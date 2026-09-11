@@ -1,0 +1,10 @@
+/* 서체는 저장소 안에서 직접 내보낸다(self-hosting). 외부 요청이 없고 기관 정책(Q-1)과
+   무관하게 동작한다. 세 서체는 모두 유니코드 구간별로 잘려 있어(fontsource 배포 방식)
+   실제로 쓰인 글자의 조각만 내려받는다. 굵기는 시안이 쓴 것만 담는다 (2026-09-11):
+   Noto Serif KR 400·600·900, Song Myung 400(단일 굵기), IBM Plex Mono 400·500. */
+@import '@fontsource/noto-serif-kr/400.css';
+@import '@fontsource/noto-serif-kr/600.css';
+@import '@fontsource/noto-serif-kr/900.css';
+@import '@fontsource/song-myung/400.css';
+@import '@fontsource/ibm-plex-mono/400.css';
+@import '@fontsource/ibm-plex-mono/500.css';

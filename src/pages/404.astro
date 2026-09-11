@@ -1,0 +1,32 @@
+---
+/** 언어 접두사 밖 최상위 404. GitHub Pages는 /404.html 하나만 쓰므로 한·영을 함께 싣는다. */
+import '../styles/fonts.css';
+import '../styles/tokens.css';
+import { withBase } from '../lib/url';
+---
+
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex" />
+    <title>404 · MUCH</title>
+  </head>
+  <body>
+    <main class="wrap">
+      <p class="label">404</p>
+      <h1>찾는 쪽이 없습니다</h1>
+      <p>주소가 바뀌었거나 옮겨졌을 수 있습니다. <a href={withBase('/ko/')}>한국어 홈으로 →</a></p>
+      <hr />
+      <h1 lang="en">Page not found</h1>
+      <p lang="en">The address may have changed. <a href={withBase('/en/')} lang="en">Go to the English home →</a></p>
+    </main>
+  </body>
+</html>
+
+<style>
+  main { padding: var(--section-pad); }
+  h1 { font-size: var(--t-section); margin: 12px 0 16px; }
+  hr { border: 0; border-top: 1px solid var(--line); margin: 40px 0; max-width: 36ch; }
+</style>

@@ -1,0 +1,74 @@
+---
+/**
+ * 영상 삽입 (DESIGN.md 5절):
+ *  - 클릭 전에는 iframe을 만들지 않는다 (현행 사이트는 iframe 11개를 한 번에 내려받는다).
+ *  - youtube-nocookie 도메인, rel=0.
+ *  - 비율은 고정하지 않는다. 세로 영상(media15·17)은 max-height로만 누른다.
+ *  - youtube가 비어 있으면(1단계 기준 19편 중 19편) 자리표시 패널을 보여 준다.
+ */
+import { getLocale, useTranslations } from '../i18n/utils';
+
+interface Props {
+  youtube?: string;
+  title: string;
+  /** 'portrait'면 세로 영상 — 높이 상한을 둔다 */
+  orientation?: 'landscape' | 'portrait';
+}
+const { youtube, title, orientation = 'landscape' } = Astro.props;
+const locale = getLocale(Astro.url);
+const t = useTranslations(locale);
+const id = youtube?.trim();
+---
+
+{id ? (
+  <figure class:list={['video', orientation]} data-video={id} data-nomotion>
+    <button type="button" class="play" aria-label={`${t('video.play')}: ${title}`}>
+      <img src={`https://i.ytimg.com/vi/${id}/hqdefault.jpg`} alt="" loading="lazy" width="480" height="360" />
+      <span class="label">▶ {t('video.play')}</span>
+    </button>
+    <figcaption>{title}</figcaption>
+  </figure>
+) : (
+  <figure class:list={['video', 'pending', orientation]}>
+    <div class="panel"><p class="label">{t('video.pending')}</p></div>
+    <figcaption>{title}</figcaption>
+  </figure>
+)}
+
+<script>
+  // 클릭한 순간에만 iframe을 만든다. 자동 재생은 사용자가 방금 눌렀으니 허용된다.
+  document.querySelectorAll<HTMLElement>('.video[data-video]').forEach((fig) => {
+    fig.querySelector('.play')?.addEventListener('click', () => {
+      const id = fig.dataset.video!;
+      const frame = document.createElement('iframe');
+      frame.src = `https://www.youtube-nocookie.com/embed/${id}?rel=0&autoplay=1`;
+      frame.title = fig.querySelector('figcaption')?.textContent ?? '';
+      frame.allow = 'autoplay; encrypted-media; picture-in-picture';
+      frame.allowFullscreen = true;
+      fig.querySelector('.play')?.replaceWith(frame);
+    }, { once: true });
+  });
+</script>
+
+<style>
+  .video { margin: 0; }
+  .play {
+    position: relative; display: block; width: 100%; padding: 0;
+    background: var(--surface); border: 1px solid var(--line-ui); cursor: pointer;
+  }
+  .play img { display: block; width: 100%; height: auto; }
+  .play .label {
+    position: absolute; left: 16px; bottom: 16px;
+    background: var(--bg); color: var(--accent); padding: 8px 12px; border: 1px solid var(--line-ui);
+  }
+  .play:hover .label { color: var(--ink); border-color: var(--accent); }
+  .video iframe { display: block; width: 100%; aspect-ratio: 16 / 9; border: 1px solid var(--line); }
+  .portrait .play img, .portrait iframe { max-height: 80vh; object-fit: contain; }
+  .portrait iframe { aspect-ratio: 9 / 16; }
+  .pending .panel {
+    display: grid; place-items: center; min-height: 200px; aspect-ratio: 16 / 9;
+    background: var(--surface); border: 1px dashed var(--line-strong);
+  }
+  .portrait.pending .panel { aspect-ratio: 9 / 16; max-height: 60vh; }
+  figcaption { margin: 10px 0 0; color: var(--ink-3); font-size: 14px; }
+</style>

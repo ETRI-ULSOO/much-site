@@ -245,3 +245,76 @@ Q-2(개별 서지 목록)는 최종보고서 78쪽의 별첨 5~7에 해당하지
 **다음 단계**: 3단계(Astro 뼈대)로 넘어간다. 확정 토큰을 `src/styles/tokens.css`로 옮기고,
 한국어와 영어가 같은 구조를 갖도록 라우팅과 i18n을 잡는다. 시안에 없는 구성 요소 세 가지
 (숫자 띠, 언어 전환, 연표)는 이 단계에서 만든다.
+
+### 2026-09-11 (밤) — 3단계: Astro 뼈대 구축
+
+**목표**: 확정 토큰과 1단계 원고 위에 Astro 사이트의 뼈대를 세우고, 한·영이 같은 구조를
+갖도록 라우팅·i18n·검사 도구·배포 흐름까지 한 번에 관통시킨다.
+
+**결정 사항**
+
+- **서체는 저장소에 담아 자체 호스팅한다** (`@fontsource` 세 묶음, [[DESIGN]] 9절 미결 해소).
+  외부 요청이 0건이므로 기관 정책(Q-1) 결과와 무관하게 유지할 수 있고, CHIC과 같은 방식이다.
+  구글 폰트 외부 로드는 정책 확인이 끝나기 전에는 쓰지 않는다는 보수적 선택이다
+  (G5 이탈 규칙에 따른 기록).
+- **영어판은 스텁 열네 개로 채운다.** 4단계 전이지만 언어 전환과 `check_i18n.py`를 검증하려면
+  한국어와 같은 이름의 파일이 있어야 한다. 프런트매터 `stub: true`인 쪽은 레이아웃이 안내 띠와
+  한국어판 링크를 띄운다.
+- **홈을 뺀 열세 쪽은 `[...slug].astro` 하나로 만든다.** 계획서에는 `much/index`, `much/[slug]`,
+  `projects/[slug]`, `contact` 네 파일로 적었으나, 뼈대가 전부 같고 다른 것이 원고뿐이라
+  원고 파일의 자리에서 경로를 그대로 뽑는 쪽이 단순하다 (G5 이탈: 파일 수 4 → 1).
+- **컬렉션은 다섯 개만 잡는다** (`pages`·`stats`·`timeline`·`consortium`·`site`). 나머지 YAML
+  여덟 개(`videos`·`papers` 등)는 4단계에서 쓰는 쪽을 만들 때 스키마와 함께 추가한다.
+- **`base: '/much-site'`**: 내부 링크는 전부 `localePath()`/`withBase()`를 거친다. 구 사이트
+  주소 아홉 개는 `redirects`로 한국어판에 넘긴다 (영어판은 별도 사이트였으므로 구분 불가).
+
+**산출물** (전부 새 파일, 2026-09-11 실측)
+
+- 설정: `package.json`(Astro 7.3.2 설치 실측, `^7.1.6` 지정), `.nvmrc`(22), `astro.config.mjs`,
+  `.claude/launch.json`, `public/.nojekyll`, `.github/workflows/deploy.yml`(CHIC 계승 +
+  `check_i18n.py`를 빌드 앞에 둠).
+- 배관: `src/lib/url.ts`, `src/i18n/ui.ts`(38키 × 2언어), `src/i18n/utils.ts`,
+  `src/content.config.ts`.
+- 외형: `src/styles/fonts.css`, `src/styles/tokens.css`([[DESIGN]] 3절 토큰 전부),
+  `src/layouts/BaseLayout.astro`(제목·설명·canonical·hreflang 3종·OG·JSON-LD `ResearchProject`·
+  건너뛰기 링크·스텁 띠).
+- 구성 요소 일곱: `Header`(고정 상단, 항목 7 + 언어 전환), `LangSwitch`, `Footer`(의무 표기
+  문구 + 전체 쪽 목록 13), `StatBand`(숫자 띠, highlight 5항목), `Timeline`(연표 3칸),
+  `VideoEmbed`(클릭 전 iframe 미생성, youtube-nocookie, 세로 영상 `max-height`).
+- 쪽: `src/pages/[locale]/index.astro`, `src/pages/[locale]/[...slug].astro`, `src/pages/404.astro`.
+- 원고: `src/content/en/` 스텁 14개.
+- 도구: `tools/check_i18n.py`(원고 파일 집합·YAML ko/en 키 짝·ui.ts 키 집합), `tools/README.md` 한 줄.
+
+**검증 결과 (2026-09-11 실측)**
+
+- `npx astro build` 성공: 29쪽(ko 14 + en 14 + 루트 넘김 1) + 구 주소 넘김 9 + `404.html`.
+  경고·오류 0건.
+- `python3 tools/check_i18n.py` 종료 코드 0. 영어 파일 하나를 빼고 ui.ts 키 하나를 바꾼 뒤
+  돌리자 3건을 잡고 종료 코드 1을 냈다 (음성 검사).
+- `tools/check_size.sh` 통과. `dist/` 25 MB, 그중 서체 24 MB (woff2 10.8 MB + 구형 woff
+  13.5 MB). 브라우저는 유니코드 구간별로 필요한 조각만 내려받는다.
+- 개발 서버에서 `/much-site/ko/` ↔ `/much-site/en/` 전환 확인. 영어 홈에서 `lang="en"`,
+  스텁 띠, 한국어판 링크가 나왔고 외부 호스트 요청은 0건이었다(서체 자체 호스팅 확인).
+  서체 세 가족이 모두 적재됐고 제목은 Song Myung으로 그려졌다.
+- 생성 HTML: 내부 링크 전부 `/much-site/` 접두, canonical과 hreflang(ko·en·x-default) 정상,
+  꼬리말 의무 표기 문구 노출, 초기 `<iframe>` 0개.
+
+**현재 진행도**: 3단계 산출물과 로컬 검증을 마쳤다. 남은 검증은 GitHub Actions 첫 배포
+(저장소 설정에서 Pages 원천을 GitHub Actions로 지정해야 한다).
+
+**남은 미해결**
+
+- 1단계 원고 앞머리의 HTML 주석(작성 노트)이 렌더 HTML에 그대로 남는다. 4단계에서 원고를
+  정리할 때 걷어내거나 프런트매터로 옮긴다.
+- 홈 원고가 아직 "히어로 / 카드" 같은 절 제목을 본문으로 갖고 있어 `.prose`로 통째로
+  나온다. 4단계에서 절별 구성 요소로 나눈다.
+- 서체 구형 woff 13.5 MB는 배포 무게만 늘린다. 5단계 자산 정리에서 woff2만 남기는
+  `@font-face`로 바꿀지 정한다.
+- `timeline.yaml`의 후속 과제 영어 값이 비어 있어 영어 연표 셋째 칸이 "In preparation"만
+  보인다 (Q-5 대기).
+- 세로형 영상 배치는 `VideoEmbed`의 `orientation="portrait"`로 자리만 잡았다. 실제 갤러리
+  배치는 4단계 showcase 쪽에서 본다.
+- 나머지 YAML 컬렉션 여덟 개의 스키마.
+
+**다음 단계**: 4단계(페이지 옮기기와 영어판). 홈 원고를 절별 구성 요소로 나누고, 각 쪽에
+`videos.yaml`·`awards.yaml` 등을 붙이며, 영어 스텁을 실제 원고로 바꾼다.

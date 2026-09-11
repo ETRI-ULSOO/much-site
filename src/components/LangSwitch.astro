@@ -1,0 +1,29 @@
+---
+import { getLocale, useTranslations, alternatePath, otherLocale } from '../i18n/utils';
+
+const locale = getLocale(Astro.url);
+const t = useTranslations(locale);
+const other = otherLocale(locale);
+---
+
+<a class="lang" href={alternatePath(Astro.url, other)} lang={other} hreflang={other}>
+  {t('lang.switch')}
+</a>
+
+<style>
+  .lang {
+    font-family: var(--font-mono);
+    font-size: var(--t-label);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink);
+    text-decoration: none;
+    /* 누를 수 있는 요소의 테두리는 --line-ui (대비 3:1 이상). 장식 선을 쓰지 않는다. */
+    border: 1px solid var(--line-ui);
+    padding: 6px 12px;
+    white-space: nowrap;
+  }
+  /* 반대 언어가 한글일 때(영문 쪽의 '한국어')는 자간을 줄인다 — 한글은 자간이 벌어지면 어절이 흩어진다. */
+  .lang:lang(ko) { letter-spacing: 0.04em; }
+  .lang:hover { border-color: var(--accent); color: var(--accent); }
+</style>

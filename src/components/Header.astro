@@ -1,0 +1,78 @@
+---
+import LangSwitch from './LangSwitch.astro';
+import { getLocale, useTranslations, localePath } from '../i18n/utils';
+
+const locale = getLocale(Astro.url);
+const t = useTranslations(locale);
+
+// 머리말에는 갈래가 되는 쪽만 올린다. 나머지는 꼬리말의 전체 쪽 목록에 있다.
+const nav = [
+  { href: localePath(locale, '/much/'), label: t('nav.much') },
+  { href: localePath(locale, '/much/research/'), label: t('nav.research') },
+  { href: localePath(locale, '/much/showcase/'), label: t('nav.showcase') },
+  { href: localePath(locale, '/much/outcomes/'), label: t('nav.outcomes') },
+  { href: localePath(locale, '/much/standards/'), label: t('nav.standards') },
+  { href: localePath(locale, '/much/consortium/'), label: t('nav.consortium') },
+  { href: localePath(locale, '/contact/'), label: t('nav.contact') },
+];
+---
+
+<header>
+  <div class="bar">
+    <a class="mark" href={localePath(locale, '/')}>
+      <span class="seal" aria-hidden="true"></span>
+      <span>{t('site.name')}</span>
+    </a>
+    <nav aria-label={t('a11y.nav')}>
+      {nav.map((item) => <a href={item.href}>{item.label}</a>)}
+      <LangSwitch />
+    </nav>
+  </div>
+</header>
+
+<style>
+  header {
+    position: sticky;
+    top: 0;
+    z-index: 30;
+    background: rgba(14, 26, 28, 0.86);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line);
+  }
+  .bar {
+    max-width: var(--page-max);
+    margin: 0 auto;
+    padding: var(--header-pad);
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+  .mark {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    color: var(--ink);
+    text-decoration: none;
+    font-family: var(--font-title);
+    font-size: 22px;
+    letter-spacing: 0.08em;
+  }
+  /* 시안의 인장 자리 — 적색 사각형 하나. 도형이므로 적색을 써도 된다 (DESIGN.md 6절 규칙 ①). */
+  .seal { width: 14px; height: 14px; background: var(--accent-red); }
+  nav {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 22px;
+    flex-wrap: wrap;
+    font-family: var(--font-mono);
+    font-size: 13px;
+    letter-spacing: 0.06em;
+  }
+  nav > a { color: var(--ink-3); text-decoration: none; }
+  nav > a:hover { color: var(--accent); }
+  @media (max-width: 720px) {
+    nav { gap: 14px; font-size: 12px; }
+  }
+</style>

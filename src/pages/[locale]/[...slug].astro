@@ -1,0 +1,51 @@
+---
+/**
+ * 홈을 뺀 모든 원고 쪽 (much/*, projects/*, contact).
+ * 경로는 원고 파일의 자리에서 그대로 나온다: src/content/ko/much/awards.md → /ko/much/awards/.
+ * 쪽마다 파일을 따로 두지 않는 이유: 열세 쪽의 뼈대가 전부 같고, 다른 것은 원고뿐이기 때문이다.
+ */
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { locales, type Locale } from '../../i18n/ui';
+import { useTranslations } from '../../i18n/utils';
+
+export async function getStaticPaths() {
+  const entries = await getCollection('pages', (e) => e.data.layout !== 'home');
+  return entries.flatMap((entry) => {
+    const [locale, ...rest] = entry.id.split('/');
+    if (!(locales as readonly string[]).includes(locale)) return [];
+    return [{ params: { locale, slug: rest.join('/') }, props: { entry } }];
+  });
+}
+
+const { entry } = Astro.props;
+const locale = Astro.params.locale as Locale;
+const t = useTranslations(locale);
+const { Content } = await render(entry);
+const updated = new Intl.DateTimeFormat(locale === 'ko' ? 'ko-KR' : 'en-GB', {
+  dateStyle: 'long',
+  timeZone: 'UTC',
+}).format(entry.data.updated);
+---
+
+<BaseLayout title={entry.data.title} description={entry.data.description} stub={entry.data.stub}>
+  <article class="section">
+    <div class="wrap">
+      <header class="head">
+        <h1>{entry.data.title}</h1>
+        <p class="lead measure">{entry.data.description}</p>
+        <p class="label meta">{t('page.updated')} <time datetime={entry.data.updated.toISOString().slice(0, 10)}>{updated}</time></p>
+      </header>
+      <div class="prose measure">
+        <Content />
+      </div>
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+  .head { padding-bottom: 40px; margin-bottom: 40px; border-bottom: 1px solid var(--line-strong); }
+  h1 { font-size: var(--t-section); font-size: clamp(32px, 4.2vw, 52px); line-height: 1.2; margin: 0; max-width: 22ch; }
+  .lead { font-size: 18px; color: var(--ink-2); margin: 20px 0 0; }
+  .meta { margin: 24px 0 0; }
+</style>

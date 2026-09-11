@@ -7,6 +7,7 @@
 | `pptx_dump.py` | 종료평가 발표자료(7.1 GB pptx)를 압축 해제하지 않고 슬라이드 본문과 발표자 노트만 뽑아낸다 |
 | `pptx_parts.py` | 같은 파일의 내부 구성 요소 목록(이미지·영상·관계 파일)을 출력한다 |
 | `check_size.sh` | 커밋 대상에 50 MB 이상 파일이 올라왔는지 검사한다 |
+| `check_i18n.py` | 한·영 어긋남 검사 — 원고 파일 집합, `src/data/*.yaml`의 ko/en 키 짝, `src/i18n/ui.ts`의 키 집합을 비교한다. `npm run check:i18n`, CI에서 빌드 전에 실행 |
 
 ## 7.1 GB 파일을 여는 방법
 

@@ -1,0 +1,50 @@
+---
+import { getEntry, render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import StatBand from '../../components/StatBand.astro';
+import Timeline from '../../components/Timeline.astro';
+import { locales, type Locale } from '../../i18n/ui';
+import { useTranslations, localePath } from '../../i18n/utils';
+
+export function getStaticPaths() {
+  return locales.map((locale) => ({ params: { locale } }));
+}
+
+const locale = Astro.params.locale as Locale;
+const t = useTranslations(locale);
+// 홈 원고의 id는 언어 코드 그대로다 (glob 로더가 index.md의 'index'를 뗀다).
+const entry = await getEntry('pages', locale);
+if (!entry) throw new Error(`src/content/${locale}/index.md가 없습니다`);
+const { Content } = await render(entry);
+---
+
+<BaseLayout description={entry.data.description} stub={entry.data.stub}>
+  <section class="hero">
+    <div class="wrap">
+      <p class="label">{t('hero.eyebrow')}</p>
+      <h1>{entry.data.title}</h1>
+      <p class="lead measure">{entry.data.description}</p>
+      <p class="actions">
+        <a class="btn btn-primary" href={localePath(locale, '/much/')}>{t('nav.much')}</a>
+        <a class="btn" href={localePath(locale, '/much/showcase/')}>{t('nav.showcase')}</a>
+      </p>
+    </div>
+  </section>
+
+  <StatBand />
+
+  <section class="section">
+    <div class="wrap prose measure">
+      <Content />
+    </div>
+  </section>
+
+  <Timeline />
+</BaseLayout>
+
+<style>
+  .hero { padding: var(--section-pad); padding-bottom: 72px; }
+  h1 { font-size: var(--t-display); line-height: 1.15; margin: 16px 0 0; max-width: 18ch; }
+  .lead { font-size: 19px; color: var(--ink-2); margin: 28px 0 0; }
+  .actions { display: flex; gap: 12px; flex-wrap: wrap; margin: 36px 0 0; }
+</style>

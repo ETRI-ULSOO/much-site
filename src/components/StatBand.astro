@@ -1,0 +1,50 @@
+---
+import { getCollection } from 'astro:content';
+import { getLocale, useTranslations } from '../i18n/utils';
+
+const locale = getLocale(Astro.url);
+const t = useTranslations(locale);
+
+// 홈 숫자 띠에는 highlight가 참인 항목만 올린다. 국제 특허(목표 2·등록 0)는 실적으로 세지 않는다 (stats.yaml에서 false).
+// 순서는 파일 순서를 따른다 — 정렬 기준을 코드에 두면 YAML과 코드 두 곳을 봐야 한다.
+const stats = (await getCollection('stats')).filter((s) => s.data.highlight);
+const num = new Intl.NumberFormat(locale === 'ko' ? 'ko-KR' : 'en-GB');
+---
+
+<section class="band" aria-label={t('stats.title')}>
+  <div class="wrap">
+    <p class="label">{t('stats.title')}</p>
+    <ul>
+      {stats.map(({ data }) => (
+        <li>
+          <p class="value">
+            <span class="n">{num.format(data.actual)}</span>
+            <span class="unit">{data.unit[locale]}</span>
+          </p>
+          <p class="name">{data[locale].label}</p>
+          {data.target !== undefined && (
+            <p class="target">{t('stats.target')} {num.format(data.target)}{data.unit[locale]}</p>
+          )}
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>
+
+<style>
+  .band { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); padding: 48px 0; }
+  ul {
+    list-style: none; margin: 20px 0 0; padding: 0;
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 0;
+  }
+  /* 배경·그림자 없이 세로 선 하나로만 칸을 나눈다 (DESIGN.md 공유 규칙). */
+  li { padding: 8px 24px 8px 0; border-left: 1px solid var(--line-strong); padding-left: 20px; }
+  .value { margin: 0; display: flex; align-items: baseline; gap: 6px; }
+  .n { font-family: var(--font-mono); font-size: clamp(30px, 3.4vw, 42px); color: var(--accent); letter-spacing: -0.01em; }
+  .unit { font-size: 15px; color: var(--ink-2); }
+  .name { margin: 6px 0 0; color: var(--ink-2); font-size: 15px; }
+  .target { margin: 4px 0 0; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; color: var(--ink-muted); }
+  @media (max-width: 720px) {
+    ul { grid-template-columns: repeat(2, 1fr); row-gap: 20px; }
+  }
+</style>

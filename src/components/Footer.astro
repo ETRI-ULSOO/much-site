@@ -1,0 +1,64 @@
+---
+import { getEntry } from 'astro:content';
+import { getLocale, useTranslations, localePath } from '../i18n/utils';
+
+const locale = getLocale(Astro.url);
+const t = useTranslations(locale);
+
+// 꼬리말의 지원 사업 표기는 의무 사항이다 (최종보고서 79쪽 주의 사항 2번). 문구는 site.yaml에만 있다.
+const site = (await getEntry('site', 'footer'))?.data;
+if (!site) throw new Error('src/data/site.yaml에 footer 항목이 없습니다');
+
+const pages = [
+  ['/much/', 'nav.much'], ['/much/research/', 'nav.research'], ['/much/showcase/', 'nav.showcase'],
+  ['/much/outcomes/', 'nav.outcomes'], ['/much/standards/', 'nav.standards'], ['/much/demos/', 'nav.demos'],
+  ['/much/awards/', 'nav.awards'], ['/much/media/', 'nav.media'], ['/much/events/', 'nav.events'],
+  ['/much/consortium/', 'nav.consortium'], ['/projects/chic/', 'nav.chic'], ['/projects/next/', 'nav.next'],
+  ['/contact/', 'nav.contact'],
+] as const;
+---
+
+<footer>
+  <div class="inner">
+    <div class="cols">
+      <div class="about">
+        <p class="label">{site.institution[locale]}</p>
+        <p class="funding">{site.funding[locale]}</p>
+        <p class="period">{site.period[locale]}</p>
+      </div>
+      <nav aria-label={t('a11y.footerNav')}>
+        <p class="label">{t('footer.pages')}</p>
+        <ul>
+          {pages.map(([path, key]) => <li><a href={localePath(locale, path)}>{t(key)}</a></li>)}
+        </ul>
+      </nav>
+    </div>
+    <p class="bottom">
+      <span>© {new Date().getFullYear()} ETRI</span>
+      <a href="#top">{t('footer.top')} ↑</a>
+    </p>
+  </div>
+</footer>
+
+<style>
+  footer { border-top: 1px solid var(--line); background: var(--surface); }
+  .inner { max-width: var(--page-max); margin: 0 auto; padding: 64px 32px 32px; }
+  .cols { display: grid; grid-template-columns: minmax(0, 56ch) minmax(0, 1fr); gap: 48px; }
+  .funding { color: var(--ink-2); margin: 12px 0 0; }
+  .period { color: var(--ink-muted); margin: 8px 0 0; font-size: 0.92em; }
+  nav ul { list-style: none; margin: 12px 0 0; padding: 0; columns: 2; column-gap: 32px; }
+  nav li { break-inside: avoid; line-height: 2.1; }
+  nav a { color: var(--ink-2); text-decoration: none; }
+  nav a:hover { color: var(--accent); }
+  .bottom {
+    margin: 48px 0 0; padding-top: 20px; border-top: 1px solid var(--line);
+    display: flex; justify-content: space-between; gap: 16px;
+    font-family: var(--font-mono); font-size: var(--t-label); letter-spacing: 0.1em; color: var(--ink-muted);
+  }
+  .bottom a { color: var(--ink-muted); text-decoration: none; }
+  .bottom a:hover { color: var(--accent); }
+  @media (max-width: 720px) {
+    .inner { padding: 48px 20px 24px; }
+    .cols { grid-template-columns: 1fr; gap: 32px; }
+  }
+</style>

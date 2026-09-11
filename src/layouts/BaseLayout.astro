@@ -1,0 +1,90 @@
+---
+import '../styles/fonts.css';
+import '../styles/tokens.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { getLocale, useTranslations, alternatePath, otherLocale, localePath } from '../i18n/utils';
+import { stripBase } from '../lib/url';
+
+interface Props {
+  title?: string;
+  description?: string;
+  /** 영어판이 아직 없는 쪽 — 안내 띠와 한국어판 링크를 띄운다 */
+  stub?: boolean;
+}
+const { title, description, stub = false } = Astro.props;
+
+const locale = getLocale(Astro.url);
+const t = useTranslations(locale);
+const other = otherLocale(locale);
+
+const pageTitle = title ? `${title} · ${t('site.name')}` : t('site.title');
+const pageDesc = description ?? t('site.desc');
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const altHref = new URL(alternatePath(Astro.url, other), Astro.site);
+// 스텁 쪽에서 한국어판으로 보낼 때는 현재 경로에서 언어 접두사만 바꾼다.
+const koHref = localePath('ko', stripBase(Astro.url.pathname).replace(/^\/(ko|en)\/?/, '/'));
+
+// 검색 엔진용 구조화 데이터. 과제 정보는 site.yaml이 아니라 i18n(사이트 이름·설명)과 고정 사실에서 온다.
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'ResearchProject',
+  name: t('site.name'),
+  description: t('site.desc'),
+  url: canonical.href,
+  startDate: '2023-04',
+  endDate: '2025-12',
+  funder: [
+    { '@type': 'GovernmentOrganization', name: locale === 'ko' ? '문화체육관광부' : 'Ministry of Culture, Sports and Tourism' },
+    { '@type': 'Organization', name: locale === 'ko' ? '한국콘텐츠진흥원' : 'Korea Creative Content Agency' },
+  ],
+  parentOrganization: { '@type': 'ResearchOrganization', name: 'ETRI', url: 'https://www.etri.re.kr/' },
+};
+---
+
+<!doctype html>
+<html lang={locale}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{pageTitle}</title>
+    <meta name="description" content={pageDesc} />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    <link rel="canonical" href={canonical} />
+    <link rel="alternate" hreflang={locale} href={canonical} />
+    <link rel="alternate" hreflang={other} href={altHref} />
+    <link rel="alternate" hreflang="x-default" href={locale === 'ko' ? canonical : altHref} />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={pageDesc} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:locale" content={locale === 'ko' ? 'ko_KR' : 'en_GB'} />
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+  </head>
+  <body id="top">
+    <a class="skip" href="#main">{t('a11y.skip')}</a>
+    <Header />
+    <main id="main">
+      {stub && (
+        <div class="stub wrap" lang={locale}>
+          <p>{t('page.stub')} <a href={koHref} lang="ko" hreflang="ko">{t('page.stubLink')} →</a></p>
+        </div>
+      )}
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>
+
+<style>
+  .skip {
+    position: absolute; left: -999px; top: 0; z-index: 100;
+    background: var(--accent); color: var(--surface); padding: 8px 16px; text-decoration: none;
+  }
+  .skip:focus { left: 16px; top: 16px; }
+  .stub { margin-top: 24px; }
+  .stub p {
+    margin: 0; padding: 12px 16px; border: 1px solid var(--line-strong);
+    font-size: 15px; color: var(--ink-2);
+  }
+</style>
