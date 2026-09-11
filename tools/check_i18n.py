@@ -19,13 +19,13 @@ errors: list[str] = []
 
 
 def check_content() -> int:
-    ko = {p.relative_to(ROOT / 'src/content/ko') for p in (ROOT / 'src/content/ko').rglob('*.md')}
-    en = {p.relative_to(ROOT / 'src/content/en') for p in (ROOT / 'src/content/en').rglob('*.md')}
+    ko = {p.relative_to(ROOT / 'src/content/ko') for p in (ROOT / 'src/content/ko').rglob('*.mdx')}
+    en = {p.relative_to(ROOT / 'src/content/en') for p in (ROOT / 'src/content/en').rglob('*.mdx')}
     for rel in sorted(ko - en):
         errors.append(f'content: en에 없음  src/content/en/{rel}')
     for rel in sorted(en - ko):
         errors.append(f'content: ko에 없음  src/content/ko/{rel}')
-    stubs = sum(1 for p in (ROOT / 'src/content/en').rglob('*.md')
+    stubs = sum(1 for p in (ROOT / 'src/content/en').rglob('*.mdx')
                 if re.search(r'^stub:\s*true', p.read_text(encoding='utf-8'), re.M))
     print(f'content: ko {len(ko)}개 / en {len(en)}개 (en 스텁 {stubs}개)')
     return len(ko)

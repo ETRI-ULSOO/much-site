@@ -18,9 +18,9 @@
       문화유산 분야 종사자들과 함께 문화유산을 디지털로 바꾸어야 하는 이유를 공유하고,
       인문학의 관점과 공학의 관점에서 디지털 데이터에 접근하는 방법과 해석을 서로 이해하는 자리였습니다.
   en:
-    title: ""
-    venue: ""
-    desc: ""
+    title: "2024 Intelligent Heritage Colloquium"
+    venue: "Hwabaek Convention Center, Gyeongju"
+    desc: "An event where cultural heritage professionals shared why cultural heritage needs to be turned digital, and where participants came to understand each other's approaches and interpretations of digital data from both the humanities and engineering perspectives."
 
 - id: colloquium-2025
   kind: colloquium
@@ -30,9 +30,9 @@
     venue: 광주 김대중컨벤션센터
     desc: 문화유산의 디지털 전환을 주제로 연구자와 현장 실무자가 함께 논의한 두 번째 콜로키움입니다.
   en:
-    title: ""
-    venue: ""
-    desc: ""
+    title: "2025 Coexistence and Sustainability Colloquium"
+    venue: "Kim Dae-jung Convention Center, Gwangju"
+    desc: "The second colloquium, where researchers and field practitioners discussed the digital transformation of cultural heritage."
 
 - id: expo-2024
   kind: exhibition
@@ -42,9 +42,9 @@
     venue: ""
     desc: 국가유산 산업 전시회 안에서 연구 성과를 소개하고 콜로키움을 함께 열었습니다.
   en:
-    title: ""
+    title: "2024 World National Heritage Industry Fair Colloquium"
     venue: ""
-    desc: ""
+    desc: "Research results were introduced and a colloquium was held together within the national heritage industry exhibition."
 
 # 확인이 필요한 사항 (2026-09-11): 아래 박람회 항목과 위의 colloquium-2025 항목이
 #   같은 행사를 가리킬 가능성이 있습니다. 최종보고서 76쪽은 박람회 협력 전시와 콜로키움을
@@ -61,9 +61,9 @@
       수요기관인 국립중앙박물관과 함께 박람회 안에 협력 전시 부스를 열어
       일반 관람객에게 연구 결과물을 공개했고, 박물관 관계자를 대상으로 콜로키움을 진행했습니다.
   en:
-    title: ""
+    title: "2025 Museum & Art Gallery Fair Cooperative Exhibition and Colloquium"
     venue: ""
-    desc: ""
+    desc: "Together with the National Museum of Korea, the end-user institution, a cooperative exhibition booth was opened within the fair to present the research results to the general public, and a colloquium was held for museum professionals."
 
 - id: witshow-2025
   kind: exhibition
@@ -75,9 +75,9 @@
       과제를 수행하는 동안 한국전자통신연구원의 우수 성과로 뽑혀,
       World IT Show 안에서 열린 기술사업화 페스티벌에 전시 부스를 운영했습니다.
   en:
-    title: ""
+    title: "World IT Show Technology Commercialization Festival Exhibition"
     venue: ""
-    desc: ""
+    desc: "Selected as an outstanding achievement of the Electronics and Telecommunications Research Institute (ETRI) during the project, an exhibition booth was run at the Technology Commercialization Festival held within World IT Show."
 
 - id: nl-mou-2025
   kind: cooperation
@@ -89,9 +89,9 @@
       박물관을 위해 개발한 기능을 도서관과 기록관, 미술관까지 넓혀 쓰기 위해
       국립중앙도서관과 업무협약을 맺었습니다.
   en:
-    title: ""
+    title: "Memorandum of Understanding with the National Library of Korea"
     venue: ""
-    desc: ""
+    desc: "A memorandum of understanding was signed with the National Library of Korea to extend the functions developed for museums to libraries, archives, and art galleries as well."
 
 - id: nl-transfer-2026
   kind: cooperation
@@ -103,9 +103,9 @@
       문화유산 데이터를 여러 형태로 자동 변환하고 메타데이터를 만들어 주는 기술을 적용해,
       국립중앙도서관의 음성 인식(STT) 기술로 이전했습니다.
   en:
-    title: ""
+    title: "Technology Transfer to the National Library of Korea"
     venue: ""
-    desc: ""
+    desc: "Technology that automatically converts cultural heritage data into multiple formats and generates metadata was applied and transferred for use with the National Library of Korea's speech recognition (STT) technology."
 
 - id: greece-2024
   kind: international
@@ -115,9 +115,9 @@
     venue: ""
     desc: 그리스 문화체육관광부 장관이 방한한 자리에서 연구 성과를 소개하고 협력 방안을 논의했습니다.
   en:
-    title: ""
+    title: "Meeting with the Visiting Greek Minister of Culture, Sports and Tourism"
     venue: ""
-    desc: ""
+    desc: "During the Greek Minister of Culture, Sports and Tourism's visit to Korea, the research results were introduced and cooperation plans were discussed."
 
 - id: global-rnd-2024
   kind: international
@@ -129,6 +129,6 @@
       유럽연합 대표부와 스웨덴·핀란드·엘살바도르 대사를 비롯해 이탈리아, 헝가리, 벨기에, 스페인까지
       여덟 나라의 관계자가 참석한 자리에서 연구 성과를 소개했습니다.
   en:
-    title: ""
+    title: "Research Results Presentation at Global R&D Friend's Day"
     venue: ""
-    desc: ""
+    desc: "Research results were presented to officials from eight countries and organizations, including the Delegation of the European Union to Korea and the ambassadors of Sweden, Finland, and El Salvador, along with representatives from Italy, Hungary, Belgium, and Spain."

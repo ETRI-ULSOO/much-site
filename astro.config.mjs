@@ -1,4 +1,7 @@
 import { defineConfig } from 'astro/config';
+import mdx from '@astrojs/mdx';
+import { satteri } from '@astrojs/markdown-satteri';
+import localeLinks from './src/lib/locale-links.mjs';
 
 // GitHub Pages 프로젝트 사이트는 `https://<계정>.github.io/<저장소>/` 아래에서 서비스된다.
 // 저장소 이름이 곧 하위 경로이므로 base를 여기서 한 번만 정한다.
@@ -9,6 +12,14 @@ const BASE = '/much-site';
 export default defineConfig({
   site: 'https://etri-ulsoo.github.io',
   base: BASE,
+
+  // 원고는 MDX다. 본문 안에 <Video id="…"/> 같은 구성 요소를 놓기 위해서이고, 구성 요소는
+  // 쪽 파일이 <Content components={…}/>로 주입하므로 원고에는 import가 없다.
+  // 마크다운 처리기는 Astro 7 기본값인 Sätteri를 명시해 hast 플러그인을 끼운다 — 원고의
+  // 사이트 절대 경로 링크에 base와 언어를 붙이는 일이다 (src/lib/locale-links.mjs).
+  // 옛 markdown.rehypePlugins는 @astrojs/markdown-remark를 따로 설치해야 동작하므로 쓰지 않는다.
+  integrations: [mdx()],
+  markdown: { processor: satteri({ hastPlugins: [localeLinks({ base: BASE })] }) },
 
   // 한국어와 영어가 같은 구조를 갖도록 두 언어 모두 접두사를 붙인다 (/ko/…, /en/…).
   // 페이지 파일은 src/pages/[locale]/ 한 벌이고 언어는 라우트 파라미터다.

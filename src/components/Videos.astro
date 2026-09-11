@@ -1,0 +1,24 @@
+---
+/** 영상 여러 편을 2열로 놓는다. ids를 주면 그 순서대로, 없으면 place가 같은 항목을 파일 순서대로 고른다. */
+import { getCollection } from 'astro:content';
+import Video from './Video.astro';
+
+interface Props {
+  place?: string;
+  ids?: string[];
+}
+const { place, ids } = Astro.props;
+
+const list = ids ?? (await getCollection('videos')).filter((v) => v.data.place === place).map((v) => v.id);
+---
+
+<div class="videos">
+  {list.map((id) => <Video id={id} />)}
+</div>
+
+<style>
+  .videos { display: grid; grid-template-columns: repeat(2, 1fr); gap: 32px 24px; align-items: start; }
+  @media (max-width: 720px) {
+    .videos { grid-template-columns: 1fr; }
+  }
+</style>

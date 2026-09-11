@@ -322,3 +322,97 @@ GitHub Actions로 지정한 다음에 이루어진다. 그때까지 push마다 A
 
 **다음 단계**: 4단계(페이지 옮기기와 영어판). 홈 원고를 절별 구성 요소로 나누고, 각 쪽에
 `videos.yaml`·`awards.yaml` 등을 붙이며, 영어 스텁을 실제 원고로 바꾼다.
+
+### 2026-09-11 (심야) — 4단계: 페이지 옮기기와 영어판
+
+**목표**: 1단계 원고를 구성 요소가 붙은 실제 쪽으로 바꾸고, 영어 스텁 14개를 번역 초안으로
+채우며, 이전·다음 링크와 내부 링크 검사까지 한 번에 관통시킨다.
+
+**결정 사항**
+
+- **원고 형식을 `.md`에서 `.mdx`로 바꾼다** (28개 파일 `git mv`). 원고 안에서 `<Video>`·
+  `<StatTable>` 같은 구성 요소 태그를 쓰기 위해서다. 쪽 파일이 `<Content components={{ … }} />`로
+  태그를 넘기므로 원고에는 import가 없고, 원고 작성자는 태그 이름만 알면 된다.
+- **마크다운 처리기를 Astro 7 기본값인 Sätteri로 명시하고 hast 플러그인을 끼운다**
+  (`astro.config.mjs`의 `processor: satteri({ hastPlugins: [localeLinks(…)] })`). 원고의
+  `[연구 내용](/much/research/)` 같은 언어 없는 경로를 빌드 때 `/much-site/ko/much/research/`로
+  바꾸는 플러그인 `src/lib/locale-links.mjs`가 그것이다. 옛 `markdown.rehypePlugins`는
+  `@astrojs/markdown-remark`를 따로 설치해야 동작하므로 쓰지 않았다 (2026-09-11 빌드 실패로 확인).
+- **프런트매터 `layout`을 `kind`로 개명**한다. MDX에서 `layout`은 Astro가 레이아웃 파일 경로로
+  해석해 "Rolldown failed to resolve import 'home'" 오류를 낸다 (2026-09-11 실측).
+- **원고 앞머리의 작성 노트는 지우지 않고 MDX 주석 `{/* */}`으로 바꾼다.** 렌더 HTML에는 나오지
+  않고 저장소에는 근거가 남는다 (3단계 미해결 "HTML 주석 잔존" 해소).
+- **영어 번역은 sonnet 서브에이전트 세 개에 나눠 맡겼다** (토큰 위생 원칙 5항). A는 원고 7편
+  (홈·개요·연구·시범 콘텐츠·성과·표준·데모), B는 원고 7편(수상·언론·행사·컨소시엄·CHIC·
+  후속·문의), C는 YAML 8파일의 `en` 값. 공통 지침은 번역 규칙 12개와 용어집(스크래치패드
+  `en-brief.md`, 저장소 밖)이며, 각 에이전트가 태그·헤딩·링크 동일성 검사와 금지어 검사, 빌드를
+  스스로 돌린 뒤 보고했다. 실측 소모: A 10.6만 토큰·27분, B 14.1만·6분, C 12.9만·28분.
+- **표의 단위는 언어별 값을 그대로 쓴다** (`StatTable.astro`). 영어 단위는 비워 두는 것이 정상이며
+  한국어 단위("편")로 대신하지 않는다.
+- **IDEA 2024 등급 표기는 `awards.yaml`의 `grade: finalist`를 따라 영어에서 "Finalist"로 통일**했다.
+  에이전트 A가 "본상"을 "the main prize"로 옮긴 것을 되돌렸다. 다만 `finalist` 값 자체의 근거가
+  기록에 없어 아래 검수 항목에 올린다.
+- **1단계 원고의 사실 오류 정정**: 언론 보도 쪽의 "매체 아홉 개"는 `press.yaml` 실측(9건 = 8개
+  매체)에 따라 "여덟 개 매체의 보도 아홉 건"으로 고쳤다 (2026-09-11).
+
+**산출물** (2026-09-11 실측: 67개 파일 변경, +1,652 / −771줄, 이름 바꾼 파일 28개 별도)
+
+- 원고: `src/content/ko/**` 14편(구성 요소 태그 적용), `src/content/en/**` 14편(번역 초안,
+  전부 `draft: true`, 스텁 0개).
+- 데이터: `src/data/*.yaml` 11개 갱신 — `awards`·`papers`·`patents`·`software`는 최상위 배열로
+  재구성(콘텐츠 컬렉션 file 로더가 배열 항목의 id를 열쇠로 쓰기 때문), 8개 파일의 `en` 값 채움.
+  `stats.unit.en`·`timeline.next`·`events.venue`(한국어도 빈 7건)는 의도적으로 비워 둠.
+- 구성 요소 12개 신규: `Section`·`Cards`·`Card`·`Video`·`Videos`·`Awards`·`Press`·`Events`·
+  `StandardTable`·`StatTable`·`Publications`·`PrevNext`. `Footer`·`VideoEmbed`·`BaseLayout`
+  (초안 띠, `og:image`) 갱신. `public/og.png` 추가.
+- 배관: `src/content.config.ts`(컬렉션 14개, `standards`에 언어별 `organization` 선택 항목),
+  `src/lib/pages.ts`(이전·다음 순서), `src/lib/locale-links.mjs`, `src/i18n/ui.ts`(60키 × 2언어).
+- 도구: `tools/check_links.py` 신규 — `dist/`의 모든 `index.html`에서 내부 `href`·`src`가 실제
+  파일을 가리키는지, 쪽마다 `description`과 `og:image`가 있는지 검사한다. `tools/check_i18n.py`는
+  `*.mdx` 기준으로 고침.
+
+**검증 결과 (2026-09-11 실측)**
+
+- `npx astro build` 성공: 29쪽. 경고는 `papers`·`patents`·`software` 컬렉션이 비어 있다는 것뿐
+  (Q-2 서지 대기, 의도된 상태).
+- `python3 tools/check_i18n.py` 통과: 원고 ko 14 / en 14(스텁 0), YAML 13개, ui 60/60키.
+- `python3 tools/check_links.py` 통과: 쪽 39개, 내부 링크 809건, 깨진 링크 0건, 메타 누락 0건.
+- `tools/check_size.sh` 통과, `git ls-files`에 참조데이터·mp4 0건.
+- 생성된 영어 쪽 14개를 스크립트로 훑은 결과: "world's first"·175ZB·TRIC·과제번호·이메일 0건
+  (`@`는 "F@IMP" 두 곳뿐), 본문에 남은 한국어는 언어 전환 단추의 "한국어"뿐. 처음 검사에서
+  표준 쪽에 포럼 이름이 한국어로 남아 `standards.yaml`의 `en.organization`을 추가해 해소했다.
+- 영어 홈: `<h1>` 번역 노출, 초안 안내 띠("draft translation pending review")와 한국어판 링크
+  노출. 성과 쪽 `StatTable`의 영어 단위 열은 빈 값.
+- YAML 주석 줄 수: 에이전트 C가 다룬 8파일 중 6파일은 HEAD와 같고, `awards`(+2)·`datasets`(+3)는
+  이번 세션의 배열 재구성 때 내가 더한 주석이다 (C의 보고와 대조해 확인).
+
+**현재 진행도**: 4단계 산출물과 로컬 검증을 마쳤다. 사용자 검수 두 건(1단계 원고, 영어 초안)은
+아직이며, 영어판은 검수 전까지 `draft: true`로 안내 띠를 띄운다.
+
+**영어 초안 검수 항목** (에이전트 보고에서 판단이 갈린 표현 — 사용자 확인 대기)
+
+| 위치 | 한국어 | 영어 초안 | 확인할 것 |
+|---|---|---|---|
+| `awards.yaml`, showcase | IDEA 2024 본상 | Finalist | IDEA 등급이 Finalist가 맞는지 (`grade: finalist`의 근거 없음) |
+| showcase, consortium | 역사의 길 | Road of History | 국립중앙박물관 공식 영문 통로명 |
+| media | 3단계에 해당하는 보도 | the project's third stage | "3단계"가 연차인지 협약 단계인지 |
+| `events.yaml` | 세계국가유산산업전 | World National Heritage Industry Fair | 공식 영문 행사명 |
+| `awards.yaml` | AVICOM 우수상 | Excellence Award | 주최 측 영문 등급명 |
+| `stats.yaml` | 체험 실증 | Hands-on Demonstrations | 협약서의 영문 항목명이 있으면 그것으로 |
+| `timeline.yaml` | 지정과제 / 일반과제 | 서로 다른 번역 | 공식 영문 구분이 있는지 |
+
+**남은 미해결**
+
+- 1단계 원고 사용자 검수(정량 수치·정정 문구)와 영어 초안 검수(위 표). 검수가 끝나면
+  `draft: false`로 바꿔 안내 띠를 없앤다.
+- `papers`·`patents`·`software` 컬렉션이 비어 성과 쪽 목록이 나오지 않는다 (Q-2).
+- 영상 19편의 `youtube` 값이 전부 비어 자리표시 패널만 보인다 (Q-3, media16 이용 허락).
+- 언론 보도 9건 전부 `ready: false`라 화면에 나오지 않는다 (Q-4 주소·일자).
+- 이메일 표기 방식·과제번호 표기 여부·TRIC 표기가 정해지지 않아 문의 쪽과 수상 쪽이 불완전하다.
+- 서체 구형 woff 13.5 MB(5단계), `.band + .band` 이중 테두리, `.nvmrc`(22)와 실제 Node(26.3.0)
+  불일치는 3단계에서 이월.
+- ~~원고 앞머리 HTML 주석 잔존~~, ~~홈 절 구성 요소화~~, ~~YAML 컬렉션 여덟 개 스키마~~는 이번에
+  해소.
+
+**다음 단계**: 사용자 검수 2건을 받은 뒤 5단계(그림·영상·문서 자산). 발표자료에서 꺼낸 그림을
+`src/assets/`에 넣고 `videos.yaml`의 `youtube` 값을 채운다.

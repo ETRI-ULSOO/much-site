@@ -1,0 +1,27 @@
+---
+/** 갈림길 카드 한 장. href는 언어 접두사 없이 적고 여기서 붙인다 (JSX 속성은 rehype 링크 변환을 거치지 않는다). */
+import { getLocale, useTranslations, localePath } from '../i18n/utils';
+
+interface Props {
+  title: string;
+  href: string;
+}
+const { title, href } = Astro.props;
+const locale = getLocale(Astro.url);
+const t = useTranslations(locale);
+---
+
+<article class="card panel">
+  <h3>{title}</h3>
+  <div class="body"><slot /></div>
+  <p class="more"><a href={localePath(locale, href)}>{t('card.more')} →</a></p>
+</article>
+
+<style>
+  .card { padding: 28px; display: flex; flex-direction: column; }
+  h3 { margin: 0; }
+  .body { margin-top: 12px; color: var(--ink-2); flex: 1; }
+  .body :global(p) { margin: 0; }
+  .body :global(p + p) { margin-top: 0.6em; }
+  .more { margin: 20px 0 0; }
+</style>

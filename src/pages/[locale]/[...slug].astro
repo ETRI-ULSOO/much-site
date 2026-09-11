@@ -1,16 +1,25 @@
 ---
 /**
  * 홈을 뺀 모든 원고 쪽 (much/*, projects/*, contact).
- * 경로는 원고 파일의 자리에서 그대로 나온다: src/content/ko/much/awards.md → /ko/much/awards/.
+ * 경로는 원고 파일의 자리에서 그대로 나온다: src/content/ko/much/awards.mdx → /ko/much/awards/.
  * 쪽마다 파일을 따로 두지 않는 이유: 열세 쪽의 뼈대가 전부 같고, 다른 것은 원고뿐이기 때문이다.
  */
 import { getCollection, render } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import PrevNext from '../../components/PrevNext.astro';
+import Video from '../../components/Video.astro';
+import Videos from '../../components/Videos.astro';
+import Awards from '../../components/Awards.astro';
+import Press from '../../components/Press.astro';
+import Events from '../../components/Events.astro';
+import StandardTable from '../../components/StandardTable.astro';
+import StatTable from '../../components/StatTable.astro';
+import Publications from '../../components/Publications.astro';
 import { locales, type Locale } from '../../i18n/ui';
 import { useTranslations } from '../../i18n/utils';
 
 export async function getStaticPaths() {
-  const entries = await getCollection('pages', (e) => e.data.layout !== 'home');
+  const entries = await getCollection('pages', (e) => e.data.kind !== 'home');
   return entries.flatMap((entry) => {
     const [locale, ...rest] = entry.id.split('/');
     if (!(locales as readonly string[]).includes(locale)) return [];
@@ -26,9 +35,11 @@ const updated = new Intl.DateTimeFormat(locale === 'ko' ? 'ko-KR' : 'en-GB', {
   dateStyle: 'long',
   timeZone: 'UTC',
 }).format(entry.data.updated);
+// 이전·다음 링크는 언어 접두사 없는 경로로 찾는다: 'ko/much/awards' → '/much/awards/'.
+const path = `/${entry.id.split('/').slice(1).join('/')}/`;
 ---
 
-<BaseLayout title={entry.data.title} description={entry.data.description} stub={entry.data.stub}>
+<BaseLayout title={entry.data.title} description={entry.data.description} stub={entry.data.stub} draft={entry.data.draft}>
   <article class="section">
     <div class="wrap">
       <header class="head">
@@ -36,9 +47,11 @@ const updated = new Intl.DateTimeFormat(locale === 'ko' ? 'ko-KR' : 'en-GB', {
         <p class="lead measure">{entry.data.description}</p>
         <p class="label meta">{t('page.updated')} <time datetime={entry.data.updated.toISOString().slice(0, 10)}>{updated}</time></p>
       </header>
-      <div class="prose measure">
-        <Content />
+      <div class="prose body">
+        {/* 원고 안의 태그 이름은 여기서 넘긴 것만 쓸 수 있다. */}
+        <Content components={{ Video, Videos, Awards, Press, Events, StandardTable, StatTable, Publications }} />
       </div>
+      <PrevNext path={path} />
     </div>
   </article>
 </BaseLayout>
@@ -48,4 +61,7 @@ const updated = new Intl.DateTimeFormat(locale === 'ko' ? 'ko-KR' : 'en-GB', {
   h1 { font-size: var(--t-section); font-size: clamp(32px, 4.2vw, 52px); line-height: 1.2; margin: 0; max-width: 22ch; }
   .lead { font-size: 18px; color: var(--ink-2); margin: 20px 0 0; }
   .meta { margin: 24px 0 0; }
+  /* 글 덩어리만 62ch로 누르고, 표·영상·목록 구성 요소는 쪽 폭을 다 쓴다. */
+  .body { max-width: none; }
+  .body > :is(p, ul, ol, h2, h3, h4, blockquote) { max-width: 62ch; }
 </style>

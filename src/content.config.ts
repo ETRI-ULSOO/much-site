@@ -6,17 +6,17 @@ import { parse as parseYaml } from 'yaml';
  * 콘텐츠와 데이터를 나누어 둔다 (CHIC의 D-06 방식을 계승).
  *   본문이 있는 쪽       → src/content/<언어>/…  Markdown. 파일 이름이 언어 간 연결 열쇠다.
  *   반복되는 항목·수치   → src/data/*.yaml       ko·en 키를 병기한다.
- * 3단계(뼈대)에서는 홈과 꼬리말이 쓰는 데이터만 컬렉션으로 잡았다.
- * 나머지 YAML(awards·events·standards·videos·press·datasets·papers·patents·software)은
- * 4단계에서 쪽을 옮길 때 같은 방식으로 추가한다 (2026-09-11).
+ * 3단계(뼈대)에서는 홈과 꼬리말이 쓰는 데이터만 잡았고, 4단계(2026-09-11)에서 나머지 YAML 아홉 개를
+ * 같은 방식으로 더했다. file 로더는 배열이면 항목의 id를, 객체면 최상위 키를 항목 열쇠로 쓴다.
+ * 스키마에는 쪽이 실제로 읽는 항목만 적는다 — 적지 않은 항목은 조용히 버려진다.
  */
 
 const yaml = (path: string) => file(path, { parser: (text) => parseYaml(text) });
 
-/** 언어별 본문. id는 'ko/much/awards'처럼 언어 접두사를 포함하고, index.md는 접미사가 떨어진다
- *  ('ko/index.md' → 'ko', 'ko/much/index.md' → 'ko/much'). */
+/** 언어별 본문. id는 'ko/much/awards'처럼 언어 접두사를 포함하고, index.mdx는 접미사가 떨어진다
+ *  ('ko/index.mdx' → 'ko', 'ko/much/index.mdx' → 'ko/much'). */
 const pages = defineCollection({
-  loader: glob({ pattern: '**/*.md', base: './src/content' }),
+  loader: glob({ pattern: '**/*.mdx', base: './src/content' }),
   schema: z.object({
     title: z.string(),
     description: z.string(),
@@ -24,10 +24,15 @@ const pages = defineCollection({
     updated: z.coerce.date(),
     /** 원고의 근거 문서. 저장소 안 문서를 [[위키링크]]로 가리킨다. 화면에는 내지 않는다. */
     source: z.string().optional(),
-    /** 홈처럼 본문 외 구성 요소가 있는 쪽의 구분. 없으면 본문만 렌더한다. */
-    layout: z.string().optional(),
+    /** 홈처럼 본문 외 구성 요소가 있는 쪽의 구분. 없으면 본문만 렌더한다.
+     *  `layout`이라 부르지 않는 이유: MDX 프론트매터의 layout은 Astro가 레이아웃 파일 경로로 해석한다. */
+    kind: z.string().optional(),
     /** 영어판이 아직 번역 전인 자리표시자. true면 안내 띠를 띄운다. */
     stub: z.boolean().optional(),
+    /** 번역 초안이라 검수 전인 쪽. true면 안내 띠를 띄운다 (4단계 영어판). */
+    draft: z.boolean().optional(),
+    /** 홈 첫 화면. 제목·한 문단·사실 불릿. 본문(MDX)은 그 아래 절부터 시작한다. */
+    hero: z.object({ heading: z.string(), lead: z.string(), facts: z.array(z.string()) }).optional(),
   }),
 });
 
@@ -42,8 +47,8 @@ const stats = defineCollection({
     actual: z.number(),
     unit: localised(z.string()),
     highlight: z.boolean(),
-    ko: z.object({ label: z.string() }),
-    en: z.object({ label: z.string() }),
+    ko: z.object({ label: z.string(), note: z.string().optional() }),
+    en: z.object({ label: z.string(), note: z.string().optional() }),
   }),
 });
 
@@ -85,4 +90,146 @@ const site = defineCollection({
   }),
 });
 
-export const collections = { pages, stats, timeline, consortium, site };
+/** 발표자료 영상 19편. youtube가 비었거나 confirmed가 거짓이면 쪽에는 자리표시 패널만 나온다. */
+const videos = defineCollection({
+  loader: yaml('./src/data/videos.yaml'),
+  schema: z.object({
+    width: z.number(),
+    height: z.number(),
+    /** 이 영상을 놓을 쪽. Videos 구성 요소가 place로 골라 낸다. */
+    place: z.string(),
+    youtube: z.string(),
+    confirmed: z.boolean(),
+    ko: z.object({ title: z.string(), desc: z.string(), alt: z.string() }),
+    en: z.object({ title: z.string(), desc: z.string(), alt: z.string() }),
+  }),
+});
+
+/** 수상 한 건의 언어별 문구. source는 근거(공식 수상작 쪽·보도)의 표시명, url이 있을 때 링크 글자로 쓴다. */
+const award = z.object({
+  title: z.string(), organization: z.string(), work: z.string(), desc: z.string(),
+  source: z.string().optional(), alt: z.string().optional(),
+});
+
+/** 수상 4건. partners_pending이 참이면 공동 기관 이름을 화면에 내지 않는다 (TRIC 표기 미확인). */
+const awards = defineCollection({
+  loader: yaml('./src/data/awards.yaml'),
+  schema: z.object({
+    year: z.number(),
+    grade: z.enum(['finalist', 'winner']),
+    url: z.string().optional(),
+    partners_pending: z.boolean().optional(),
+    ko: award, en: award,
+  }),
+});
+
+/** 언론 보도. ready가 거짓인 항목(기사 주소·일자 미확보)은 어느 쪽에도 내지 않는다. */
+const press = defineCollection({
+  loader: yaml('./src/data/press.yaml'),
+  schema: z.object({
+    outlet: localised(z.string()),
+    ready: z.boolean(),
+    date: z.coerce.string().optional(),
+    url: z.string().optional(),
+    ko: z.object({ title: z.string() }).optional(),
+    en: z.object({ title: z.string() }).optional(),
+  }),
+});
+
+/** 행사·국제 협력 9건. date는 YAML이 날짜로 읽을 수 있으므로 문자열로 강제한다. */
+const events = defineCollection({
+  loader: yaml('./src/data/events.yaml'),
+  schema: z.object({
+    kind: z.enum(['colloquium', 'exhibition', 'cooperation', 'international']),
+    date: z.coerce.string().optional(),
+    year: z.number().optional(),
+    ko: z.object({ title: z.string(), venue: z.string(), desc: z.string() }),
+    en: z.object({ title: z.string(), venue: z.string(), desc: z.string() }),
+  }),
+});
+
+/** 표준·가이드라인 6건. */
+const standards = defineCollection({
+  loader: yaml('./src/data/standards.yaml'),
+  schema: z.object({
+    kind: z.enum(['standard', 'guideline', 'plan']),
+    organization: z.string(),
+    status: z.enum(['enacted', 'published', 'planned']),
+    date: z.coerce.string().optional(),
+    number: z.string().optional(),
+    year: z.number().optional(),
+    // 기관명이 언어마다 다를 때만 ko/en 안에 organization을 두고, 없으면 위의 organization을 쓴다.
+    ko: z.object({ title: z.string(), desc: z.string(), organization: z.string().optional() }),
+    en: z.object({ title: z.string(), desc: z.string(), organization: z.string().optional() }),
+  }),
+});
+
+/** 조합형 데이터셋. 항목은 'dataset' 하나다. */
+const datasets = defineCollection({
+  loader: yaml('./src/data/datasets.yaml'),
+  schema: z.object({
+    total: z.number(),
+    target: z.number(),
+    unit: localised(z.string()),
+    composition: z.array(
+      z.object({
+        id: z.string(),
+        ko: z.object({ label: z.string(), desc: z.string() }),
+        en: z.object({ label: z.string(), desc: z.string() }),
+      }),
+    ),
+    detail: z.object({
+      artifacts: z.number(),
+      pieces: z.number(),
+      breakdown: z.array(
+        z.object({ id: z.string(), count: z.number(), ko: z.object({ label: z.string() }), en: z.object({ label: z.string() }) }),
+      ),
+      ko: z.object({ note: z.string() }),
+      en: z.object({ note: z.string() }),
+    }),
+  }),
+});
+
+/** 논문·특허·소프트웨어. 서지가 오기 전(Q-2)까지 비어 있고, 비어 있으면 쪽에 목록을 내지 않는다. */
+const papers = defineCollection({
+  loader: yaml('./src/data/papers.yaml'),
+  schema: z.object({
+    kind: z.enum(['journal', 'conference']),
+    index: z.string().optional(),
+    year: z.number(),
+    doi: z.string().optional(),
+    url: z.string().optional(),
+    authors: z.array(z.string()),
+    ko: z.object({ title: z.string(), venue: z.string() }),
+    en: z.object({ title: z.string(), venue: z.string() }),
+  }),
+});
+
+const patents = defineCollection({
+  loader: yaml('./src/data/patents.yaml'),
+  schema: z.object({
+    scope: z.enum(['domestic', 'international']),
+    status: z.enum(['filed', 'registered']),
+    application_no: z.string().optional(),
+    application_date: z.coerce.string().optional(),
+    registration_no: z.string().optional(),
+    registration_date: z.coerce.string().optional(),
+    ko: z.object({ title: z.string() }),
+    en: z.object({ title: z.string() }),
+  }),
+});
+
+const software = defineCollection({
+  loader: yaml('./src/data/software.yaml'),
+  schema: z.object({
+    registration_no: z.string(),
+    registration_date: z.coerce.string(),
+    ko: z.object({ title: z.string(), desc: z.string() }),
+    en: z.object({ title: z.string(), desc: z.string() }),
+  }),
+});
+
+export const collections = {
+  pages, stats, timeline, consortium, site,
+  videos, awards, press, events, standards, datasets, papers, patents, software,
+};

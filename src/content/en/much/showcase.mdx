@@ -1,0 +1,89 @@
+---
+title: "Pilot Content and Public Deployment"
+description: "The digital Gwanggaeto Stele installed at the National Museum of Korea, along with cultural heritage content moved to large public screens."
+updated: 2026-09-11
+draft: true
+source: "[[REF-최종보고서]] 59·67·68쪽 · [[REF-종료평가발표자료]] 슬라이드 29~31·48 · [[SITE-ANALYSIS]] Results 3차년도"
+---
+
+{/*
+  이 쪽은 videos.yaml에서 place가 showcase인 일곱 편을 담는 자리입니다.
+  media10·11·12(슬라이드 29), media13(30), media14·15(31), media18(48)입니다.
+  media10과 media12는 소리가 없어 홈 배경 영상 후보이기도 합니다.
+  media15는 세로형 1392x3914이고 원본이 1기가바이트를 넘으므로 저장소에 담지 않습니다.
+*/}
+
+## Digital Gwanggaeto Stele on the National Museum of Korea's 'Road of History'
+
+A digitally recreated Gwanggaeto Stele was installed on the National Museum of Korea's 'Road of History.' It is based on an ultra-high-resolution record of the actual stele, and the inscriptions carved into its surface can be zoomed in and read on screen. The work was named a Finalist at the 2024 IDEA Design Award.
+
+<Video id="media18" />
+
+## Cultural Heritage Moved to Public Spaces
+
+So that people who do not visit exhibition halls could also encounter cultural heritage, content was displayed on large screens in public places with heavy foot traffic. The presentation materials cited three such deployment cases.
+
+1. Pensive Bodhisattva media art at Seoul Central City
+2. Pensive Bodhisattva media art at Incheon International Airport Terminal 1
+3. King Jeongjo's Hwaseong Haenggung media art at Seoul Central City
+
+{/*
+  영상 media10·media11·media12가 같은 슬라이드(29)에 나란히 실려 있어 위 세 곳에
+  대응하는 것으로 보이나, 어느 영상이 어느 곳인지는 확인되지 않았습니다.
+  사용자 확인 후에 짝을 맞춥니다.
+*/}
+
+<Videos ids={['media10', 'media11', 'media12']} />
+
+## Media Art at Incheon International Airport Terminal 1
+
+This is Pensive Bodhisattva media art installed on a tall vertical large screen at Incheon International Airport Terminal 1. The work received the 2023 iF Design Award.
+
+<Video id="media15" />
+
+{/* media15는 원본이 1기가바이트를 넘으므로 저장소에 담지 않고 ETRI 공식 유튜브 계정에 올린 뒤 그 주소로 싣습니다. */}
+
+{/* 이 영상이 iF 수상작과 같은 작업인지는 사용자 확인이 필요합니다. */}
+
+## Other Pilot Content
+
+<Videos ids={['media13', 'media14']} />
+
+{/* media13(슬라이드 30)·media14(슬라이드 31)의 제목이 확인되면 videos.yaml에 한 문장 설명과 대체 텍스트를 채웁니다. */}
+
+## Six Pilot Services Built on the Platform
+
+To verify that the data held in the platform could actually lead to real services, six services of different kinds were built and demonstrated at the National Museum of Korea. The demonstration ran from 4 September to 18 November 2024, starting with the Gwanggaeto Stele and later expanding to Hwaseong Haenggung (King Jeongjo's temporary palace), the Pensive Bodhisattva, and the Gilt-bronze Incense Burner of Baekje.
+
+### 1. Pensive Bodhisattva Web Exhibition
+
+This service lets visitors rotate and view the two Pensive Bodhisattva statues held by the National Museum of Korea (collection numbers 1962-1 and 1962-2) directly in a web browser. It was implemented using the WebGL web graphics standard so that no separate program needs to be installed.
+
+### 2. Digital Gwanggaeto Stele
+
+Based on a precise 3D record of the stele, this service lets users zoom in to read the inscriptions and view their meaning alongside them. It draws on the same data as the 'Road of History' installation described above.
+
+### 3. Ultra-High-Resolution Viewing of King Jeongjo's Hwaseong Haenggung
+
+An ultra-high-resolution image of the temporary palace was converted into Deep Zoom Image (DZI) format, so that fine detail holds up no matter how far the view is zoomed in. Clicking a marker on the image opens a description window for that spot, together with an audio narration.
+
+### 4. 'Jinmyo,' the AI Docent for King Muryeong's Tomb
+
+This is a guide assistant that answers visitors' questions. 109,000 pieces of material related to King Muryeong's Tomb were converted into vectors and stored in a search index (FAISS); when a question comes in, the system first retrieves the relevant material and generates its answer based only on that content, a method known as retrieval-augmented generation (RAG). This reduces the problem of a language model fabricating facts it does not have.
+
+### 5. Visitor Route Recommendation
+
+A service that recommends a route through the National Museum of Korea's large exhibition space, letting visitors follow artifacts that match their interests in sequence.
+
+### 6. Generative AI Catalog Visualization
+
+A prototype that lets users narrow their view of artifacts across four stages: shape, material, period, and function. It applies a model-lightening technique (LoRA), so a single response takes about 98 milliseconds. When recommending similar artifacts, it combines two criteria — metadata similarity, weighted at 0.7, and relationship similarity computed from the knowledge graph, weighted at 0.3.
+
+## How the Content Was Made
+
+All of the content shown here came from data held in the MUCH (Multi-purpose Universal Cultural Heritage) platform. Rather than reshooting the artifacts, it recombined 3D shapes and high-resolution images that had already been created, to fit each new purpose. This is a case where the project's goal — making data created once usable in many places — actually worked.
+
+## Where to Go Next
+
+- The awards these works received → [Awards](/much/awards/)
+- The standards used to create the data → [Standards and Guidelines](/much/standards/)

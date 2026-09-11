@@ -1,0 +1,70 @@
+---
+/** 논문·특허·소프트웨어 목록. 서지(Q-2)가 오기 전에는 비어 있고, 비어 있으면 아무것도 그리지 않는다. */
+import { getCollection } from 'astro:content';
+import { getLocale, useTranslations } from '../i18n/utils';
+
+interface Props {
+  kind: 'journal' | 'conference' | 'patent' | 'software';
+}
+const { kind } = Astro.props;
+const locale = getLocale(Astro.url);
+const t = useTranslations(locale);
+
+const papers = kind === 'journal' || kind === 'conference'
+  ? (await getCollection('papers')).filter((p) => p.data.kind === kind).sort((a, b) => b.data.year - a.data.year)
+  : [];
+const patents = kind === 'patent' ? await getCollection('patents') : [];
+const software = kind === 'software' ? await getCollection('software') : [];
+---
+
+{papers.length > 0 && (
+  <ol class="pubs">
+    {papers.map(({ data }) => {
+      const d = data[locale].title ? data[locale] : data.ko;
+      return (
+        <li>
+          <p class="title">{data.url || data.doi ? <a href={data.url ?? `https://doi.org/${data.doi}`} rel="noopener">{d.title}</a> : d.title}</p>
+          <p class="meta">{data.authors.join(', ')} · {d.venue} · {data.year}{data.index && ` · ${data.index}`}</p>
+        </li>
+      );
+    })}
+  </ol>
+)}
+{patents.length > 0 && (
+  <ol class="pubs">
+    {patents.map(({ data }) => {
+      const d = data[locale].title ? data[locale] : data.ko;
+      return (
+        <li>
+          <p class="title">{d.title}</p>
+          <p class="meta">
+            {t(`patent.status.${data.status}`)}
+            {data.registration_no ? ` · ${data.registration_no} · ${data.registration_date ?? ''}` : data.application_no ? ` · ${data.application_no} · ${data.application_date ?? ''}` : ''}
+          </p>
+        </li>
+      );
+    })}
+  </ol>
+)}
+{software.length > 0 && (
+  <ol class="pubs">
+    {software.map(({ data }) => {
+      const d = data[locale].title ? data[locale] : data.ko;
+      return (
+        <li>
+          <p class="title">{d.title}</p>
+          <p class="meta">{t('software.registration')} {data.registration_no} · {data.registration_date}</p>
+          {d.desc && <p class="desc">{d.desc}</p>}
+        </li>
+      );
+    })}
+  </ol>
+)}
+
+<style>
+  .pubs { margin: 0; padding-left: 1.6em; color: var(--ink-2); }
+  .pubs > li + li { margin-top: 16px; }
+  .title { margin: 0; color: var(--ink); }
+  .meta { margin: 4px 0 0; font-size: 15px; color: var(--ink-3); }
+  .desc { margin: 6px 0 0; font-size: 15px; }
+</style>

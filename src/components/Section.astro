@@ -1,0 +1,21 @@
+---
+/** 홈처럼 본문 대신 구성 요소를 쌓는 쪽의 한 절. 눈금 글자(label)와 제목은 있을 때만 그린다. */
+interface Props {
+  title?: string;
+  label?: string;
+  id?: string;
+}
+const { title, label, id } = Astro.props;
+---
+
+<section class="section" id={id}>
+  <div class="wrap">
+    {label && <p class="label">{label}</p>}
+    {title && <h2>{title}</h2>}
+    <slot />
+  </div>
+</section>
+
+<style>
+  h2 { font-size: var(--t-section); margin: 8px 0 32px; max-width: 24ch; }
+</style>

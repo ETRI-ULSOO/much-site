@@ -1,0 +1,80 @@
+---
+/** 수상 4건. compact면 홈의 한 줄 띠(StatBand와 같은 꼴), 아니면 수상 쪽의 전체 목록. 최근 연도가 먼저다. */
+import { getCollection } from 'astro:content';
+import { getLocale, useTranslations, localePath } from '../i18n/utils';
+
+interface Props {
+  compact?: boolean;
+}
+const { compact = false } = Astro.props;
+const locale = getLocale(Astro.url);
+const t = useTranslations(locale);
+
+const awards = (await getCollection('awards')).sort((a, b) => b.data.year - a.data.year);
+const text = (data: (typeof awards)[number]['data']) => (data[locale].title ? data[locale] : data.ko);
+---
+
+{compact ? (
+  <section class="band" aria-label={t('awards.title')}>
+    <div class="wrap">
+      <p class="label">{t('awards.title')}</p>
+      <ul>
+        {awards.map(({ data }) => {
+          const d = text(data);
+          return (
+            <li>
+              <p class="year">{data.year}</p>
+              <p class="name">{d.title}</p>
+              <p class="work">{d.work}</p>
+            </li>
+          );
+        })}
+      </ul>
+      <p class="more"><a href={localePath(locale, '/much/awards/')}>{t('awards.all')} →</a></p>
+    </div>
+  </section>
+) : (
+  <ol class="list">
+    {awards.map(({ data }) => {
+      const d = text(data);
+      return (
+        <li>
+          <h3>{d.title}</h3>
+          <p class="label meta">{d.organization} · {data.year}</p>
+          <p class="work"><span class="label">{t('awards.work')}</span> {d.work}</p>
+          <p class="desc">{d.desc}</p>
+          {data.url && d.source && (
+            <p class="source"><a href={data.url} rel="noopener">{d.source} ↗</a></p>
+          )}
+        </li>
+      );
+    })}
+  </ol>
+)}
+
+<style>
+  /* 홈 띠 — StatBand와 같은 세로 선 구획 */
+  .band { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); padding: 48px 0; }
+  ul {
+    list-style: none; margin: 20px 0 0; padding: 0;
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 0;
+  }
+  ul li { padding: 8px 24px 8px 20px; border-left: 1px solid var(--line-strong); }
+  .year { margin: 0; font-family: var(--font-mono); font-size: var(--t-label); letter-spacing: var(--tracking); color: var(--accent); }
+  .name { margin: 8px 0 0; color: var(--ink); }
+  ul .work { margin: 4px 0 0; color: var(--ink-3); font-size: 14px; }
+  .more { margin: 28px 0 0; }
+  @media (max-width: 720px) {
+    ul { grid-template-columns: 1fr; row-gap: 12px; }
+  }
+
+  /* 수상 쪽 — 항목 사이를 선 하나로 나눈다 */
+  .list { list-style: none; margin: 0; padding: 0; }
+  .list > li + li { margin-top: 40px; padding-top: 40px; border-top: 1px solid var(--line); }
+  .list h3 { margin: 0; }
+  .meta { margin: 10px 0 0; }
+  .list .work { margin: 16px 0 0; color: var(--ink-2); }
+  .list .work .label { display: inline; margin-right: 8px; }
+  .desc { margin: 12px 0 0; color: var(--ink-2); max-width: 62ch; }
+  .source { margin: 12px 0 0; font-size: 15px; }
+</style>

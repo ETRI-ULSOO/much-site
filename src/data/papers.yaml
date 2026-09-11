@@ -15,5 +15,8 @@
 #     ko: { title: 논문 제목, venue: 게재지 이름 }
 #     en: { title: "", venue: "" }
 
-journal: []
-conference: []
+#
+# 파일 형태 (2026-09-11 4단계): 최상위가 항목 배열이며 kind 항목(journal·conference)으로 구분한다.
+#   콘텐츠 컬렉션의 file 로더가 배열 항목의 id를 열쇠로 쓰기 때문이다.
+
+[]

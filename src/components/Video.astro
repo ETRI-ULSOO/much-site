@@ -1,0 +1,24 @@
+---
+/** videos.yaml의 항목 하나를 VideoEmbed로 그린다. MDX 본문에서 <Video id="media18" />처럼 쓴다. */
+import { getEntry } from 'astro:content';
+import VideoEmbed from './VideoEmbed.astro';
+import { getLocale } from '../i18n/utils';
+
+interface Props {
+  id: string;
+}
+const { id } = Astro.props;
+const locale = getLocale(Astro.url);
+
+const entry = await getEntry('videos', id);
+if (!entry) throw new Error(`videos.yaml에 ${id} 항목이 없습니다`);
+const { data } = entry;
+
+// 영어 문구가 비어 있으면 한국어를 대신 보인다 (Timeline과 같은 규칙).
+const text = data[locale].title ? data[locale] : data.ko;
+// 제목이 확인되지 않은 영상은 ID가 있어도 자리표시 패널만 보인다 (videos.yaml 머리 주석).
+const youtube = data.confirmed && data.youtube ? data.youtube : undefined;
+const orientation = data.height > data.width ? 'portrait' : 'landscape';
+---
+
+<VideoEmbed youtube={youtube} title={text.title} desc={text.desc} orientation={orientation} />

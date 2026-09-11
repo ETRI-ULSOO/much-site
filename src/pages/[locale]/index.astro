@@ -3,6 +3,12 @@ import { getEntry, render } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import StatBand from '../../components/StatBand.astro';
 import Timeline from '../../components/Timeline.astro';
+import Section from '../../components/Section.astro';
+import Videos from '../../components/Videos.astro';
+import Awards from '../../components/Awards.astro';
+import Press from '../../components/Press.astro';
+import Cards from '../../components/Cards.astro';
+import Card from '../../components/Card.astro';
 import { locales, type Locale } from '../../i18n/ui';
 import { useTranslations, localePath } from '../../i18n/utils';
 
@@ -12,32 +18,36 @@ export function getStaticPaths() {
 
 const locale = Astro.params.locale as Locale;
 const t = useTranslations(locale);
-// 홈 원고의 id는 언어 코드 그대로다 (glob 로더가 index.md의 'index'를 뗀다).
+// 홈 원고의 id는 언어 코드 그대로다 (glob 로더가 index.mdx의 'index'를 뗀다).
 const entry = await getEntry('pages', locale);
-if (!entry) throw new Error(`src/content/${locale}/index.md가 없습니다`);
+if (!entry) throw new Error(`src/content/${locale}/index.mdx가 없습니다`);
 const { Content } = await render(entry);
+// 첫 화면 문구는 frontmatter의 hero에 있다. 없으면 title·description으로 대신한다.
+const hero = entry.data.hero;
 ---
 
-<BaseLayout description={entry.data.description} stub={entry.data.stub}>
+<BaseLayout description={entry.data.description} stub={entry.data.stub} draft={entry.data.draft}>
   <section class="hero">
     <div class="wrap">
       <p class="label">{t('hero.eyebrow')}</p>
-      <h1>{entry.data.title}</h1>
-      <p class="lead measure">{entry.data.description}</p>
+      <h1>{hero?.heading ?? entry.data.title}</h1>
+      <p class="lead measure">{hero?.lead ?? entry.data.description}</p>
+      {hero && hero.facts.length > 0 && (
+        <ul class="facts measure">
+          {hero.facts.map((f) => <li>{f}</li>)}
+        </ul>
+      )}
       <p class="actions">
-        <a class="btn btn-primary" href={localePath(locale, '/much/')}>{t('nav.much')}</a>
-        <a class="btn" href={localePath(locale, '/much/showcase/')}>{t('nav.showcase')}</a>
+        <a class="btn btn-primary" href={localePath(locale, '/much/outcomes/')}>{t('hero.cta.outcomes')}</a>
+        <a class="btn" href={localePath(locale, '/much/')}>{t('hero.cta.much')}</a>
       </p>
     </div>
   </section>
 
   <StatBand />
 
-  <section class="section">
-    <div class="wrap prose measure">
-      <Content />
-    </div>
-  </section>
+  {/* 홈 본문(MDX)은 산문 대신 구성 요소만 쌓는다. 태그 이름은 여기서 넘긴 것만 쓸 수 있다. */}
+  <Content components={{ Section, Videos, Awards, Press, Cards, Card }} />
 
   <Timeline />
 </BaseLayout>
@@ -46,5 +56,7 @@ const { Content } = await render(entry);
   .hero { padding: var(--section-pad); padding-bottom: 72px; }
   h1 { font-size: var(--t-display); line-height: 1.15; margin: 16px 0 0; max-width: 18ch; }
   .lead { font-size: 19px; color: var(--ink-2); margin: 28px 0 0; }
+  .facts { margin: 20px 0 0; padding-left: 1.2em; color: var(--ink-3); font-size: 15px; }
+  .facts li + li { margin-top: 4px; }
   .actions { display: flex; gap: 12px; flex-wrap: wrap; margin: 36px 0 0; }
 </style>

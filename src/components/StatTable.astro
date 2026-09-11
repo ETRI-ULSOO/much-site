@@ -1,0 +1,44 @@
+---
+/** 정량 성과 11행 전체. 홈 띠(StatBand)와 달리 highlight와 무관하게 전부 보이고, 목표가 없는 항목은 목표 칸을 비운다. */
+import { getCollection } from 'astro:content';
+import { getLocale, useTranslations } from '../i18n/utils';
+
+const locale = getLocale(Astro.url);
+const t = useTranslations(locale);
+const stats = await getCollection('stats');
+const num = new Intl.NumberFormat(locale === 'ko' ? 'ko-KR' : 'en-GB');
+---
+
+<div class="table-scroll">
+  <table>
+    <thead>
+      <tr>
+        <th>{t('stats.item')}</th>
+        <th class="r">{t('stats.target')}</th>
+        <th class="r">{t('stats.actual')}</th>
+        <th>{t('stats.note')}</th>
+      </tr>
+    </thead>
+    <tbody>
+      {stats.map(({ data }) => {
+        const d = data[locale].label ? data[locale] : data.ko;
+        // 단위는 언어별 값을 그대로 쓴다. 영어는 비워 두는 것이 정상이며(숫자만 보임), 한국어 단위로 대신하지 않는다.
+        const unit = data.unit[locale];
+        return (
+          <tr>
+            <td>{d.label}</td>
+            <td class="r">{data.target !== undefined ? `${num.format(data.target)}${unit}` : ''}</td>
+            <td class="r"><strong>{num.format(data.actual)}{unit}</strong></td>
+            <td class="note">{d.note ?? ''}</td>
+          </tr>
+        );
+      })}
+    </tbody>
+  </table>
+</div>
+
+<style>
+  .r { text-align: right; white-space: nowrap; font-family: var(--font-mono); }
+  th.r { font-family: var(--font-mono); }
+  .note { color: var(--ink-3); font-size: 0.94em; }
+</style>

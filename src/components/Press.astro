@@ -1,0 +1,56 @@
+---
+/** 언론 보도. ready가 참인 항목만 보이고, 한 건도 없으면 아무것도 그리지 않는다 (Q-4 기사 주소·일자 대기). */
+import { getCollection } from 'astro:content';
+import { getLocale, useTranslations, localePath } from '../i18n/utils';
+
+interface Props {
+  compact?: boolean;
+}
+const { compact = false } = Astro.props;
+const locale = getLocale(Astro.url);
+const t = useTranslations(locale);
+
+const press = (await getCollection('press')).filter((p) => p.data.ready);
+const title = (data: (typeof press)[number]['data']) => data[locale]?.title || data.ko?.title || '';
+---
+
+{press.length > 0 && (compact ? (
+  <section class="band" aria-label={t('press.title')}>
+    <div class="wrap">
+      <p class="label">{t('press.title')}</p>
+      <ul>
+        {press.map(({ data }) => (
+          <li>
+            <p class="outlet">{data.outlet[locale]}{data.date && <span class="date"> · {data.date}</span>}</p>
+            <p class="name">{data.url ? <a href={data.url} rel="noopener">{title(data)} ↗</a> : title(data)}</p>
+          </li>
+        ))}
+      </ul>
+      <p class="more"><a href={localePath(locale, '/much/media/')}>{t('nav.media')} →</a></p>
+    </div>
+  </section>
+) : (
+  <ol class="list">
+    {press.map(({ data }) => (
+      <li>
+        <p class="label">{data.outlet[locale]}{data.date && <span> · {data.date}</span>}</p>
+        <p class="name">{data.url ? <a href={data.url} rel="noopener">{title(data)} ↗</a> : title(data)}</p>
+      </li>
+    ))}
+  </ol>
+))}
+
+<style>
+  .band { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); padding: 48px 0; }
+  ul {
+    list-style: none; margin: 20px 0 0; padding: 0;
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 0;
+  }
+  ul li { padding: 8px 24px 8px 20px; border-left: 1px solid var(--line-strong); }
+  .outlet { margin: 0; font-family: var(--font-mono); font-size: var(--t-label); letter-spacing: var(--tracking); color: var(--accent); }
+  .name { margin: 8px 0 0; color: var(--ink); }
+  .more { margin: 28px 0 0; }
+  .list { list-style: none; margin: 0; padding: 0; }
+  .list > li + li { margin-top: 24px; padding-top: 24px; border-top: 1px solid var(--line); }
+  .list .label { margin: 0; }
+</style>

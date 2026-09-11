@@ -1,0 +1,50 @@
+---
+/** 쪽 끝의 이전·다음 링크. 순서는 lib/pages.ts가 정하고, 그 목록에 없는 쪽(홈)에서는 아무것도 그리지 않는다. */
+import { getLocale, useTranslations, localePath } from '../i18n/utils';
+import { pages } from '../lib/pages';
+
+interface Props {
+  /** 언어 접두사를 뺀 현재 쪽 경로. 예: '/much/research/' */
+  path: string;
+}
+const { path } = Astro.props;
+const locale = getLocale(Astro.url);
+const t = useTranslations(locale);
+
+const i = pages.findIndex(([p]) => p === path);
+const prev = i > 0 ? pages[i - 1] : undefined;
+const next = i >= 0 && i < pages.length - 1 ? pages[i + 1] : undefined;
+---
+
+{i >= 0 && (
+  <nav class="prevnext" aria-label={`${t('page.prev')} / ${t('page.next')}`}>
+    <p class="prev">
+      {prev && (
+        <a href={localePath(locale, prev[0])}>
+          <span class="label">← {t('page.prev')}</span>
+          <span class="name">{t(prev[1])}</span>
+        </a>
+      )}
+    </p>
+    <p class="next">
+      {next && (
+        <a href={localePath(locale, next[0])}>
+          <span class="label">{t('page.next')} →</span>
+          <span class="name">{t(next[1])}</span>
+        </a>
+      )}
+    </p>
+  </nav>
+)}
+
+<style>
+  .prevnext {
+    display: flex; justify-content: space-between; gap: 24px;
+    margin-top: 64px; padding-top: 32px; border-top: 1px solid var(--line-strong);
+  }
+  .prevnext p { margin: 0; }
+  .next { text-align: right; }
+  a { text-decoration: none; }
+  .name { display: block; margin-top: 6px; font-family: var(--font-title); font-size: 20px; color: var(--ink); }
+  a:hover .name { color: var(--accent); }
+</style>

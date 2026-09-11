@@ -11,10 +11,12 @@ import { getLocale, useTranslations } from '../i18n/utils';
 interface Props {
   youtube?: string;
   title: string;
+  /** 제목 아래 한 줄 설명. 없으면 제목만 보인다 */
+  desc?: string;
   /** 'portrait'면 세로 영상 — 높이 상한을 둔다 */
   orientation?: 'landscape' | 'portrait';
 }
-const { youtube, title, orientation = 'landscape' } = Astro.props;
+const { youtube, title, desc, orientation = 'landscape' } = Astro.props;
 const locale = getLocale(Astro.url);
 const t = useTranslations(locale);
 const id = youtube?.trim();
@@ -26,12 +28,12 @@ const id = youtube?.trim();
       <img src={`https://i.ytimg.com/vi/${id}/hqdefault.jpg`} alt="" loading="lazy" width="480" height="360" />
       <span class="label">▶ {t('video.play')}</span>
     </button>
-    <figcaption>{title}</figcaption>
+    <figcaption><span class="t">{title}</span>{desc && <span class="d">{desc}</span>}</figcaption>
   </figure>
 ) : (
   <figure class:list={['video', 'pending', orientation]}>
     <div class="panel"><p class="label">{t('video.pending')}</p></div>
-    <figcaption>{title}</figcaption>
+    <figcaption><span class="t">{title}</span>{desc && <span class="d">{desc}</span>}</figcaption>
   </figure>
 )}
 
@@ -42,7 +44,7 @@ const id = youtube?.trim();
       const id = fig.dataset.video!;
       const frame = document.createElement('iframe');
       frame.src = `https://www.youtube-nocookie.com/embed/${id}?rel=0&autoplay=1`;
-      frame.title = fig.querySelector('figcaption')?.textContent ?? '';
+      frame.title = fig.querySelector('figcaption .t')?.textContent ?? '';
       frame.allow = 'autoplay; encrypted-media; picture-in-picture';
       frame.allowFullscreen = true;
       fig.querySelector('.play')?.replaceWith(frame);
@@ -71,4 +73,6 @@ const id = youtube?.trim();
   }
   .portrait.pending .panel { aspect-ratio: 9 / 16; max-height: 60vh; }
   figcaption { margin: 10px 0 0; color: var(--ink-3); font-size: 14px; }
+  figcaption .t { display: block; color: var(--ink-2); }
+  figcaption .d { display: block; margin-top: 4px; }
 </style>

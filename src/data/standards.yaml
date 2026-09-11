@@ -19,8 +19,8 @@
       한국정보통신기술협회(TTA)가 2025년 12월 5일에 제정했습니다.
       표준 문서 번호는 TTAK.KO-10.1621입니다.
   en:
-    title: ""
-    desc: ""
+    title: "Production Guidelines for Maintaining Quality in Generating Digital Data of Movable Cultural Heritage"
+    desc: "A domestic standard specifying the methods of data acquisition and production procedures for keeping quality consistent when movable cultural heritage is turned into digital data. It was enacted by the Telecommunications Technology Association (TTA) on 5 December 2025. The standard document number is TTAK.KO-10.1621."
 
 # 포럼 표준 — 최종보고서 54쪽에서 확인했습니다 (2026-09-11).
 # TTA 단체 표준보다 1년 먼저 제정된 표준이며, 현행 사이트와 발표자료에는 실려 있지 않았습니다.
@@ -36,8 +36,9 @@
       실감형혼합현실 기술포럼의 상호운용성 표준분과에서 2024년 8월 13일에 제정한 포럼 표준입니다.
       이듬해 제정된 TTA 표준의 앞 단계에 해당합니다.
   en:
-    title: ""
-    desc: ""
+    organization: "Immersive Mixed Reality Technology Forum"
+    title: "Standard for Generating and Using Digital Cultural Heritage Data"
+    desc: "A forum standard enacted on 13 August 2024 by the Interoperability Standards Subcommittee of the Immersive Mixed Reality Technology Forum. It was an earlier step that preceded the TTA standard enacted the following year."
 
 - id: guideline-2024
   kind: guideline
@@ -53,8 +54,8 @@
       작업 환경과 장비별 설정 조건을 기술했습니다. 2024년 12월에 출간했습니다.
       국립중앙박물관은 이 가이드라인을 기가픽셀·3D 데이터 획득 용역의 납품 지침서로 채택했습니다.
   en:
-    title: ""
-    desc: ""
+    title: "Cultural Heritage Digital Asset Standard Guidelines 2024"
+    desc: "A book that sets out the formats and quality standards to follow when turning cultural heritage into digital assets. It covers recently used data acquisition technologies such as 3D, gigapixel, and RTI, describing the working environment and equipment settings for each. It was published in December 2024. The National Museum of Korea adopted these guidelines as the delivery specification for its gigapixel and 3D data acquisition services."
 
 - id: guideline-rti
   kind: guideline
@@ -64,8 +65,8 @@
     title: RTI 데이터 획득 가이드라인
     desc: 빛의 방향을 바꾸어 가며 촬영하는 반사 변환 이미지(RTI)를 일정한 품질로 얻는 절차를 규정했습니다.
   en:
-    title: ""
-    desc: ""
+    title: "RTI Data Acquisition Guidelines"
+    desc: "Specifies the procedure for capturing reflectance transformation images (RTI), taken by varying the direction of light, at a consistent quality."
 
 - id: guideline-3d
   kind: guideline
@@ -75,8 +76,8 @@
     title: 3D 데이터 획득 가이드라인
     desc: 유물을 삼차원으로 기록할 때 필요한 촬영 조건과 데이터 품질 기준을 규정했습니다.
   en:
-    title: ""
-    desc: ""
+    title: "3D Data Acquisition Guidelines"
+    desc: "Specifies the shooting conditions and data quality standards required when recording artifacts in three dimensions."
 
 - id: iso-plan
   kind: plan
@@ -86,5 +87,5 @@
     title: ISO 국제 표준 제정 추진
     desc: 국내에서 제정한 제작 지침을 바탕으로 국제 표준을 만드는 작업을 이어 갈 계획입니다.
   en:
-    title: ""
-    desc: ""
+    title: "Pursuing an ISO International Standard"
+    desc: "The plan is to continue developing an international standard based on the production guidelines enacted domestically."

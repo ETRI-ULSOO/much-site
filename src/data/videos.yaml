@@ -45,7 +45,7 @@
     title: 과제 소개 영상
     desc: 발표자료 앞부분에 실린 영상으로, 과제의 배경과 방향을 소개합니다.
     alt: 과제 소개 영상의 첫 화면입니다.
-  en: { title: "", desc: "", alt: "" }
+  en: { title: "Project Introduction Video", desc: "A video from the opening part of the presentation, introducing the background and direction of the project.", alt: "The opening frame of the project introduction video." }
 
 - id: media2
   source: media2.mp4
@@ -64,7 +64,7 @@
     desc: 문화유산 데이터를 조합할 수 있는 형태로 만드는 접근 방식을 보여 주는 4K 영상입니다.
     alt: 솔루션 소개 영상의 첫 화면입니다.
     note: 원본이 2.7GB이므로 저장소에 넣지 않고 유튜브로만 게시합니다. 발표자료의 첫 화면 이미지도 검은 화면입니다.
-  en: { title: "", desc: "", alt: "", note: "" }
+  en: { title: "Digital Heritage Solution Introduction Video", desc: "A 4K video showing the approach for turning cultural heritage data into a composable form.", alt: "The opening frame of the solution introduction video.", note: "Because the original file is 2.7GB, it is not stored in the repository and is published on YouTube only. The opening frame in the presentation is also a black screen." }
 
 - id: media3
   source: media3.mp4
@@ -82,7 +82,7 @@
     title: 연구 내용 시연 영상 (슬라이드 17)
     desc: 연구 내용을 상세히 설명하는 구간에 실린 시연 영상입니다.
     alt: 연구 내용 시연 영상의 첫 화면입니다.
-  en: { title: "", desc: "", alt: "" }
+  en: { title: "Research Demonstration Video (Slide 17)", desc: "A demonstration video from the section that explains the research in detail.", alt: "The opening frame of the research demonstration video." }
 
 - id: media4
   source: media4.mp4
@@ -100,7 +100,7 @@
     title: 연구 내용 시연 영상 (슬라이드 18)
     desc: 연구 내용을 상세히 설명하는 구간에 실린 시연 영상입니다.
     alt: 연구 내용 시연 영상의 첫 화면입니다.
-  en: { title: "", desc: "", alt: "" }
+  en: { title: "Research Demonstration Video (Slide 18)", desc: "A demonstration video from the section that explains the research in detail.", alt: "The opening frame of the research demonstration video." }
 
 - id: media5
   source: media5.mp4
@@ -119,7 +119,7 @@
     desc: 연구 내용을 상세히 설명하는 구간에 실린 시연 영상입니다.
     alt: 연구 내용 시연 영상의 첫 화면입니다.
     note: 발표자료에 실린 첫 화면 이미지가 검은 화면이므로, 게시 전에 대표 화면을 따로 만들어야 합니다.
-  en: { title: "", desc: "", alt: "", note: "" }
+  en: { title: "Research Demonstration Video (Slide 20)", desc: "A demonstration video from the section that explains the research in detail.", alt: "The opening frame of the research demonstration video.", note: "Because the opening frame shown in the presentation is a black screen, a separate thumbnail must be made before publishing." }
 
 - id: media6
   source: media6.mp4
@@ -137,7 +137,7 @@
     title: 연구 내용 시연 영상 (슬라이드 21)
     desc: 연구 내용을 상세히 설명하는 구간에 실린 시연 영상입니다.
     alt: 연구 내용 시연 영상의 첫 화면입니다.
-  en: { title: "", desc: "", alt: "" }
+  en: { title: "Research Demonstration Video (Slide 21)", desc: "A demonstration video from the section that explains the research in detail.", alt: "The opening frame of the research demonstration video." }
 
 - id: media7
   source: media7.mp4
@@ -155,7 +155,7 @@
     title: 연구 내용 시연 영상 (슬라이드 22)
     desc: 연구 내용을 상세히 설명하는 구간에 실린 시연 영상입니다.
     alt: 연구 내용 시연 영상의 첫 화면입니다.
-  en: { title: "", desc: "", alt: "" }
+  en: { title: "Research Demonstration Video (Slide 22)", desc: "A demonstration video from the section that explains the research in detail.", alt: "The opening frame of the research demonstration video." }
 
 - id: media8
   source: media8.mp4
@@ -174,7 +174,7 @@
     desc: 연구 내용을 상세히 설명하는 구간에 실린 시연 영상입니다.
     alt: 연구 내용 시연 영상의 첫 화면입니다.
     note: 발표자료에 실린 첫 화면 이미지가 검은 화면이므로, 게시 전에 대표 화면을 따로 만들어야 합니다.
-  en: { title: "", desc: "", alt: "", note: "" }
+  en: { title: "Research Demonstration Video (Slide 26)", desc: "A demonstration video from the section that explains the research in detail.", alt: "The opening frame of the research demonstration video.", note: "Because the opening frame shown in the presentation is a black screen, a separate thumbnail must be made before publishing." }
 
 - id: media9
   source: media9.mp4
@@ -192,7 +192,7 @@
     title: 연구 내용 시연 영상 (슬라이드 27)
     desc: 5분 51초 길이로, 발표자료에 실린 시연 영상 가운데 두 번째로 깁니다.
     alt: 연구 내용 시연 영상의 첫 화면입니다.
-  en: { title: "", desc: "", alt: "" }
+  en: { title: "Research Demonstration Video (Slide 27)", desc: "At 5 minutes 51 seconds, it is the second-longest demonstration video in the presentation.", alt: "The opening frame of the research demonstration video." }
 
 - id: media10
   source: media10.mp4
@@ -218,7 +218,7 @@
       같은 슬라이드의 세 영상은 발표자료가 공공 확산 사례로 든 세 곳,
       곧 센트럴시티 반가사유상과 인천공항 반가사유상, 센트럴시티 정조 화성행궁에
       대응하는 것으로 보이나 어느 영상이 어느 곳인지는 확인되지 않았습니다.
-  en: { title: "", desc: "", alt: "", note: "" }
+  en: { title: "Large Public Display Content (1)", desc: "A silent video with a wide aspect ratio, about 1.9 times as wide as it is tall. It appears to be content made for a large display installed in a public space.", alt: "Cultural heritage content playing on a large display in a public space.", note: "Since it has no sound and is 88 seconds long, cropping an 8-to-10-second segment at 1280 pixels wide would bring it under 5MB, making it usable as the home page's background video. The three videos on the same slide appear to correspond to the three public-deployment cases the presentation cites, the Pensive Bodhisattva at Central City, the Pensive Bodhisattva at Incheon International Airport, and King Jeongjo's Hwaseong Haenggung at Central City, but which video corresponds to which location has not been confirmed." }
 
 - id: media11
   source: media11.mp4
@@ -236,7 +236,7 @@
     title: 공공장소 대형 화면 콘텐츠 (2)
     desc: 같은 슬라이드에 나란히 실린 대형 화면용 콘텐츠 가운데 두 번째 영상입니다.
     alt: 공공장소 대형 화면에 재생되는 문화유산 콘텐츠 화면입니다.
-  en: { title: "", desc: "", alt: "" }
+  en: { title: "Large Public Display Content (2)", desc: "The second of the large-display content videos placed side by side on the same slide.", alt: "Cultural heritage content playing on a large display in a public space." }
 
 - id: media12
   source: media12.mp4
@@ -255,7 +255,7 @@
     desc: 같은 슬라이드에 나란히 실린 대형 화면용 콘텐츠 가운데 세 번째 영상이며 소리가 없습니다.
     alt: 공공장소 대형 화면에 재생되는 문화유산 콘텐츠 화면입니다.
     note: media10과 마찬가지로 홈 화면의 배경 영상 후보입니다. 두 편 가운데 한 편을 고릅니다.
-  en: { title: "", desc: "", alt: "", note: "" }
+  en: { title: "Large Public Display Content (3)", desc: "The third of the large-display content videos placed side by side on the same slide; it has no sound.", alt: "Cultural heritage content playing on a large display in a public space.", note: "Like media10, this is a candidate for the home page background video. One of the two will be chosen." }
 
 - id: media13
   source: media13.mp4
@@ -273,7 +273,7 @@
     title: 시범 콘텐츠 시연 영상 (슬라이드 30)
     desc: 4K 해상도로 제작한 시범 콘텐츠 시연 영상입니다.
     alt: 시범 콘텐츠 시연 영상의 첫 화면입니다.
-  en: { title: "", desc: "", alt: "" }
+  en: { title: "Pilot Content Demonstration Video (Slide 30)", desc: "A pilot content demonstration video produced in 4K resolution.", alt: "The opening frame of the pilot content demonstration video." }
 
 - id: media14
   source: media14.mp4
@@ -292,7 +292,7 @@
     desc: 초당 전송량이 43Mbps에 이르는 고화질 영상입니다.
     alt: 시범 콘텐츠 시연 영상의 첫 화면입니다.
     note: 발표자료에 실린 첫 화면 이미지가 검은 화면이므로, 게시 전에 대표 화면을 따로 만들어야 합니다.
-  en: { title: "", desc: "", alt: "", note: "" }
+  en: { title: "Pilot Content Demonstration Video (Slide 31)", desc: "A high-quality video with a bit rate reaching 43Mbps.", alt: "The opening frame of the pilot content demonstration video.", note: "Because the opening frame shown in the presentation is a black screen, a separate thumbnail must be made before publishing." }
 
 - id: media15
   source: media15.mp4
@@ -318,7 +318,7 @@
       화면 비율을 따로 지정해야 합니다.
       iF Design Award 2023을 받은 인천공항 제1여객터미널 반가사유상 미디어아트로 보이며,
       그렇다면 수상 페이지에도 함께 실을 수 있습니다. 사용자 확인이 필요합니다.
-  en: { title: "", desc: "", alt: "", note: "" }
+  en: { title: "Vertical Large-Display Content", desc: "A vertical aspect ratio, about 2.8 times as tall as it is wide. It appears to be content made for a vertical large display installed in an airport or building lobby.", alt: "Cultural heritage content playing on a tall, vertical display.", note: "Because the original file is 1,051MB, it is not stored in the repository and is published on YouTube only. Since the aspect ratio is very tall, placing it in a standard 16:9 frame would leave large empty margins on both sides, so the aspect ratio needs to be set separately. It appears to be the Pensive Bodhisattva media art at Incheon International Airport Terminal 1 that received the iF Design Award 2023; if so, it could also be featured on the awards page. This needs to be confirmed by the user." }
 
 - id: media16
   source: media16.mp4
@@ -337,7 +337,7 @@
     desc: 연구 성과를 다룬 텔레비전 뉴스 보도를 발표자료에 그대로 실은 영상입니다.
     alt: 연구 성과를 소개하는 텔레비전 뉴스 보도 화면입니다.
     note: 방송사가 제작한 영상이므로, 게시하기 전에 방송사의 이용 허락 여부를 확인해야 합니다.
-  en: { title: "", desc: "", alt: "", note: "" }
+  en: { title: "Television News Report", desc: "A television news report covering the research results, included as-is in the presentation.", alt: "A television news report screen introducing the research results.", note: "Because the video was produced by a broadcaster, permission for use must be confirmed with the broadcaster before publishing." }
 
 - id: media17
   source: media17.mp4
@@ -360,7 +360,7 @@
     note: >-
       원본이 7MB로 작아 저장소에 직접 담을 수도 있으나,
       이미 ETRI 공식 계정에 올라가 있으므로 그 주소를 그대로 씁니다.
-  en: { title: "", desc: "", alt: "", note: "" }
+  en: { title: "ETRI Official YouTube Shorts", desc: "A short vertical video made to raise awareness of digital heritage, posted on ETRI's official YouTube account.", alt: "The opening frame of the short vertical video.", note: "Although the original file is small enough (7MB) to store directly in the repository, since it is already posted on ETRI's official account, that address is used as is." }
 
 - id: media18
   source: media18.mp4
@@ -380,7 +380,7 @@
       초고해상도로 만든 디지털 애셋을 활용해,
       국립중앙박물관의 중앙 통로인 '역사의 길'에 디지털 광개토대왕릉비 콘텐츠로 설치했습니다.
     alt: 국립중앙박물관 역사의 길에 설치된 디지털 광개토대왕릉비 화면입니다.
-  en: { title: "", desc: "", alt: "" }
+  en: { title: "Digital Gwanggaeto Stele at the National Museum of Korea's 'Road of History'", desc: "Using digital assets created in ultra-high resolution, the Digital Gwanggaeto Stele content was installed in 'Road of History,' the National Museum of Korea's central corridor.", alt: "The Digital Gwanggaeto Stele screen installed in the National Museum of Korea's Road of History." }
 
 - id: media19
   source: media19.mp4
@@ -400,4 +400,4 @@
       문화유산 분야 종사자들과 디지털 전환의 필요성을 공유하고,
       인문학의 관점과 공학의 관점에서 데이터에 접근하는 방법을 함께 논의한 콜로키움의 현장 영상입니다.
     alt: 콜로키움 발표와 토론이 진행되는 현장 모습입니다.
-  en: { title: "", desc: "", alt: "" }
+  en: { title: "Intelligent Heritage Colloquium Footage", desc: "Footage from the colloquium where the need for digital transformation was shared with cultural heritage professionals, and where approaches to data from both the humanities and engineering perspectives were discussed together.", alt: "The scene of presentations and discussion taking place at the colloquium." }

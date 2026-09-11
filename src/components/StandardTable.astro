@@ -1,0 +1,43 @@
+---
+/** 표준·가이드라인 6건의 표. 열은 제목 / 기관 / 일자·번호 / 상태. 순서는 standards.yaml 파일 순서다. */
+import { getCollection } from 'astro:content';
+import { getLocale, useTranslations } from '../i18n/utils';
+
+const locale = getLocale(Astro.url);
+const t = useTranslations(locale);
+const standards = await getCollection('standards');
+---
+
+<div class="table-scroll">
+  <table>
+    <thead>
+      <tr>
+        <th>{t('standards.title')}</th>
+        <th>{t('standards.organization')}</th>
+        <th>{t('standards.date')}</th>
+        <th>{t('standards.status')}</th>
+      </tr>
+    </thead>
+    <tbody>
+      {standards.map(({ data }) => {
+        const d = data[locale].title ? data[locale] : data.ko;
+        return (
+          <tr>
+            <td>{d.title}</td>
+            <td>{d.organization ?? data.organization}</td>
+            <td>
+              {data.date ?? data.year ?? ''}
+              {data.number && <span class="num">{data.number}</span>}
+            </td>
+            <td>{t(`standards.status.${data.status}`)}</td>
+          </tr>
+        );
+      })}
+    </tbody>
+  </table>
+</div>
+
+<style>
+  .num { display: block; font-family: var(--font-mono); font-size: 13px; color: var(--ink-3); }
+  td:nth-child(3) { white-space: nowrap; }
+</style>

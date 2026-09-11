@@ -16,7 +16,7 @@
     fullname: 지능형 문화유산 큐레이션 플랫폼
     program: 문화체육관광부 문화기술 연구개발 지정과제
     desc: 문화유산 데이터를 큐레이션하는 지능형 플랫폼을 만든 선행 과제입니다.
-  en: { name: CHIC, fullname: "", program: "", desc: "" }
+  en: { name: CHIC, fullname: "Intelligent Cultural Heritage Curation Platform", program: "Ministry of Culture, Sports and Tourism-Designated Culture Technology R&D Project", desc: "The preceding project that built an intelligent platform for curating cultural heritage data." }
 
 - id: much
   status: done
@@ -31,7 +31,7 @@
     desc: >-
       문화유산을 디지털 데이터로 만드는 기준을 세우고,
       그 데이터를 여러 분야에서 나누어 쓸 수 있는 플랫폼을 개발했습니다.
-  en: { name: MUCH, fullname: "", program: "", desc: "" }
+  en: { name: MUCH, fullname: "Development of Intelligent Heritage Sharing Platform Technology for Leading Digital Standards in Cultural Heritage", program: "Ministry of Culture, Sports and Tourism Culture Technology R&D Program", desc: "Established standards for turning cultural heritage into digital data, and developed a platform for sharing that data across multiple fields." }
 
 - id: next
   status: planned

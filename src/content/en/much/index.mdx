@@ -1,0 +1,118 @@
+---
+title: "About MUCH"
+description: "Museum records kept growing, but reusing them across institutions was difficult. MUCH built both a standard for creating cultural heritage data and a platform for sharing it."
+updated: 2026-09-11
+draft: true
+source: "[[REF-종료평가발표자료]] 슬라이드 6·7·12 · [[SITE-ANALYSIS]] About·Concept·Ambition"
+---
+
+{/*
+  구 사이트의 About, Concept, Ambition 세 쪽을 한 쪽으로 합쳤습니다.
+  Ambition은 본래 이미지 한 장뿐이고 설명 문장이 없었으므로([[SITE-ANALYSIS]] 오류 10번),
+  "기대 효과" 절의 문장을 새로 썼습니다.
+  오류 5번(출처 없는 175ZB 예측)과 6번(근거 없는 "세계 최초")을 이 쪽에서 걷어냈습니다.
+*/}
+
+## Summary in One Paragraph
+
+The digital records that museums and galleries created for their artifacts grew larger every year, but each institution made them differently, so data created in one place was hard to reuse elsewhere. MUCH (Multi-purpose Universal Cultural Heritage) addressed this in two ways: by setting standards for the procedures and quality used to create digital data, and by building a platform that connected that data so it could be drawn on for multiple purposes.
+
+## Why It Was Needed
+
+### Records Kept Growing, but Reuse Was Difficult
+
+Even when photographing the same artifact, institutions differed in resolution, lighting, file format, and metadata fields. As a result, every new exhibition or set of educational materials required reshooting from scratch.
+
+### Relationships Between Artifacts Were Not Captured in the Data
+
+Information describing individual artifacts existed, but data that recorded which period an artifact belonged to or which artifacts shared a lineage — in a form a machine could follow — was rare.
+
+### Content Was Used Once and Then Set Aside
+
+High-resolution material produced for an exhibition sat in storage once the exhibition ended, because it was not in a form that could be recombined for other purposes.
+
+{/* 대체 텍스트: 국립중앙박물관이 제시한 요구사항 여섯 가지가 왼쪽에 놓이고, 각 요구에 대응하는 MUCH의 해법이 오른쪽에 화살표로 이어진 그림입니다. */}
+
+## What Was Built
+
+### Data Fabric Architecture
+
+The project designed an architecture that let cultural heritage data scattered across different locations be used together without collecting it all in one place. Instead of moving data, it standardized a way of pointing to data.
+
+### Knowledge Graph Platform
+
+Relationships among artifacts, periods, materials, techniques, and people were linked in a graph. It is built on CIDOC CRM, an international standard, so it can also connect with data from other institutions.
+
+### AI-Based Visualization
+
+The project developed ways to display the relationship graph so people can follow it visually. It offers four paths together: browsing a hierarchical structure, searching by keyword, paging through a catalog, and querying directly.
+
+### Heritage-Specific Service Technology
+
+Features were built to meet needs specific to the cultural heritage field, including automatic image classification, guidance for visitor routes, and displaying restored versions of damaged areas.
+
+### Building Composable Datasets
+
+12,131 items of data were created, stored with their components separated so that, once made, they could be used for multiple purposes. The contractual target was 4,500 items.
+
+### Generative AI Applications
+
+The project tested methods for generating new content from the data already created.
+
+{/* 대체 텍스트: MUCH 플랫폼의 구성 요소가 데이터 층, 지식 층, 서비스 층 세 단으로 쌓인 구조도입니다. */}
+
+## Research Goals
+
+The goal was to establish standards for creating digital cultural heritage data and to develop an intelligent sharing platform that let multiple fields share data meeting those standards. There were three specific objectives.
+
+1. Enact a domestic standard for creating and assuring the quality of digital cultural heritage assets.
+2. Develop a knowledge graph capturing relationships between artifacts and a platform for exploring it.
+3. Verify real-world use through a demonstration at the National Museum of Korea.
+
+## Expected Effects
+
+{/*
+  구 사이트의 Ambition 쪽은 이미지 한 장만 있고 설명 문장이 없었습니다([[SITE-ANALYSIS]] 오류 10번).
+  아래 세 문단은 [[REF-종료평가발표자료]]의 파급효과 절을 근거로 새로 썼습니다.
+*/}
+
+### Technical Aspect
+
+The procedure for creating cultural heritage data was organized into a standard, so data of the same quality can be obtained regardless of which institution creates it. The demonstration at the National Museum of Korea confirmed that the procedure works in practice.
+
+### Cultural Aspect
+
+As artifacts that once stayed inside museums moved onto large public screens and digital exhibits, people who do not visit exhibition halls also gained access to cultural heritage.
+
+### Industrial Aspect
+
+Data was prepared in a form that content producers can use directly, without having to reshoot cultural heritage material themselves.
+
+## Project Overview
+
+| Item | Details |
+| --- | --- |
+| Project title | Development of Intelligent Heritage Sharing Platform Technology for Leading Cultural Heritage Digital Standards |
+| Duration | April 2023 to December 2025 |
+| Funding ministry | Ministry of Culture, Sports and Tourism |
+| Lead organization | Electronics and Telecommunications Research Institute (ETRI) |
+| Participating organizations | Korea National University of Cultural Heritage, Chung-Ang University |
+| End-user institution | National Museum of Korea |
+| Preceding project | CHIC (July 2020 to December 2022) |
+
+R&D costs were fully covered by government contributions, and no companies participated.
+
+## Project Introduction Video
+
+<Video id="media1" />
+
+{/* media1은 현행 사이트 홈에 실린 영상(유튜브 ID nJ_bwRA2z98)과 같은 영상으로 보이므로,
+    확인되면 videos.yaml의 youtube 값에 그 ID를 넣습니다 (2026-09-11). */}
+
+A longer video introducing the full project in detail will be posted to ETRI's official YouTube account and added here.
+
+## Where to Go Next
+
+- To see the research by year → [Research](/much/research/)
+- To see the content that was actually produced → [Pilot Content and Public Deployment](/much/showcase/)
+- To see the list of papers and patents → [Research Outcomes](/much/outcomes/)

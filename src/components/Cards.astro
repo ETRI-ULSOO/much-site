@@ -1,0 +1,14 @@
+---
+/** 갈림길 카드 격자. 안에 Card를 넣는다. */
+---
+
+<div class="cards">
+  <slot />
+</div>
+
+<style>
+  .cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
+  @media (max-width: 720px) {
+    .cards { grid-template-columns: 1fr; }
+  }
+</style>
