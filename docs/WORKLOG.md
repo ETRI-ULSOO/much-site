@@ -299,8 +299,12 @@ Q-2(개별 서지 목록)는 최종보고서 78쪽의 별첨 5~7에 해당하지
 - 생성 HTML: 내부 링크 전부 `/much-site/` 접두, canonical과 hreflang(ko·en·x-default) 정상,
   꼬리말 의무 표기 문구 노출, 초기 `<iframe>` 0개.
 
-**현재 진행도**: 3단계 산출물과 로컬 검증을 마쳤다. 남은 검증은 GitHub Actions 첫 배포
-(저장소 설정에서 Pages 원천을 GitHub Actions로 지정해야 한다).
+**현재 진행도**: 3단계 산출물과 로컬 검증을 마쳤고 커밋 `f45dc77`로 push했다. GitHub Actions
+첫 실행(2026-09-11 실측, run 34563553209)에서 `npm ci`·`check_i18n.py`·`npm run build`는
+ubuntu에서도 통과했으나, `configure-pages` 단계가 "Pages site not found"로 실패했다. 저장소가
+개인 계정(User)의 비공개 저장소라 Pages를 켤 수 없는 상태다 — 비공개 저장소의 Pages는 유료
+플랜에서만 되므로, 첫 배포는 Q-1(기관 정책) 확인 뒤 저장소를 공개로 전환하고 Pages 원천을
+GitHub Actions로 지정한 다음에 이루어진다. 그때까지 push마다 Actions는 같은 자리에서 실패한다.
 
 **남은 미해결**
 
