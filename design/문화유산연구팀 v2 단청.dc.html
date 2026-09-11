@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Song+Myung&family=Noto+Serif+KR:wght@400;600;900&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  html { scroll-behavior: smooth; }
+  body { margin:0; background:#0e1a1c; color:#f3ece0; font-family:'Noto Serif KR', serif; -webkit-font-smoothing:antialiased; }
+  a { color:#e0b25a; text-decoration:none; }
+  a:hover { color:#f3ece0; }
+  ::selection { background:#1f3b3c; }
+  [data-up] { opacity:0; transform:translateY(22px); transition:opacity .9s cubic-bezier(.2,.6,.3,1), transform .9s cubic-bezier(.2,.6,.3,1); }
+  [data-up].in, [data-nomotion] [data-up] { opacity:1; transform:none; }
+  @keyframes danIn { from { opacity:0; transform:translateY(24px); } to { opacity:1; transform:none; } }
+  [data-rail]::-webkit-scrollbar { height:6px; }
+  [data-rail]::-webkit-scrollbar-thumb { background:#2c4a4b; }
+</style>
+</helmet>
+
+<div style="background-color:#0e1a1c; background-image:radial-gradient(120% 60% at 100% 0%, rgba(37,74,74,.7), rgba(14,26,28,0) 60%), radial-gradient(80% 50% at 0% 100%, rgba(96,38,32,.4), rgba(14,26,28,0) 60%); overflow-x:hidden;">
+
+  <header style="position:sticky; top:0; z-index:30; background:rgba(14,26,28,.86); backdrop-filter:blur(10px); border-bottom:1px solid #23383a;">
+    <div style="max-width:1240px; margin:0 auto; padding:16px 32px; display:flex; align-items:center; gap:28px; flex-wrap:wrap;">
+      <a href="#top" style="display:flex; align-items:center; gap:14px; color:#f3ece0;">
+        <span style="display:flex; gap:3px;">
+          <span style="width:9px; height:30px; background:#c3452f;"></span>
+          <span style="width:9px; height:30px; background:#e0b25a;"></span>
+          <span style="width:9px; height:30px; background:#3f7d72;"></span>
+        </span>
+        <span style="font-family:'Song Myung',serif; font-size:19px; letter-spacing:.03em;">문화유산 연구팀</span>
+      </a>
+      <nav style="margin-left:auto; display:flex; gap:24px; flex-wrap:wrap; font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:.14em;">
+        <a href="#about" style="color:#c3bdb0;">01 소개</a>
+        <a href="#tracks" style="color:#c3bdb0;">02 분야</a>
+        <a href="#works" style="color:#c3bdb0;">03 성과</a>
+        <a href="#archive" style="color:#c3bdb0;">04 아카이브</a>
+        <a href="#people" style="color:#c3bdb0;">05 연구진</a>
+      </nav>
+    </div>
+  </header>
+
+  <section id="top" style="max-width:1240px; margin:0 auto; padding:0 32px;">
+    <div style="padding:96px 0 40px; animation:danIn 1s ease both;">
+      <div style="display:flex; align-items:center; gap:16px; flex-wrap:wrap;">
+        <span style="display:flex; gap:4px;">
+          <span style="width:26px; height:8px; background:#c3452f;"></span>
+          <span style="width:26px; height:8px; background:#e0b25a;"></span>
+          <span style="width:26px; height:8px; background:#3f7d72;"></span>
+          <span style="width:26px; height:8px; background:#2f4b8a;"></span>
+          <span style="width:26px; height:8px; background:#f3ece0;"></span>
+        </span>
+        <p style="font-family:'IBM Plex Mono',monospace; font-size:11.5px; letter-spacing:.26em; color:#a79f90; margin:0;">ETRI CULTURAL HERITAGE LAB · EST. 2009</p>
+      </div>
+      <h1 style="font-family:'Song Myung',serif; font-size:clamp(40px,6.4vw,86px); line-height:1.18; letter-spacing:-.01em; margin:36px 0 0; text-wrap:pretty; max-width:19ch;">
+        단청의 <span style="color:#e0b25a;">다섯 빛</span>을<br>데이터로 옮깁니다
+      </h1>
+      <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:44px; margin-top:44px; align-items:start;">
+        <p style="font-size:18px; line-height:2.05; color:#cfc8ba; margin:0; max-width:50ch; text-wrap:pretty;">
+          건축과 공간, 복식과 직물, 의례와 세시풍속, 고문헌과 서화 — 네 갈래의 문화유산을
+          정밀 계측·영상·언어 기술로 기록합니다. 결과는 모두 공개 아카이브로 열립니다.
+        </p>
+        <sc-if value="{{ bilingual }}" hint-placeholder-val="{{ true }}">
+          <p style="font-family:'IBM Plex Mono',monospace; font-size:13px; line-height:1.95; color:#a79f90;" data-up>Recording architecture, textiles, rites and manuscripts with measurement, imaging and language technology — published as open data.</p>
+        </sc-if>
+      </div>
+      <div style="display:flex; gap:14px; flex-wrap:wrap; margin-top:42px;">
+        <a href="#archive" style="padding:16px 32px; background:#e0b25a; color:#14211f; font-size:16px;">아카이브 열람</a>
+        <a href="#works" style="padding:16px 32px; border:1px solid #4a6360; color:#f3ece0; font-size:16px;">주요 성과</a>
+      </div>
+    </div>
+
+    <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(170px,1fr)); gap:1px; background:#23383a; border-top:1px solid #23383a; border-bottom:1px solid #23383a; margin-top:56px;">
+      <sc-for list="{{ stats }}" as="s" hint-placeholder-count="4">
+        <div style="background:#0e1a1c; padding:30px 12px 34px;">
+          <div style="font-family:'Song Myung',serif; font-size:36px; color:#f3ece0;">{{ s.value }}</div>
+          <div style="font-size:14px; color:#b3ab9c; margin-top:10px;">{{ s.label }}</div>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+
+  <section id="about" style="max-width:1240px; margin:0 auto; padding:104px 32px;">
+    <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(290px,1fr)); gap:56px; align-items:start;">
+      <div data-up>
+        <p style="font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.24em; color:#e06a4f; margin:0;">01 — 연구 소개</p>
+        <p style="font-family:'Song Myung',serif; font-size:clamp(26px,3vw,36px); line-height:1.6; margin:26px 0 0; text-wrap:pretty;">
+          기록되지 않은 기술은<br>한 세대 안에 사라집니다.
+        </p>
+        <sc-if value="{{ bilingual }}" hint-placeholder-val="{{ true }}">
+          <p style="font-family:'IBM Plex Mono',monospace; font-size:12.5px; line-height:1.8; color:#9d9686; margin:20px 0 0;">A craft left unrecorded disappears within a single generation.</p>
+        </sc-if>
+      </div>
+      <div data-up>
+        <p style="font-size:17px; line-height:2.1; color:#cfc8ba; margin:0; text-wrap:pretty;">
+          한국전자통신연구원 문화유산 연구팀은 정보통신 기술과 인문 연구를 한 자리에서 수행합니다.
+          목조건축의 3차원 실측, 직물 조직의 광학 분석, 세시 의례의 구술 기록, 고문헌 판독 모형이
+          하나의 방법론 안에서 이어집니다.
+        </p>
+        <p style="font-size:17px; line-height:2.1; color:#cfc8ba; margin:26px 0 0; text-wrap:pretty;">
+          계측 원본과 전사본, 학습용 말뭉치까지 공개 아카이브로 정리해 학계·교육기관·시민
+          누구나 인용하고 다시 쓸 수 있도록 합니다.
+        </p>
+        <div style="display:flex; gap:14px; align-items:baseline; margin-top:30px; border-top:1px solid #23383a; padding-top:22px;">
+          <span style="font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.18em; color:#a79f90;">OPEN LICENCE</span>
+          <span style="font-size:15px; color:#e0b25a;">CC BY 4.0 · 출처 표기 후 자유 인용</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="tracks" style="border-top:1px solid #23383a; border-bottom:1px solid #23383a; background:rgba(255,255,255,.02);">
+    <div style="max-width:1240px; margin:0 auto; padding:104px 32px;">
+      <div style="display:flex; align-items:baseline; gap:22px; flex-wrap:wrap;">
+        <p style="font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.24em; color:#e06a4f; margin:0;">02 — 연구 분야</p>
+        <h2 style="font-family:'Song Myung',serif; font-size:34px; margin:0;">네 갈래의 기록</h2>
+      </div>
+      <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(270px,1fr)); gap:1px; background:#23383a; margin-top:48px; border:1px solid #23383a;">
+        <sc-for list="{{ tracks }}" as="t" hint-placeholder-count="4">
+          <div data-up style="background:#0e1a1c; padding:34px 28px 38px; display:flex; flex-direction:column; gap:0;" style-hover="background:#132325;">
+            <div style="display:flex; align-items:center; gap:12px;">
+              <span style="width:34px; height:8px; background:{{ t.hue }};"></span>
+              <span style="font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.18em; color:#a79f90;">{{ t.code }}</span>
+            </div>
+            <h3 style="font-family:'Song Myung',serif; font-size:23px; line-height:1.5; margin:26px 0 0;">{{ t.name }}</h3>
+            <sc-if value="{{ bilingual }}" hint-placeholder-val="{{ true }}">
+              <p style="font-family:'IBM Plex Mono',monospace; font-size:11.5px; letter-spacing:.06em; color:#9d9686; margin:12px 0 0;">{{ t.en }}</p>
+            </sc-if>
+            <p style="font-size:15.5px; line-height:1.95; color:#c0b8aa; margin:20px 0 0; text-wrap:pretty;">{{ t.body }}</p>
+            <div style="display:grid; gap:12px; margin-top:24px;">
+              <sc-for list="{{ t.points }}" as="p" hint-placeholder-count="2">
+                <div style="display:flex; gap:12px; align-items:baseline; border-top:1px solid #1d3032; padding-top:12px;">
+                  <span style="width:5px; height:5px; background:#e0b25a; flex:none;"></span>
+                  <span style="font-size:14.5px; line-height:1.75; color:#d6cfc1;">{{ p }}</span>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <section id="works" style="max-width:1240px; margin:0 auto; padding:104px 32px;">
+    <div style="display:flex; align-items:baseline; justify-content:space-between; gap:22px; flex-wrap:wrap;">
+      <div style="display:flex; align-items:baseline; gap:22px; flex-wrap:wrap;">
+        <p style="font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.24em; color:#e06a4f; margin:0;">03 — 주요 성과</p>
+        <h2 style="font-family:'Song Myung',serif; font-size:34px; margin:0;">발간과 등재</h2>
+      </div>
+      <p style="font-size:14px; color:#a79f90; margin:0;">2023–2026</p>
+    </div>
+    <div style="margin-top:44px;">
+      <sc-for list="{{ works }}" as="w" hint-placeholder-count="5">
+        <a href="#archive" data-up style="display:grid; grid-template-columns:minmax(0,90px) minmax(0,1fr) minmax(0,132px); gap:26px; align-items:baseline; padding:28px 10px; border-top:1px solid #23383a; color:#f3ece0;" style-hover="background:#132325;">
+          <span style="font-family:'IBM Plex Mono',monospace; font-size:12px; color:#a79f90;">{{ w.year }}</span>
+          <span style="min-width:0;">
+            <span style="font-family:'Song Myung',serif; font-size:21px; line-height:1.6; display:block; text-wrap:pretty;">{{ w.title }}</span>
+            <span style="font-size:14px; color:#a79f90; display:block; margin-top:10px;">{{ w.meta }}</span>
+          </span>
+          <span style="font-size:12.5px; letter-spacing:.1em; color:#e0b25a;">{{ w.kind }}</span>
+        </a>
+      </sc-for>
+      <div style="border-top:1px solid #23383a;"></div>
+    </div>
+  </section>
+
+  <section id="archive" style="border-top:1px solid #23383a; background:rgba(255,255,255,.02);">
+    <div style="max-width:1240px; margin:0 auto; padding:104px 32px 60px;">
+      <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:32px; align-items:end;">
+        <div>
+          <p style="font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.24em; color:#e06a4f; margin:0;">04 — 아카이브 갤러리</p>
+          <h2 style="font-family:'Song Myung',serif; font-size:34px; margin:22px 0 0;">열려 있는 자료</h2>
+          <p style="font-size:16.5px; line-height:2; color:#c0b8aa; margin:18px 0 0; max-width:52ch; text-wrap:pretty;">
+            실측 도면, 직물 현미경 촬영, 의례 영상, 고문헌 판독 이미지. 옆으로 밀어 살펴보세요.
+          </p>
+        </div>
+        <div style="display:flex; gap:10px; flex-wrap:wrap; justify-content:flex-end;">
+          <sc-for list="{{ filters }}" as="f" hint-placeholder-count="5">
+            <button type="button" onClick="{{ f.select }}" style="cursor:pointer; font-family:'Noto Serif KR',serif; font-size:14px; padding:10px 18px; border:1px solid {{ f.bd }}; background:{{ f.bg }}; color:{{ f.fg }};">{{ f.label }}</button>
+          </sc-for>
+        </div>
+      </div>
+    </div>
+    <div data-rail style="overflow-x:auto; padding:0 32px 104px; display:flex; gap:24px; scroll-snap-type:x proximity;">
+      <sc-for list="{{ items }}" as="it" hint-placeholder-count="5">
+        <div style="flex:0 0 320px; scroll-snap-align:start; border:1px solid #23383a; padding:12px; background:#0e1a1c;">
+          <div style="aspect-ratio:4/5; display:grid; place-items:center; background-image:repeating-linear-gradient(135deg, #16272a 0 6px, #11201f 6px 13px);">
+            <span style="font-family:'IBM Plex Mono',monospace; font-size:10.5px; letter-spacing:.12em; color:#9d9686; background:#11201f; padding:9px 12px; text-align:center;">{{ it.figure }}</span>
+          </div>
+          <div style="padding:20px 8px 12px;">
+            <p style="font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:.18em; color:#e0b25a; margin:0;">{{ it.code }}</p>
+            <h3 style="font-family:'Song Myung',serif; font-size:19px; line-height:1.55; margin:12px 0 0;">{{ it.title }}</h3>
+            <p style="font-size:13.5px; color:#a79f90; margin:12px 0 0;">{{ it.meta }}</p>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+
+  <section id="people" style="max-width:1240px; margin:0 auto; padding:104px 32px;">
+    <div style="display:flex; align-items:baseline; gap:22px; flex-wrap:wrap;">
+      <p style="font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.24em; color:#e06a4f; margin:0;">05 — 연구진</p>
+      <h2 style="font-family:'Song Myung',serif; font-size:34px; margin:0;">사람이 남깁니다</h2>
+    </div>
+    <div style="display:grid; grid-template-columns:repeat(auto-fill,minmax(240px,1fr)); gap:1px; background:#23383a; border:1px solid #23383a; margin-top:44px;">
+      <sc-for list="{{ people }}" as="m" hint-placeholder-count="6">
+        <div data-up style="background:#0e1a1c; padding:28px 24px 30px;">
+          <div style="width:52px; height:52px; display:grid; place-items:center; background:{{ m.hue }}; color:{{ m.ink }}; font-family:'Song Myung',serif; font-size:22px;">{{ m.sign }}</div>
+          <h3 style="font-family:'Song Myung',serif; font-size:20px; margin:22px 0 0;">{{ m.name }}</h3>
+          <p style="font-size:14px; color:#a79f90; margin:10px 0 0;">{{ m.role }}</p>
+          <p style="font-size:14.5px; line-height:1.9; color:#c0b8aa; margin:14px 0 0; text-wrap:pretty;">{{ m.focus }}</p>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+
+  <footer style="border-top:1px solid #23383a;">
+    <div style="max-width:1240px; margin:0 auto; padding:76px 32px 34px; display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); gap:46px;">
+      <div>
+        <span style="display:flex; gap:3px;">
+          <span style="width:9px; height:30px; background:#c3452f;"></span>
+          <span style="width:9px; height:30px; background:#e0b25a;"></span>
+          <span style="width:9px; height:30px; background:#3f7d72;"></span>
+        </span>
+        <p style="font-family:'Song Myung',serif; font-size:19px; margin:20px 0 0;">문화유산 연구팀</p>
+        <p style="font-size:15px; line-height:2; color:#a79f90; margin:14px 0 0; max-width:30ch;">전통은 지켜야 할 과거가 아니라, 이어 쓸 문장입니다.</p>
+      </div>
+      <div>
+        <p style="font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.2em; color:#a79f90; margin:0;">CONTACT</p>
+        <p style="font-size:15px; line-height:2; color:#d6cfc1; margin:16px 0 0;">
+          대전광역시 유성구 가정로 218<br>
+          한국전자통신연구원 문화유산 연구팀<br>
+          heritage-lab@example.re.kr
+        </p>
+      </div>
+      <div>
+        <p style="font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.2em; color:#a79f90; margin:0;">SECTIONS</p>
+        <div style="display:grid; gap:10px; margin-top:16px; font-size:15px;">
+          <a href="#about" style="color:#d6cfc1;">연구 소개</a>
+          <a href="#tracks" style="color:#d6cfc1;">연구 분야</a>
+          <a href="#works" style="color:#d6cfc1;">주요 성과</a>
+          <a href="#archive" style="color:#d6cfc1;">아카이브 갤러리</a>
+          <a href="#people" style="color:#d6cfc1;">연구진</a>
+        </div>
+      </div>
+    </div>
+    <div style="max-width:1240px; margin:0 auto; padding:0 32px 42px;">
+      <div style="border-top:1px solid #23383a; padding-top:22px; display:flex; justify-content:space-between; gap:20px; flex-wrap:wrap; font-family:'IBM Plex Mono',monospace; font-size:10.5px; letter-spacing:.12em; color:#a79f90;">
+        <span>© 2026 CULTURAL HERITAGE RESEARCH TEAM</span>
+        <span>ARCHIVE UNDER CC BY 4.0</span>
+      </div>
+    </div>
+  </footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;bilingual&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;콘텐츠&quot;},&quot;scrollReveal&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;연출&quot;}}">
+class Component extends DCLogic {
+  state = { filter: "전체" };
+
+  componentDidMount() {
+    if (this.props.scrollReveal === false) {
+      document.documentElement.setAttribute("data-nomotion", "");
+      return;
+    }
+    const io = new IntersectionObserver((es) => {
+      es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } });
+    }, { rootMargin: "0px 0px -8% 0px", threshold: 0.08 });
+    this._io = io;
+    this._tick = setInterval(() => {
+      document.querySelectorAll("[data-up]:not(.in)").forEach((el, i) => {
+        if (!el.dataset.obs) { el.dataset.obs = "1"; el.style.transitionDelay = (i % 4) * 90 + "ms"; io.observe(el); }
+      });
+    }, 400);
+  }
+  componentWillUnmount() { clearInterval(this._tick); this._io && this._io.disconnect(); }
+
+  renderVals() {
+    const all = [
+      { t: "숭례문 부재 결구 점군 데이터", m: "목조건축 · 2025 실측", c: "ARC-2025-014", g: "실측 점군 시각화 (4:5)", k: "건축·공간" },
+      { t: "출토 견직물 조직 현미경 도판", m: "복식·직물 · 400배 광학", c: "TEX-2024-088", g: "직물 현미경 도판 (4:5)", k: "복식·직물" },
+      { t: "안동 하회 별신굿 다시점 영상", m: "의례 · 4채널 음향 동기", c: "RIT-2025-006", g: "의례 영상 스틸 (4:5)", k: "의례·풍속" },
+      { t: "초서 서간 판독 대조 이미지", m: "고문헌 · 판독 보조 모형", c: "MSS-2026-031", g: "고문헌 판독 이미지 (4:5)", k: "고문헌·서화" },
+      { t: "천연염료 분광 반사 데이터셋", m: "복식·직물 · 94종 염료", c: "TEX-2025-121", g: "염료 색표 촬영 (4:5)", k: "복식·직물" },
+      { t: "사찰 대웅전 가구법 해체 기록", m: "건축 · 수리 전·후 대조", c: "ARC-2024-052", g: "가구법 해체 기록 (4:5)", k: "건축·공간" },
+      { t: "정월 대보름 줄다리기 구술 전사", m: "의례 · 구술 11인", c: "RIT-2024-019", g: "구술 채록 현장 (4:5)", k: "의례·풍속" },
+      { t: "산수화 안료 층위 분광 도판", m: "서화 · 층위 5단 분리", c: "PNT-2026-004", g: "안료 층위 분광 도판 (4:5)", k: "고문헌·서화" },
+    ];
+    const labels = ["전체", "건축·공간", "복식·직물", "의례·풍속", "고문헌·서화"];
+    return {
+      bilingual: this.props.bilingual ?? true,
+      stats: [
+        { value: "17년", label: "연속 현장 조사" },
+        { value: "42인", label: "참여 연구진" },
+        { value: "186편", label: "등재 논문·보고서" },
+        { value: "8.4만", label: "공개 아카이브 항목" },
+      ],
+      tracks: [
+        { code: "TRACK 01", hue: "#c3452f", name: "건축·공간", en: "Architecture & Space",
+          body: "궁궐·사찰·민가의 가구법을 레이저 스캔과 사진 측량으로 기록하고, 도면이 없는 건물도 부재 단위 점군으로 복원합니다.",
+          points: ["전국 47개 목조건축 점군 데이터", "부재 결구 분류 체계 제안(2024)"] },
+        { code: "TRACK 02", hue: "#e0b25a", name: "복식·직물", en: "Costume & Textile",
+          body: "출토 복식의 조직 밀도와 염료 성분을 비파괴 광학 분석으로 판별하고, 재현 직조 실험으로 공정을 역추적합니다.",
+          points: ["견직물 조직 도해 118건", "천연염료 분광 데이터셋 공개"] },
+        { code: "TRACK 03", hue: "#3f7d72", name: "의례·세시풍속", en: "Rites & Seasonal Customs",
+          body: "한 해에 한 번뿐인 의례를 다채널 음향과 다시점 영상으로 기록하고, 구술을 전사해 시간축에 색인합니다.",
+          points: ["14개 지역 세시 의례 연간 기록", "구술 전사본 2,400여 쪽 색인화"] },
+        { code: "TRACK 04", hue: "#6f8bc4", name: "고문헌·서화", en: "Manuscripts & Painting",
+          body: "초서와 이두 판독을 모형으로 보조하고, 서화 안료의 층위를 분광 촬영으로 살펴 후대 보수를 구분합니다.",
+          points: ["초서 판독 보조 모형 정확도 91.4%", "고문서 이미지 8만 면 정제 말뭉치"] },
+      ],
+      works: [
+        { year: "2026", title: "초서 판독 보조 모형의 고문서 적용과 판독 신뢰도 평가", meta: "한국문헌정보학회지 · 제1저자 윤재호", kind: "학술논문" },
+        { year: "2025", title: "레이저 스캔 기반 목조건축 부재 결구 분류 체계", meta: "건축역사연구 · 공동 4인", kind: "학술논문" },
+        { year: "2025", title: "세시 의례 다채널 기록 표준 절차 지침", meta: "국가유산청 수탁 연구 최종보고서", kind: "정책보고" },
+        { year: "2024", title: "천연염료 분광 데이터셋 및 재현 직조 공정 아카이브", meta: "공개 데이터 · CC BY 4.0", kind: "데이터 공개" },
+        { year: "2023", title: "서화 안료 층위 분석을 위한 비파괴 분광 촬영 연구", meta: "보존과학회지 · 우수논문상", kind: "학술논문" },
+      ],
+      filters: labels.map((l) => ({
+        label: l,
+        select: () => this.setState({ filter: l }),
+        bg: this.state.filter === l ? "#e0b25a" : "transparent",
+        fg: this.state.filter === l ? "#14211f" : "#d6cfc1",
+        bd: this.state.filter === l ? "#e0b25a" : "#4a6360",
+      })),
+      items: all.filter((i) => this.state.filter === "전체" || i.k === this.state.filter)
+        .map((i) => ({ title: i.t, meta: i.m, code: i.c, figure: i.g })),
+      people: [
+        { sign: "尹", hue: "#e0b25a", ink: "#0e1a1c", name: "윤재호", role: "팀장 · 책임연구원", focus: "고문헌 판독 모형, 한국어 역사자료 처리" },
+        { sign: "韓", hue: "#c3452f", ink: "#f3ece0", name: "한소연", role: "선임연구원", focus: "목조건축 3차원 실측, 점군 데이터 정합" },
+        { sign: "徐", hue: "#3f7d72", ink: "#f3ece0", name: "서민아", role: "선임연구원", focus: "직물 조직 광학 분석, 천연염색 재현" },
+        { sign: "朴", hue: "#6f8bc4", ink: "#0e1a1c", name: "박도현", role: "연구원", focus: "세시 의례 현장 기록, 다채널 음향 설계" },
+        { sign: "林", hue: "#e0b25a", ink: "#0e1a1c", name: "임세진", role: "연구원 · 민속학", focus: "구술 채록과 전사, 마을 공동체 조사" },
+        { sign: "崔", hue: "#c3452f", ink: "#f3ece0", name: "최유정", role: "연구원 · 보존과학", focus: "서화 안료 층위, 비파괴 분광 촬영" },
+      ],
+    };
+  }
+}
+</script>
+</body>
+</html>

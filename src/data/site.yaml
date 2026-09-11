@@ -1,0 +1,22 @@
+# 사이트 전역에 쓰이는 문구입니다.
+#
+# footer.funding 문장은 최종보고서 79쪽 주의 사항 2번이 요구하는 의무 표기입니다.
+#   "이 연구개발내용을 대외적으로 발표할 때에는 반드시 문화체육관광부(한국콘텐츠진흥원)에서
+#    시행한 문화서비스 확산형 기술개발사업의 결과임을 밝혀야 한다."
+# 따라서 이 문장은 편집 대상이 아니며, 모든 쪽의 꼬리말에 노출해야 합니다 (2026-09-11 확인).
+
+footer:
+  funding:
+    ko: >-
+      이 연구는 문화체육관광부와 한국콘텐츠진흥원이 시행한
+      문화서비스 확산형 기술개발사업의 지원으로 수행한 결과입니다.
+    en: >-
+      This work was supported by the Ministry of Culture, Sports and Tourism
+      and the Korea Creative Content Agency under the Culture Service
+      Technology Development Program.
+  period:
+    ko: 연구 기간 2023년 4월부터 2025년 12월까지
+    en: Project period April 2023 - December 2025
+  institution:
+    ko: 한국전자통신연구원 콘텐츠융합연구실
+    en: Content Convergence Research Section, ETRI

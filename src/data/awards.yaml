@@ -83,21 +83,25 @@ items:
       source: ""
       alt: ""
 
+  # 2026-09-11 보강: 최종보고서 76쪽에서 수상 시점(2025년 11월)과 수상 대상 기술을 확인했습니다.
   - id: avicom-2024
-    year: 2024
+    year: 2025
+    date: 2025-11
     grade: winner
     organization: AVICOM
     category: H+Low
+    work: 관계 기반 데이터 시각화 기술
     ko:
-      title: AVICOM F@IMP 2024-2025 수상
+      title: AVICOM F@IMP 2024-2025 우수상
       organization: 국제박물관협의회 시청각·신기술위원회(AVICOM)
-      work: ""
+      work: 관계 기반 데이터 시각화 기술
       desc: >-
+        유물과 유물 사이의 관계를 눈으로 확인할 수 있게 만든 시각화 기술이
         국제박물관협의회 산하 시청각·신기술위원회가 여는 멀티미디어 페스티벌에서
-        H+Low 부문 수상작으로 선정되었습니다.
-        이 수상 실적은 현행 사이트에 실려 있지 않고 종료평가 발표자료에만 있습니다.
-      source: 종료평가 발표자료
-      alt: AVICOM 수상을 알리는 화면입니다.
+        2025년 11월에 우수상을 받았습니다.
+        이 수상 실적은 현행 사이트에 실려 있지 않습니다.
+      source: 최종보고서 76쪽
+      alt: AVICOM 공모전 수상 인증서입니다.
     en:
       title: ""
       organization: ""
