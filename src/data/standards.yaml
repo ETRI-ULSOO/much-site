@@ -1,0 +1,68 @@
+# 표준과 가이드라인 — 종료평가 발표자료 슬라이드 47의 원문을 근거로 정리했습니다 (2026-09-11 대조).
+#
+# 미해결 Q-2 (2026-09-11 기준): 가이드라인 PDF 원본 파일을 사용자가 제공하면 file 항목에 경로를 적습니다.
+#   원본을 받기 전까지는 TTA 표준 정보 사이트의 검색 결과로 안내합니다.
+
+- id: tta-2025
+  kind: standard
+  organization: TTA
+  status: enacted
+  date: 2025-12-05
+  # url: TTA 표준 문서 번호를 확인한 뒤 정확한 주소를 적습니다.
+  ko:
+    title: 동산 문화유산 디지털 데이터 생성 품질 유지를 위한 제작 지침
+    desc: >-
+      옮길 수 있는 문화유산을 디지털 데이터로 만들 때 품질을 일정하게 유지하도록,
+      데이터를 얻는 방법과 만드는 절차를 규정한 국내 표준입니다.
+      한국정보통신기술협회(TTA)가 2025년 12월 5일에 제정했습니다.
+  en:
+    title: ""
+    desc: ""
+
+- id: guideline-2024
+  kind: guideline
+  organization: MUCH
+  status: published
+  year: 2024
+  # file: 사용자가 PDF 원본을 제공하면 여기에 경로를 적습니다.
+  ko:
+    title: 문화유산 디지털 애셋 표준 가이드라인 2024
+    desc: >-
+      문화유산을 디지털 애셋으로 만들 때 지켜야 할 형식과 품질 기준을 정리한 발간물입니다.
+      TTA 표준을 만들기 전에 현장에서 먼저 적용할 수 있도록 작성했습니다.
+  en:
+    title: ""
+    desc: ""
+
+- id: guideline-rti
+  kind: guideline
+  organization: MUCH
+  status: published
+  ko:
+    title: RTI 데이터 획득 가이드라인
+    desc: 빛의 방향을 바꾸어 가며 촬영하는 반사 변환 이미지(RTI)를 일정한 품질로 얻는 절차를 규정했습니다.
+  en:
+    title: ""
+    desc: ""
+
+- id: guideline-3d
+  kind: guideline
+  organization: MUCH
+  status: published
+  ko:
+    title: 3D 데이터 획득 가이드라인
+    desc: 유물을 삼차원으로 기록할 때 필요한 촬영 조건과 데이터 품질 기준을 규정했습니다.
+  en:
+    title: ""
+    desc: ""
+
+- id: iso-plan
+  kind: plan
+  organization: ISO
+  status: planned
+  ko:
+    title: ISO 국제 표준 제정 추진
+    desc: 국내에서 제정한 제작 지침을 바탕으로 국제 표준을 만드는 작업을 이어 갈 계획입니다.
+  en:
+    title: ""
+    desc: ""

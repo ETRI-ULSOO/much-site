@@ -1,0 +1,403 @@
+# 발표자료 영상 19편 — 종료평가 발표자료에서 뽑아낸 원본을 ffprobe로 실측했고(2026-09-10),
+# 각 영상이 실린 슬라이드 번호를 발표자료 인벤토리와 대조했습니다 (2026-09-11).
+#
+# ── 이 파일의 목적 ───────────────────────────────────────────────────────────
+# 사용자가 "발표자료에 있는 동영상도 최대한 활용"할 것을 요청했습니다 (2026-09-11).
+# 그래서 19편을 하나도 빠뜨리지 않고 등록하고, 각각 어느 페이지에 놓을지와
+# 어떤 경로로 게시할지를 미리 정해 두었습니다.
+#
+# ── 필드 설명 ────────────────────────────────────────────────────────────────
+# source      원본 파일 이름입니다. 원본은 저장소 밖(`docs/참조데이터/`)에 둡니다.
+# slide       발표자료에서 이 영상이 실린 슬라이드 번호입니다.
+# size_mb     원본 파일 크기입니다. 100MB를 넘는 파일은 저장소에 넣을 수 없습니다.
+# duration_s  재생 길이(초), width·height 해상도, audio 오디오 트랙 유무입니다.
+# place       사이트에서 이 영상을 놓을 페이지입니다.
+# delivery    게시 경로입니다.
+#               youtube     ETRI 공식 계정에 올리고 지연 로드 방식으로 불러옵니다.
+#               self-clip   무음 짧은 발췌를 만들어 저장소에 직접 담습니다(5MB 이하).
+#               oversize    원본이 너무 커서 저장소에 절대 넣지 않습니다. 게시는 유튜브로만 합니다.
+# youtube     영상 ID입니다. 5단계에서 현행 사이트의 게시 영상과 대조해 채웁니다.
+# confirmed   제목과 설명이 확인된 항목인지 여부입니다. false면 사용자 확인 전까지 게시하지 않습니다.
+#
+# ── 미해결 사항 (2026-09-11 기준) ────────────────────────────────────────────
+# Q-3  영상을 어느 계정에 올릴지 정해지지 않았습니다. 선행 과제 CHIC의 영상이 개인 계정에
+#      올라가 있어 과제 종료 뒤 관리가 끊길 위험이 있으므로, ETRI 공식 계정 사용을 확인해야 합니다.
+# 슬라이드 16~31은 발표자료에 "연구내용 상세"라는 제목만 있고 내용이 전부 이미지 안에 있습니다.
+#      그래서 그 구간 영상 13편(media3~media15)의 제목은 추정한 것이며, 사용자 확인이 필요합니다.
+# media2(2,732MB)와 media15(1,051MB)는 어떤 경로로도 저장소에 넣지 않습니다.
+
+- id: media1
+  source: media1.mp4
+  slide: 4
+  size_mb: 35
+  duration_s: 135
+  width: 1920
+  height: 1080
+  audio: true
+  place: much-overview
+  delivery: youtube
+  # 현행 사이트 홈에 삽입된 과제 소개 영상(유튜브 ID nJ_bwRA2z98)과 같은 영상일 가능성이 높습니다.
+  # 재생 길이를 대조해 확인한 뒤에 youtube 항목에 옮겨 적습니다 (5단계).
+  youtube: ""
+  youtube_candidate: nJ_bwRA2z98
+  confirmed: false
+  ko:
+    title: 과제 소개 영상
+    desc: 발표자료 앞부분에 실린 영상으로, 과제의 배경과 방향을 소개합니다.
+    alt: 과제 소개 영상의 첫 화면입니다.
+  en: { title: "", desc: "", alt: "" }
+
+- id: media2
+  source: media2.mp4
+  slide: 11
+  size_mb: 2732
+  duration_s: 203
+  width: 3840
+  height: 2160
+  audio: true
+  place: much-overview
+  delivery: oversize
+  youtube: ""
+  confirmed: false
+  ko:
+    title: 디지털 헤리티지 솔루션 소개 영상
+    desc: 문화유산 데이터를 조합할 수 있는 형태로 만드는 접근 방식을 보여 주는 4K 영상입니다.
+    alt: 솔루션 소개 영상의 첫 화면입니다.
+    note: 원본이 2.7GB이므로 저장소에 넣지 않고 유튜브로만 게시합니다. 발표자료의 첫 화면 이미지도 검은 화면입니다.
+  en: { title: "", desc: "", alt: "", note: "" }
+
+- id: media3
+  source: media3.mp4
+  slide: 17
+  size_mb: 98
+  duration_s: 137
+  width: 3840
+  height: 2160
+  audio: true
+  place: research
+  delivery: youtube
+  youtube: ""
+  confirmed: false
+  ko:
+    title: 연구 내용 시연 영상 (슬라이드 17)
+    desc: 연구 내용을 상세히 설명하는 구간에 실린 시연 영상입니다.
+    alt: 연구 내용 시연 영상의 첫 화면입니다.
+  en: { title: "", desc: "", alt: "" }
+
+- id: media4
+  source: media4.mp4
+  slide: 18
+  size_mb: 77
+  duration_s: 61
+  width: 1920
+  height: 1080
+  audio: true
+  place: research
+  delivery: youtube
+  youtube: ""
+  confirmed: false
+  ko:
+    title: 연구 내용 시연 영상 (슬라이드 18)
+    desc: 연구 내용을 상세히 설명하는 구간에 실린 시연 영상입니다.
+    alt: 연구 내용 시연 영상의 첫 화면입니다.
+  en: { title: "", desc: "", alt: "" }
+
+- id: media5
+  source: media5.mp4
+  slide: 20
+  size_mb: 70
+  duration_s: 94
+  width: 1920
+  height: 1080
+  audio: true
+  place: research
+  delivery: youtube
+  youtube: ""
+  confirmed: false
+  ko:
+    title: 연구 내용 시연 영상 (슬라이드 20)
+    desc: 연구 내용을 상세히 설명하는 구간에 실린 시연 영상입니다.
+    alt: 연구 내용 시연 영상의 첫 화면입니다.
+    note: 발표자료에 실린 첫 화면 이미지가 검은 화면이므로, 게시 전에 대표 화면을 따로 만들어야 합니다.
+  en: { title: "", desc: "", alt: "", note: "" }
+
+- id: media6
+  source: media6.mp4
+  slide: 21
+  size_mb: 54
+  duration_s: 40
+  width: 3840
+  height: 2160
+  audio: true
+  place: research
+  delivery: youtube
+  youtube: ""
+  confirmed: false
+  ko:
+    title: 연구 내용 시연 영상 (슬라이드 21)
+    desc: 연구 내용을 상세히 설명하는 구간에 실린 시연 영상입니다.
+    alt: 연구 내용 시연 영상의 첫 화면입니다.
+  en: { title: "", desc: "", alt: "" }
+
+- id: media7
+  source: media7.mp4
+  slide: 22
+  size_mb: 335
+  duration_s: 157
+  width: 2560
+  height: 1400
+  audio: true
+  place: research
+  delivery: youtube
+  youtube: ""
+  confirmed: false
+  ko:
+    title: 연구 내용 시연 영상 (슬라이드 22)
+    desc: 연구 내용을 상세히 설명하는 구간에 실린 시연 영상입니다.
+    alt: 연구 내용 시연 영상의 첫 화면입니다.
+  en: { title: "", desc: "", alt: "" }
+
+- id: media8
+  source: media8.mp4
+  slide: 26
+  size_mb: 150
+  duration_s: 166
+  width: 1920
+  height: 1080
+  audio: true
+  place: research
+  delivery: youtube
+  youtube: ""
+  confirmed: false
+  ko:
+    title: 연구 내용 시연 영상 (슬라이드 26)
+    desc: 연구 내용을 상세히 설명하는 구간에 실린 시연 영상입니다.
+    alt: 연구 내용 시연 영상의 첫 화면입니다.
+    note: 발표자료에 실린 첫 화면 이미지가 검은 화면이므로, 게시 전에 대표 화면을 따로 만들어야 합니다.
+  en: { title: "", desc: "", alt: "", note: "" }
+
+- id: media9
+  source: media9.mp4
+  slide: 27
+  size_mb: 227
+  duration_s: 351
+  width: 1920
+  height: 1080
+  audio: true
+  place: research
+  delivery: youtube
+  youtube: ""
+  confirmed: false
+  ko:
+    title: 연구 내용 시연 영상 (슬라이드 27)
+    desc: 5분 51초 길이로, 발표자료에 실린 시연 영상 가운데 두 번째로 깁니다.
+    alt: 연구 내용 시연 영상의 첫 화면입니다.
+  en: { title: "", desc: "", alt: "" }
+
+- id: media10
+  source: media10.mp4
+  slide: 29
+  size_mb: 323
+  duration_s: 88
+  width: 3836
+  height: 1988
+  audio: false
+  place: showcase
+  delivery: self-clip
+  youtube: ""
+  confirmed: false
+  ko:
+    title: 공공장소 대형 화면 콘텐츠 (1)
+    desc: >-
+      가로가 세로의 약 1.9배인 대형 화면 비율이고 소리가 없는 영상입니다.
+      공공장소에 설치한 대형 화면용 콘텐츠로 보입니다.
+    alt: 공공장소 대형 화면에 재생되는 문화유산 콘텐츠 화면입니다.
+    note: >-
+      소리가 없고 길이가 88초이므로, 8초에서 10초 구간을 가로 1280픽셀로 잘라 내면
+      5MB 이하가 되어 홈 화면의 배경 영상으로 쓸 수 있습니다.
+      같은 슬라이드의 세 영상은 발표자료가 공공 확산 사례로 든 세 곳,
+      곧 센트럴시티 반가사유상과 인천공항 반가사유상, 센트럴시티 정조 화성행궁에
+      대응하는 것으로 보이나 어느 영상이 어느 곳인지는 확인되지 않았습니다.
+  en: { title: "", desc: "", alt: "", note: "" }
+
+- id: media11
+  source: media11.mp4
+  slide: 29
+  size_mb: 192
+  duration_s: 120
+  width: 3820
+  height: 1988
+  audio: true
+  place: showcase
+  delivery: youtube
+  youtube: ""
+  confirmed: false
+  ko:
+    title: 공공장소 대형 화면 콘텐츠 (2)
+    desc: 같은 슬라이드에 나란히 실린 대형 화면용 콘텐츠 가운데 두 번째 영상입니다.
+    alt: 공공장소 대형 화면에 재생되는 문화유산 콘텐츠 화면입니다.
+  en: { title: "", desc: "", alt: "" }
+
+- id: media12
+  source: media12.mp4
+  slide: 29
+  size_mb: 218
+  duration_s: 85
+  width: 3822
+  height: 1984
+  audio: false
+  place: showcase
+  delivery: self-clip
+  youtube: ""
+  confirmed: false
+  ko:
+    title: 공공장소 대형 화면 콘텐츠 (3)
+    desc: 같은 슬라이드에 나란히 실린 대형 화면용 콘텐츠 가운데 세 번째 영상이며 소리가 없습니다.
+    alt: 공공장소 대형 화면에 재생되는 문화유산 콘텐츠 화면입니다.
+    note: media10과 마찬가지로 홈 화면의 배경 영상 후보입니다. 두 편 가운데 한 편을 고릅니다.
+  en: { title: "", desc: "", alt: "", note: "" }
+
+- id: media13
+  source: media13.mp4
+  slide: 30
+  size_mb: 186
+  duration_s: 139
+  width: 3840
+  height: 2160
+  audio: true
+  place: showcase
+  delivery: youtube
+  youtube: ""
+  confirmed: false
+  ko:
+    title: 시범 콘텐츠 시연 영상 (슬라이드 30)
+    desc: 4K 해상도로 제작한 시범 콘텐츠 시연 영상입니다.
+    alt: 시범 콘텐츠 시연 영상의 첫 화면입니다.
+  en: { title: "", desc: "", alt: "" }
+
+- id: media14
+  source: media14.mp4
+  slide: 31
+  size_mb: 449
+  duration_s: 83
+  width: 1920
+  height: 1080
+  audio: true
+  place: showcase
+  delivery: youtube
+  youtube: ""
+  confirmed: false
+  ko:
+    title: 시범 콘텐츠 시연 영상 (슬라이드 31)
+    desc: 초당 전송량이 43Mbps에 이르는 고화질 영상입니다.
+    alt: 시범 콘텐츠 시연 영상의 첫 화면입니다.
+    note: 발표자료에 실린 첫 화면 이미지가 검은 화면이므로, 게시 전에 대표 화면을 따로 만들어야 합니다.
+  en: { title: "", desc: "", alt: "", note: "" }
+
+- id: media15
+  source: media15.mp4
+  slide: 31
+  size_mb: 1051
+  duration_s: 332
+  width: 1392
+  height: 3914
+  audio: true
+  place: showcase
+  delivery: oversize
+  youtube: ""
+  confirmed: false
+  ko:
+    title: 세로형 대형 화면 콘텐츠
+    desc: >-
+      세로가 가로의 약 2.8배인 세로형 화면 비율입니다.
+      공항이나 건물 로비에 설치하는 세로형 대형 화면용 콘텐츠로 보입니다.
+    alt: 세로로 긴 대형 화면에 재생되는 문화유산 콘텐츠 화면입니다.
+    note: >-
+      원본이 1,051MB이므로 저장소에 넣지 않고 유튜브로만 게시합니다.
+      화면 비율이 세로로 매우 길어 가로 16대 9 틀에 넣으면 좌우가 크게 비므로,
+      화면 비율을 따로 지정해야 합니다.
+      iF Design Award 2023을 받은 인천공항 제1여객터미널 반가사유상 미디어아트로 보이며,
+      그렇다면 수상 페이지에도 함께 실을 수 있습니다. 사용자 확인이 필요합니다.
+  en: { title: "", desc: "", alt: "", note: "" }
+
+- id: media16
+  source: media16.mp4
+  slide: 44
+  size_mb: 36
+  duration_s: 27
+  width: 3840
+  height: 2160
+  audio: true
+  place: media
+  delivery: youtube
+  youtube: ""
+  confirmed: true
+  ko:
+    title: 텔레비전 뉴스 보도
+    desc: 연구 성과를 다룬 텔레비전 뉴스 보도를 발표자료에 그대로 실은 영상입니다.
+    alt: 연구 성과를 소개하는 텔레비전 뉴스 보도 화면입니다.
+    note: 방송사가 제작한 영상이므로, 게시하기 전에 방송사의 이용 허락 여부를 확인해야 합니다.
+  en: { title: "", desc: "", alt: "", note: "" }
+
+- id: media17
+  source: media17.mp4
+  slide: 45
+  size_mb: 7
+  duration_s: 51
+  width: 1080
+  height: 1920
+  audio: true
+  place: media
+  delivery: youtube
+  youtube: ""
+  confirmed: true
+  ko:
+    title: ETRI 공식 유튜브 숏츠
+    desc: >-
+      디지털 헤리티지에 대한 인식을 넓히기 위해 만든 세로형 짧은 영상으로,
+      ETRI 공식 유튜브 계정에 올라가 있습니다.
+    alt: 세로형 짧은 영상의 첫 화면입니다.
+    note: >-
+      원본이 7MB로 작아 저장소에 직접 담을 수도 있으나,
+      이미 ETRI 공식 계정에 올라가 있으므로 그 주소를 그대로 씁니다.
+  en: { title: "", desc: "", alt: "", note: "" }
+
+- id: media18
+  source: media18.mp4
+  slide: 48
+  size_mb: 44
+  duration_s: 34
+  width: 1920
+  height: 1080
+  audio: true
+  place: showcase
+  delivery: youtube
+  youtube: ""
+  confirmed: true
+  ko:
+    title: 국립중앙박물관 '역사의 길' 디지털 광개토대왕릉비
+    desc: >-
+      초고해상도로 만든 디지털 애셋을 활용해,
+      국립중앙박물관의 중앙 통로인 '역사의 길'에 디지털 광개토대왕릉비 콘텐츠로 설치했습니다.
+    alt: 국립중앙박물관 역사의 길에 설치된 디지털 광개토대왕릉비 화면입니다.
+  en: { title: "", desc: "", alt: "" }
+
+- id: media19
+  source: media19.mp4
+  slide: 50
+  size_mb: 714
+  duration_s: 284
+  width: 1920
+  height: 1080
+  audio: true
+  place: events
+  delivery: youtube
+  youtube: ""
+  confirmed: true
+  ko:
+    title: 지능형 헤리티지 콜로키움 현장 영상
+    desc: >-
+      문화유산 분야 종사자들과 디지털 전환의 필요성을 공유하고,
+      인문학의 관점과 공학의 관점에서 데이터에 접근하는 방법을 함께 논의한 콜로키움의 현장 영상입니다.
+    alt: 콜로키움 발표와 토론이 진행되는 현장 모습입니다.
+  en: { title: "", desc: "", alt: "" }

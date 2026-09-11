@@ -1,0 +1,45 @@
+# 조합형 데이터셋(Composable Dataset) — 종료평가 발표자료의 정량 성과표와
+# 1차년도 애셋 데이터 최적화 항목을 근거로 정리했습니다 (2026-09-11 대조).
+#
+# total은 최종 실적 건수이고, composition은 그 데이터셋을 구성하는 데이터의 종류입니다.
+# detail의 수치는 1차년도 애셋 최적화 작업에서 확인된 유물 단위 실적이며,
+# 데이터셋 전체 건수와는 집계 기준이 다르므로 따로 적어 둡니다.
+
+total: 12131
+target: 4500
+unit: { ko: 건, en: "" }
+
+composition:
+  - id: 3d
+    ko:
+      label: 3D 스캔 데이터
+      desc: 유물의 형태와 표면 질감을 삼차원으로 기록한 데이터입니다.
+    en: { label: "", desc: "" }
+  - id: rti
+    ko:
+      label: RTI 데이터
+      desc: 빛의 방향을 바꾸어 가며 촬영해 표면의 미세한 요철을 드러내는 반사 변환 이미지입니다.
+    en: { label: "", desc: "" }
+  - id: gigapixel
+    ko:
+      label: 기가픽셀 이미지
+      desc: 여러 장의 고해상도 사진을 이어 붙여 만든 초고해상도 이미지입니다.
+    en: { label: "", desc: "" }
+  - id: metadata
+    ko:
+      label: 메타데이터와 지식그래프
+      desc: 유물 사이의 관계를 기계가 읽을 수 있는 형태로 기술한 데이터입니다.
+    en: { label: "", desc: "" }
+
+# 1차년도 애셋 데이터 최적화 실적 (현행 사이트 Results 1차년도 항목에서 확인)
+detail:
+  artifacts: 56
+  pieces: 66
+  breakdown:
+    - { id: 3d, count: 60, ko: { label: 3D 데이터 }, en: { label: "" } }
+    - { id: rti, count: 15, ko: { label: RTI 데이터 }, en: { label: "" } }
+    - { id: gigapixel, count: 5, ko: { label: 기가픽셀 이미지 }, en: { label: "" } }
+  ko:
+    note: glTF 형식으로 만든 3D 데이터를 Nexus 형식으로 다시 압축해, 웹에서 곧바로 열어 볼 수 있게 만들었습니다.
+  en:
+    note: ""

@@ -1,0 +1,51 @@
+# 참여 기관 — 현행 사이트 Consortium 페이지와 종료평가 발표자료 슬라이드 2를 대조했습니다 (2026-09-11).
+#
+# role  ministry(주관 부처) · lead(주관 연구기관) · partner(참여 연구기관) · demand(수요처)
+#
+# 기관 주소는 선행 과제 CHIC 사이트 저장소에서 접속이 확인된 것만 옮겼습니다 (2026-08-13 확인).
+# url이 비어 있는 기관은 3단계에서 주소를 확인한 뒤에 채웁니다.
+#
+# 미해결 (2026-09-11 기준):
+#   현행 사이트의 수상 페이지는 공동연구기관으로 TRIC(문화유산기술연구소)을 적고 있으나
+#   컨소시엄 페이지에는 TRIC이 없습니다. 실제로 MUCH 과제에 참여했는지 사용자에게 확인해야 합니다.
+#   확인되기 전까지 이 파일에 TRIC을 넣지 않았습니다.
+#
+# 연구개발비는 정부 출연금이 100퍼센트이고 참여 기업은 없습니다 (발표자료 슬라이드 2).
+
+- id: mcst
+  role: ministry
+  url: ""
+  order: 1
+  ko: { name: 문화체육관광부, abbr: 문체부 }
+  en: { name: "Ministry of Culture, Sports and Tourism", abbr: MCST }
+
+- id: etri
+  role: lead
+  url: https://www.etri.re.kr/intro.html
+  order: 2
+  ko: { name: 한국전자통신연구원, abbr: ETRI }
+  en: { name: Electronics and Telecommunications Research Institute, abbr: ETRI }
+
+- id: knuh
+  role: partner
+  url: https://www.knuh.ac.kr/
+  order: 3
+  ko: { name: 한국전통문화대학교, abbr: 한국전통문화대 }
+  en: { name: Korea National University of Cultural Heritage, abbr: KNUH }
+
+- id: cau
+  role: partner
+  url: ""
+  order: 4
+  ko: { name: 중앙대학교, abbr: 중앙대 }
+  en: { name: Chung-Ang University, abbr: CAU }
+
+- id: nmk
+  role: demand
+  url: https://www.museum.go.kr/MUSEUM/main/index.do
+  order: 5
+  ko:
+    name: 국립중앙박물관
+    abbr: 국립중앙박물관
+    note: 과제를 기획하는 단계에서 수요를 제기한 기관이며, 연구 성과를 실제 전시와 업무에 적용해 검증했습니다.
+  en: { name: National Museum of Korea, abbr: NMK, note: "" }

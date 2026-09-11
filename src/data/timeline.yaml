@@ -1,0 +1,43 @@
+# 과제 시리즈 타임라인 — 홈 화면 맨 아래에 놓습니다.
+#
+# 선행 과제 CHIC의 수행 기간과 사업 이름은 CHIC 사이트 저장소의 데이터 파일에서 확인했습니다 (2026-09-11).
+# MUCH의 종료 시점은 종료평가 발표자료와 현행 사이트에서 확인했습니다.
+#
+# 미해결 Q-5: 후속 과제의 이름, 기간, 한 줄 소개를 사용자가 제공하면 next 항목을 채웁니다.
+
+- id: chic
+  status: done
+  start: 2020-07
+  end: 2022-12
+  url: /projects/chic/
+  external: https://sites.google.com/view/intelligent-curation/
+  ko:
+    name: CHIC
+    fullname: 지능형 문화유산 큐레이션 플랫폼
+    program: 문화체육관광부 문화기술 연구개발 지정과제
+    desc: 문화유산 데이터를 큐레이션하는 지능형 플랫폼을 만든 선행 과제입니다.
+  en: { name: CHIC, fullname: "", program: "", desc: "" }
+
+- id: much
+  status: done
+  start: 2023-04
+  end: 2025-12
+  url: /much/
+  current: true
+  ko:
+    name: MUCH
+    fullname: 문화유산 디지털 표준 선도를 위한 지능형 헤리티지 공유 플랫폼 기술 개발
+    program: 문화체육관광부 문화기술 연구개발
+    desc: >-
+      문화유산을 디지털 데이터로 만드는 기준을 세우고,
+      그 데이터를 여러 분야에서 나누어 쓸 수 있는 플랫폼을 개발했습니다.
+  en: { name: MUCH, fullname: "", program: "", desc: "" }
+
+- id: next
+  status: planned
+  ko:
+    name: 후속 과제
+    fullname: ""
+    program: ""
+    desc: 준비 중입니다.
+  en: { name: "", fullname: "", program: "", desc: "" }

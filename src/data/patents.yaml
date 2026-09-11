@@ -1,0 +1,19 @@
+# 특허 목록 — 서지 정보를 사용자가 제공하기 전까지 비어 있는 상태로 둡니다.
+#
+# 미해결 Q-2 (2026-09-11 기준): 국내 특허 6건과 출원 진행 중인 국제 특허 2건의
+#   발명 명칭, 출원인, 출원번호, 출원일, 등록번호를 사용자가 복귀한 뒤에 제공하기로 했습니다.
+#
+# 항목을 채울 때 사용할 형식입니다.
+#   - id: kr01
+#     scope: domestic              # domestic 또는 international
+#     status: registered           # filed(출원) 또는 registered(등록)
+#     application_no: 10-2024-...
+#     application_date: 2024-01-01
+#     registration_no: 10-....     # 등록된 건에만 적습니다
+#     registration_date: 2025-01-01
+#     inventors: [홍길동]
+#     ko: { title: 발명의 명칭 }
+#     en: { title: "" }
+
+domestic: []
+international: []

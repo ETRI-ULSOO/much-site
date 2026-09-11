@@ -1,0 +1,42 @@
+# 언론 보도 — 현행 사이트 News 페이지의 Media 항목 9건을 매체 이름만 옮겨 두었습니다 (2026-09-11 실측).
+#
+# 미해결 Q-4 (2026-09-11 기준): 종료평가 발표자료는 보도가 20여 회 있었다고 적고 있으나,
+#   현행 사이트에는 9건만 매체 이름과 함께 실려 있고 기사 원문 주소도 보도 일자도 없습니다.
+#   사용자가 복귀한 뒤에 기사 주소와 보도 일자를 제공하기로 했으므로, 그때 title·url·date를 채웁니다.
+#   주소와 일자가 없는 항목은 페이지에 노출하지 않습니다.
+#
+# 항목을 채울 때 사용할 형식입니다.
+#   - id: kbs-01
+#     outlet: KBS
+#     date: 2024-01-01
+#     url: https://...
+#     ko: { title: 기사 제목 }
+#     en: { title: "" }
+
+- id: kbs
+  outlet: { ko: KBS, en: KBS }
+  ready: false
+- id: sbs
+  outlet: { ko: SBS, en: SBS }
+  ready: false
+- id: mbc-daejeon
+  outlet: { ko: 대전MBC, en: Daejeon MBC }
+  ready: false
+- id: tjb
+  outlet: { ko: TJB, en: TJB }
+  ready: false
+- id: chosun-tv
+  outlet: { ko: TV조선, en: TV Chosun }
+  ready: false
+- id: yonhap-1
+  outlet: { ko: 연합뉴스, en: Yonhap News }
+  ready: false
+- id: yonhap-2
+  outlet: { ko: 연합뉴스, en: Yonhap News }
+  ready: false
+- id: cctoday
+  outlet: { ko: 충청투데이, en: Chungcheong Today }
+  ready: false
+- id: dt
+  outlet: { ko: 디지털타임스, en: Digital Times }
+  ready: false

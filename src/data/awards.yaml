@@ -1,0 +1,115 @@
+# 수상 실적 — 종료평가 발표자료 슬라이드 42·45의 원문과
+# 현행 사이트 News 페이지의 Award 항목을 대조했습니다 (2026-09-11).
+#
+# 현행 사이트의 오탈자 두 곳을 바로잡았습니다 (SITE-ANALYSIS 오류 3번).
+#   "Communication Desing" → "Communication Design"
+#   "콘텐츠가세계" → "콘텐츠가 세계" (띄어쓰기)
+#
+# 미해결 (2026-09-11 기준, SITE-ANALYSIS 오류 8번):
+#   현행 사이트의 수상 페이지는 IDEA 수상의 공동연구기관으로 TRIC(문화유산기술연구소)을 적고 있으나
+#   컨소시엄 페이지에는 TRIC이 없습니다. 어느 쪽이 맞는지 사용자에게 확인해야 하므로,
+#   partners 항목에 TRIC을 적어 두되 확인 전까지는 화면에 내보내지 않습니다.
+items:
+  - id: idea-2024
+    year: 2024
+    grade: finalist
+    organization: IDEA
+    url: https://www.mk.co.kr/news/culture/11141582
+    work: 디지털 광개토대왕릉비
+    partners_pending: true
+    ko:
+      title: IDEA Design Award 2024 본상
+      organization: 국제 디자인 우수상(International Design Excellence Awards)
+      work: 디지털 광개토대왕릉비
+      desc: >-
+        초고해상도로 기록한 광개토대왕릉비를 디지털 콘텐츠로 되살린 작업이 본상을 받았습니다.
+        국립중앙박물관과 함께 진행했습니다.
+      source: 매일경제 보도
+      alt: 디지털 광개토대왕릉비 콘텐츠가 전시된 모습입니다.
+    en:
+      title: ""
+      organization: ""
+      work: ""
+      desc: ""
+      source: ""
+      alt: ""
+
+  - id: if-2023
+    year: 2023
+    grade: winner
+    organization: iF
+    url: https://ifdesign.com/en/winner-ranking/project/greet-with-koreas-best-smile/581626
+    work: 인천공항 제1여객터미널 반가사유상 미디어아트
+    project: Greet with Korea's Best Smile
+    category: Communication Design
+    ko:
+      title: iF Design Award 2023 위너
+      organization: iF 디자인 어워드
+      work: 인천공항 제1여객터미널 반가사유상 미디어아트
+      desc: >-
+        인천공항 제1여객터미널에 설치한 반가사유상 미디어아트가
+        커뮤니케이션 디자인(Communication Design) 부문에서 위너로 선정되었습니다.
+      source: iF 공식 수상작 페이지
+      alt: 인천공항에 설치된 반가사유상 미디어아트 화면입니다.
+    en:
+      title: ""
+      organization: ""
+      work: ""
+      desc: ""
+      source: ""
+      alt: ""
+
+  - id: reddot-2023
+    year: 2023
+    grade: winner
+    organization: Red Dot
+    url: https://www.red-dot.org/ko/project/unfolding-heritage-the-world-tour-digital-korean-art-project-66989
+    work: 평생도
+    project: "Unfolding Heritage: The World Tour Digital Korean Art Project"
+    ko:
+      title: Red Dot Design Award 2023 위너
+      organization: 레드닷 디자인 어워드
+      work: 평생도
+      desc: >-
+        사람의 한평생을 그린 조선 시대 그림 「평생도」를 디지털 콘텐츠로 옮겨
+        세계 여러 곳에 소개한 작업이 위너로 선정되었습니다.
+      source: Red Dot 공식 수상작 페이지
+      alt: 평생도를 디지털 콘텐츠로 옮긴 화면입니다.
+    en:
+      title: ""
+      organization: ""
+      work: ""
+      desc: ""
+      source: ""
+      alt: ""
+
+  - id: avicom-2024
+    year: 2024
+    grade: winner
+    organization: AVICOM
+    category: H+Low
+    ko:
+      title: AVICOM F@IMP 2024-2025 수상
+      organization: 국제박물관협의회 시청각·신기술위원회(AVICOM)
+      work: ""
+      desc: >-
+        국제박물관협의회 산하 시청각·신기술위원회가 여는 멀티미디어 페스티벌에서
+        H+Low 부문 수상작으로 선정되었습니다.
+        이 수상 실적은 현행 사이트에 실려 있지 않고 종료평가 발표자료에만 있습니다.
+      source: 종료평가 발표자료
+      alt: AVICOM 수상을 알리는 화면입니다.
+    en:
+      title: ""
+      organization: ""
+      work: ""
+      desc: ""
+      source: ""
+      alt: ""
+# 발표자료 슬라이드 42의 원문입니다. 홈이나 수상 페이지의 머리글로 쓸 수 있습니다.
+# 띄어쓰기를 바로잡은 문장입니다.
+summary:
+  ko: >-
+    지능형 헤리티지 공유 플랫폼을 활용해 제작한 콘텐츠가
+    세계 3대 디자인 어워드로 꼽히는 IDEA Design Award(2024), iF Design Award(2023),
+    Red Dot Design Award(2023)를 모두 수상했습니다.
+  en: ""

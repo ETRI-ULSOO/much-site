@@ -1,0 +1,82 @@
+# 행사와 국제 협력 — 현행 사이트 News 페이지의 Event 항목과
+# 종료평가 발표자료 슬라이드 33·49·50의 원문을 대조해 정리했습니다 (2026-09-11).
+#
+# kind: colloquium(콜로키움), exhibition(전시·박람회), international(국제 협력)
+
+- id: colloquium-2024
+  kind: colloquium
+  date: 2024-09-10
+  ko:
+    title: 2024 지능형 헤리티지 콜로키움
+    venue: 경주 화백컨벤션센터
+    desc: >-
+      문화유산 분야 종사자들과 함께 문화유산을 디지털로 바꾸어야 하는 이유를 공유하고,
+      인문학의 관점과 공학의 관점에서 디지털 데이터에 접근하는 방법과 해석을 서로 이해하는 자리였습니다.
+  en:
+    title: ""
+    venue: ""
+    desc: ""
+
+- id: colloquium-2025
+  kind: colloquium
+  date: 2025-09-05
+  ko:
+    title: 2025 공존과 지속 콜로키움
+    venue: 광주 김대중컨벤션센터
+    desc: 문화유산의 디지털 전환을 주제로 연구자와 현장 실무자가 함께 논의한 두 번째 콜로키움입니다.
+  en:
+    title: ""
+    venue: ""
+    desc: ""
+
+- id: expo-2024
+  kind: exhibition
+  year: 2024
+  ko:
+    title: 2024 세계국가유산산업전 콜로키움
+    venue: ""
+    desc: 국가유산 산업 전시회 안에서 연구 성과를 소개하고 콜로키움을 함께 열었습니다.
+  en:
+    title: ""
+    venue: ""
+    desc: ""
+
+- id: expo-2025
+  kind: exhibition
+  year: 2025
+  ko:
+    title: 2025 박물관·미술관 박람회 협력 전시와 콜로키움
+    venue: ""
+    desc: >-
+      박물관과 미술관 종사자가 모이는 박람회에서 협력 전시를 열고,
+      전국 국립박물관의 학예관리사를 대상으로 콜로키움을 진행했습니다.
+  en:
+    title: ""
+    venue: ""
+    desc: ""
+
+- id: greece-2024
+  kind: international
+  date: 2024-09
+  ko:
+    title: 그리스 문화체육관광부 장관 방한 간담회
+    venue: ""
+    desc: 그리스 문화체육관광부 장관이 방한한 자리에서 연구 성과를 소개하고 협력 방안을 논의했습니다.
+  en:
+    title: ""
+    venue: ""
+    desc: ""
+
+- id: global-rnd-2024
+  kind: international
+  date: 2024-11
+  ko:
+    title: Global R&D Friend's day 연구 성과 소개
+    venue: ""
+    desc: >-
+      유럽연합 대표부와 스웨덴·핀란드·엘살바도르 대사를 비롯해 이탈리아, 헝가리, 벨기에, 스페인까지
+      여덟 나라의 관계자가 참석한 자리에서 연구 성과를 소개했습니다.
+  en:
+    title: ""
+    venue: ""
+    desc: ""
