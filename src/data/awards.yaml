@@ -87,28 +87,40 @@
     alt: "A screen showing Pyeongsaengdo adapted into digital content."
 
 # 2026-09-11 보강: 최종보고서 76쪽에서 수상 시점(2025년 11월)과 수상 대상 기술을 확인했습니다.
+# 2026-09-14 정정: 수상 인증서 실측 (docs/참조데이터/01_성과등록/99_기타 산출물/공모전 수상_faimp_avicom.pdf, 1쪽).
+#   인증서 기재: "AVICOM F@IMP FESTIVAL 2024-2025 / H+Low: Visual Explaration of Cultural Heritage with
+#   Generative AI / National Museum of Korea / Category Website / Prize Interpretation".
+#   - 이전에 category에 적었던 "H+Low"는 부문이 아니라 출품작 이름이었습니다. 부문은 Website입니다.
+#   - 출품작 이름의 "Explaration"은 인증서 인쇄 그대로이며 "Exploration"의 오자로 보입니다 (사용자 확인 항목).
+#     화면에는 Exploration으로 적습니다.
+#   - 출품 기관은 국립중앙박물관(National Museum of Korea)입니다.
+#   - 최종보고서의 "우수상"은 인증서의 "Prize: Interpretation"에 해당합니다. 상 이름의 한국어 표기는 사용자 확인 항목.
+#   - 인증서 서명자(ICOM AVICOM 의장, 페스티벌 디렉터) 개인 이름은 화면에 싣지 않습니다.
 - id: avicom-2024
   year: 2025
   date: 2025-11
   grade: winner
   organization: AVICOM
-  category: H+Low
+  category: Website
+  prize: Interpretation
+  entry: "H+Low: Visual Exploration of Cultural Heritage with Generative AI"
+  entrant: National Museum of Korea
   work: 관계 기반 데이터 시각화 기술
   ko:
-    title: AVICOM F@IMP 2024-2025 우수상
+    title: AVICOM F@IMP 2024-2025 우수상 (웹사이트 부문 Interpretation)
     organization: 국제박물관협의회 시청각·신기술위원회(AVICOM)
-    work: 관계 기반 데이터 시각화 기술
+    work: "H+Low: 생성형 AI로 문화유산을 시각적으로 탐색하는 웹사이트"
     desc: >-
-      유물과 유물 사이의 관계를 눈으로 확인할 수 있게 만든 시각화 기술이
-      국제박물관협의회 산하 시청각·신기술위원회가 여는 멀티미디어 페스티벌에서
-      2025년 11월에 우수상을 받았습니다.
-    # 이 수상 실적은 현행 사이트에 실려 있지 않다 (최종보고서 76쪽에서만 확인, 2026-09-11).
-    source: 최종보고서 76쪽
-    alt: AVICOM 공모전 수상 인증서입니다.
+      유물과 유물 사이의 관계를 눈으로 확인할 수 있게 만든 관계 기반 데이터 시각화 기술을 담은
+      웹사이트 「H+Low」가 국립중앙박물관 이름으로 출품되어, 국제박물관협의회 산하 시청각·신기술위원회가 여는
+      멀티미디어 페스티벌(F@IMP 2024-2025)의 웹사이트 부문에서 2025년 11월에 상(Prize: Interpretation)을 받았습니다.
+    # 이 수상 실적은 현행 사이트에 실려 있지 않다 (최종보고서 76쪽과 수상 인증서에서 확인, 2026-09-14).
+    source: 최종보고서 76쪽·수상 인증서
+    alt: AVICOM F@IMP 2024-2025 수상 인증서입니다.
   en:
-    title: "AVICOM F@IMP 2024-2025 Excellence Award"
+    title: "AVICOM F@IMP 2024-2025 Award (Website Category, Prize: Interpretation)"
     organization: "ICOM AVICOM (International Committee for Audiovisual, New Technologies and Social Media)"
-    work: "Relationship-based data visualization technology"
-    desc: "Visualization technology that made the relationships between artifacts visible received an Excellence Award in November 2025 at the multimedia festival held by ICOM AVICOM."
-    source: "Final report, p. 76"
-    alt: "The AVICOM competition award certificate."
+    work: "H+Low: Visual Exploration of Cultural Heritage with Generative AI"
+    desc: "The website H+Low, built on relationship-based data visualization technology that makes the connections between artifacts visible, was entered under the name of the National Museum of Korea and received the Interpretation prize in the Website category of the F@IMP 2024-2025 multimedia festival held by ICOM AVICOM in November 2025."
+    source: "Final report, p. 76, and the award certificate"
+    alt: "The AVICOM F@IMP 2024-2025 award certificate."

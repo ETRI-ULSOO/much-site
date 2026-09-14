@@ -1,16 +1,23 @@
 ---
-/** 언론 보도. ready가 참인 항목만 보이고, 한 건도 없으면 아무것도 그리지 않는다 (Q-4 기사 주소·일자 대기). */
+/**
+ * 언론 보도. ready가 참인 항목만 보이고, 한 건도 없으면 아무것도 그리지 않는다.
+ * 최근 것부터 늘어놓고(컬렉션은 id 순으로 오므로 날짜로 다시 정렬), compact(홈 띠)는 limit건만 보인다 (2026-09-14).
+ */
 import { getCollection } from 'astro:content';
 import { getLocale, useTranslations, localePath } from '../i18n/utils';
 
 interface Props {
   compact?: boolean;
+  limit?: number;
 }
-const { compact = false } = Astro.props;
+const { compact = false, limit = 4 } = Astro.props;
 const locale = getLocale(Astro.url);
 const t = useTranslations(locale);
 
-const press = (await getCollection('press')).filter((p) => p.data.ready);
+const ready = (await getCollection('press'))
+  .filter((p) => p.data.ready)
+  .sort((a, b) => (b.data.date ?? '').localeCompare(a.data.date ?? ''));
+const press = compact ? ready.slice(0, limit) : ready;
 const title = (data: (typeof press)[number]['data']) => data[locale]?.title || data.ko?.title || '';
 ---
 

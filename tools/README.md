@@ -8,6 +8,7 @@
 | `pptx_parts.py` | 같은 파일의 내부 구성 요소 목록(이미지·영상·관계 파일)을 출력한다 |
 | `check_size.sh` | 커밋 대상에 50 MB 이상 파일이 올라왔는지 검사한다 |
 | `check_i18n.py` | 한·영 어긋남 검사 — 원고 파일 집합, `src/data/*.yaml`의 ko/en 키 짝, `src/i18n/ui.ts`의 키 집합을 비교한다. `npm run check:i18n`, CI에서 빌드 전에 실행 |
+| `extract_outcomes.py` | 최종보고서 별첨 5·6·7 zip(논문·특허·프로그램 취합)을 풀지 않고 pypdf로 읽어 서지 텍스트를 JSON 세 개로 낸다. 특허 출원서(개인정보 포함)는 읽지 않는다. `src/data/papers.yaml`·`patents.yaml`·`software.yaml`의 원천 (2026-09-14) |
 
 ## 7.1 GB 파일을 여는 방법
 

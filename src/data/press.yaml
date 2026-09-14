@@ -1,39 +1,120 @@
-# 언론 보도 — 현행 사이트 News 페이지의 Media 항목 9건을 매체 이름만 옮겨 두었습니다 (2026-09-11 실측).
+# 언론 보도.
 #
-# 미해결 Q-4 (2026-09-11 기준): 종료평가 발표자료는 보도가 20여 회 있었다고 적고 있으나,
-#   현행 사이트에는 9건만 매체 이름과 함께 실려 있고 기사 원문 주소도 보도 일자도 없습니다.
-#   사용자가 복귀한 뒤에 기사 주소와 보도 일자를 제공하기로 했으므로, 그때 title·url·date를 채웁니다.
-#   주소와 일자가 없는 항목은 페이지에 노출하지 않습니다.
+# 2026-09-11: 현행 사이트 News 페이지의 Media 항목 9건을 매체 이름만 옮겨 두었습니다.
+# 2026-09-14 보강: 아래 두 원천으로 항목을 채웠습니다.
+#   ① 방송 7건: 현행 사이트 Media 쪽에 임베드된 유튜브 영상 7편의 ID를 확인하고, YouTube oEmbed와 watch 쪽에서
+#      제목·채널·게시일·길이를 실측했습니다. date는 유튜브 게시일(한국 시간으로 환산)이며 방송 일자와 다를 수 있습니다.
+#      방송사 저작물이므로 사이트에 임베드하지 않고 유튜브 링크(url)로만 안내합니다. youtube 필드는 ID 보관용이며
+#      임베드 여부는 사용자 확인 뒤에 정합니다.
+#   ② 신문·웹 기사 5건: 최종보고서 70쪽 "언론 보도" 표(캡션만 추출됨 — 국립중앙박물관 보도 25.07, 표준 가이드라인 공개
+#      관련 보도 25.07, ETRI 웹진 25.08, ZDNet 문화유산 시리즈 25.08)를 단서로 웹에서 기사를 찾아 본문을 확인했습니다.
+#      - ETRI 웹진은 보고서 캡션이 "25.08"이나 실측한 기사는 2024년 8월호(Vol.242)입니다. 2025년 8월호에서는 해당 기사를
+#        찾지 못했으므로 연월 불일치를 사용자 확인 항목으로 남깁니다.
+#      - ZDNet 시리즈 가운데 2025년 8월의 ETRI 편은 검색으로 찾지 못했고, 2025-07-10의 국립중앙박물관 편(㉑)에서
+#        ETRI와 가이드라인 언급을 확인해 그 기사를 실었습니다.
+#   ③ 충청투데이·디지털타임스는 기사 주소를 찾지 못해 ready: false로 남깁니다 (사용자 확인 항목).
+#   ④ en.title은 초안 번역입니다 (사용자 검수 항목). 방송 항목의 ko.title은 유튜브 제목에서 매체 표기와 날짜를 뗀 것입니다.
 #
-# 항목을 채울 때 사용할 형식입니다.
-#   - id: kbs-01
-#     outlet: KBS
-#     date: 2024-01-01
-#     url: https://...
-#     ko: { title: 기사 제목 }
-#     en: { title: "" }
+# 미해결 Q-4 (2026-09-14 기준): 종료평가 발표자료의 "20여 회" 가운데 12건을 확인했습니다. 나머지는 사용자 제공을 기다립니다.
+#
+# 필드: outlet(ko/en) · ready · date(YYYY-MM-DD, 문자열) · url · youtube(방송 영상 ID, 보관용) · ko/en.title
 
+# ---- 방송 (2024-05 국립중앙박물관 실증 보도, 2024-01 광개토대왕릉비 보도) ----
 - id: kbs
   outlet: { ko: KBS, en: KBS }
-  ready: false
+  ready: true
+  date: "2024-05-28"
+  youtube: Qse-L34mrTg
+  url: https://www.youtube.com/watch?v=Qse-L34mrTg
+  ko: { title: "디지털로 되살아난 문화유산…\"세계 표준화 추진\"" }
+  en: { title: "Cultural heritage revived in digital form, aiming for an international standard" }
 - id: sbs
   outlet: { ko: SBS, en: SBS }
-  ready: false
+  ready: true
+  date: "2024-05-29"
+  youtube: ht4W6gvcfpY
+  url: https://www.youtube.com/watch?v=ht4W6gvcfpY
+  ko: { title: "디지털로 구현한 '문화유산'…지역 박물관으로 기술 확대" }
+  en: { title: "Cultural heritage rendered digitally, with the technology spreading to regional museums" }
 - id: mbc-daejeon
   outlet: { ko: 대전MBC, en: Daejeon MBC }
-  ready: false
+  ready: true
+  date: "2024-05-29"
+  youtube: U7wPAri7PU4
+  url: https://www.youtube.com/watch?v=U7wPAri7PU4
+  ko: { title: "'디지털 귀향'…해외 문화유산을 만나는 새로운 방법" }
+  en: { title: "A 'digital homecoming': a new way to meet Korean heritage held overseas" }
 - id: tjb
   outlet: { ko: TJB, en: TJB }
-  ready: false
+  ready: true
+  date: "2024-05-28"
+  youtube: hx-Mq4_caFI
+  url: https://www.youtube.com/watch?v=hx-Mq4_caFI
+  ko: { title: "'디지털 옷 입은 문화유산'…지능형 유산 플랫폼" }
+  en: { title: "Cultural heritage in digital clothing: an intelligent heritage platform" }
 - id: chosun-tv
   outlet: { ko: TV조선, en: TV Chosun }
-  ready: false
+  ready: true
+  date: "2024-05-28"
+  youtube: zsJ_jE_S0SE
+  url: https://www.youtube.com/watch?v=zsJ_jE_S0SE
+  ko: { title: "3D로 재탄생한 광개토대왕비…AI로 국가유산 200만 건 디지털 전환" }
+  en: { title: "The Gwanggaeto Stele reborn in 3D, with AI to digitize two million heritage records" }
 - id: yonhap-1
-  outlet: { ko: 연합뉴스, en: Yonhap News }
-  ready: false
+  outlet: { ko: 연합뉴스TV, en: Yonhap News TV }
+  ready: true
+  date: "2024-05-28"
+  youtube: DPlJ9q7HW2E
+  url: https://www.youtube.com/watch?v=DPlJ9q7HW2E
+  ko: { title: "문화유산, 디지털 옷을 입다…지능형 문화유산 플랫폼 개발" }
+  en: { title: "Cultural heritage goes digital: an intelligent heritage platform" }
 - id: yonhap-2
-  outlet: { ko: 연합뉴스, en: Yonhap News }
-  ready: false
+  outlet: { ko: 연합뉴스TV, en: Yonhap News TV }
+  ready: true
+  date: "2024-01-24"
+  youtube: xy_wABMgkJ0
+  url: https://www.youtube.com/watch?v=xy_wABMgkJ0
+  ko: { title: "디지털로 재현된 광개토대왕릉비…\"고구려사는 우리 역사\"" }
+  en: { title: "The Gwanggaeto Stele recreated digitally: \"Goguryeo's history is our history\"" }
+
+# ---- 신문·웹 ----
+- id: kukinews-2024-05
+  outlet: { ko: 쿠키뉴스, en: Kuki News }
+  ready: true
+  date: "2024-05-28"
+  url: https://www.kukinews.com/article/view/kuk202405280040
+  ko: { title: "ETRI 디지털 기술로 되살아난 문화유산" }
+  en: { title: "Cultural heritage revived by ETRI's digital technology" }
+- id: zdnet-series-21
+  outlet: { ko: ZDNet Korea, en: ZDNet Korea }
+  ready: true
+  date: "2025-07-10"
+  url: https://zdnet.co.kr/view/?no=20250710100003
+  ko: { title: "[디지털 K-헤리티지] ㉑ 국립중앙박물관, AI시대 문화유산 디지털화 발맞춰" }
+  en: { title: "[Digital K-Heritage] (21) The National Museum of Korea keeps pace with heritage digitization in the AI era" }
+- id: zdnet-2025-07
+  outlet: { ko: ZDNet Korea, en: ZDNet Korea }
+  ready: true
+  date: "2025-07-18"
+  url: https://zdnet.co.kr/view/?no=20250718091452
+  ko: { title: "ETRI, 박물관·(주)리스트 등과 문화유산 디지털 표준화 \"속도\"" }
+  en: { title: "ETRI speeds up cultural-heritage digital standardization with the museum and partners" }
+- id: herald-2025-07
+  outlet: { ko: 헤럴드경제, en: The Herald Business }
+  ready: true
+  date: "2025-07-18"
+  url: https://biz.heraldcorp.com/article/10534393
+  ko: { title: "'반가사유상' AI로 재탄생…ETRI, '문화유산 디지털 기술주권' 표준화 선도" }
+  en: { title: "The Pensive Bodhisattva reborn through AI: ETRI leads standardization for digital sovereignty over cultural heritage" }
+- id: etri-webzine-2024-08
+  outlet: { ko: ETRI 웹진, en: ETRI Webzine }
+  ready: true
+  date: "2024-08"
+  url: https://www.etri.re.kr/webzine/202408/sub05.html
+  ko: { title: "ETRI, 문화유산에 디지털로 혼 불어넣는다 (Vol.242)" }
+  en: { title: "ETRI breathes digital life into cultural heritage (Vol. 242)" }
+
+# ---- 주소 미확인 (화면에 내지 않음) ----
 - id: cctoday
   outlet: { ko: 충청투데이, en: Chungcheong Today }
   ready: false

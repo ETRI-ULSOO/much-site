@@ -1,22 +1,71 @@
-# 특허 목록 — 서지 정보를 사용자가 제공하기 전까지 비어 있는 상태로 둡니다.
+# 국내 특허 출원 6건 — 최종보고서 별첨 6(특허 취합 zip)의 출원 통지서·명세서를 2026-09-14에 실측해 옮겼습니다.
 #
-# 미해결 Q-2 (2026-09-11 기준): 국내 특허 6건과 출원 진행 중인 국제 특허 2건의
-#   발명 명칭, 출원인, 출원번호, 출원일, 등록번호를 사용자가 복귀한 뒤에 제공하기로 했습니다.
+# 출원인은 여섯 건 모두 한국전자통신연구원입니다. 등록된 건은 없어 status는 전부 filed(출원)입니다.
+# 국제 특허 2건은 아직 출원 전이므로 이 파일에도 싣지 않습니다 (최종보고서 75쪽에서만 확인).
 #
-# 항목을 채울 때 사용할 형식입니다.
-#   - id: kr01
-#     scope: domestic              # domestic 또는 international
-#     status: registered           # filed(출원) 또는 registered(등록)
-#     application_no: 10-2024-...
-#     application_date: 2024-01-01
-#     registration_no: 10-....     # 등록된 건에만 적습니다
-#     registration_date: 2025-01-01
-#     inventors: [홍길동]
-#     ko: { title: 발명의 명칭 }
-#     en: { title: "" }
-
+# public: false 인 항목은 화면에 내보내지 않습니다 (Publications.astro가 거릅니다).
+#   2025년에 출원한 3건(kr04·kr05·kr06)은 특허청 공개(출원 후 18개월) 전이라 노출 여부를
+#   사용자 확인 뒤에 정합니다 (2026-09-14 기준 보류). 나머지 3건은 공개 시점이 지났습니다.
+# inventors는 스키마에 없는 참고 항목이라 화면에는 나오지 않습니다 (발명자 이름만 적고 개인정보는 옮기지 않음).
 #
 # 파일 형태 (2026-09-11 4단계): 최상위가 항목 배열이며 scope 항목(domestic·international)으로 구분한다.
 #   콘텐츠 컬렉션의 file 로더가 배열 항목의 id를 열쇠로 쓰기 때문이다.
 
-[]
+- id: kr01
+  scope: domestic
+  status: filed
+  application_no: 10-2023-0145066
+  application_date: 2023-10-26
+  inventors: [박찬우]
+  ko: { title: "문화 유산 기반의 히스토리 애셋 뷰어를 구축하는 방법 및 시스템" }
+  en: { title: "Method and System for Building Cultural Heritage-Based History Asset Viewer" }
+
+# kr02: 취합 자료에 명세서가 없어 영문 명칭을 확인하지 못했습니다. en.title은 초안 번역이므로 사용자 검수가 필요합니다.
+- id: kr02
+  scope: domestic
+  status: filed
+  application_no: 10-2024-0024291
+  application_date: 2024-02-20
+  inventors: [김희권, 박찬우, 이재호]
+  ko: { title: "온톨로지에 기반하여 문화유산의 디지털데이터를 가시화하는 방법 및 장치" }
+  en: { title: "Method and Apparatus for Visualizing Digital Data of Cultural Heritage Based on Ontology" }
+
+- id: kr03
+  scope: domestic
+  status: filed
+  application_no: 10-2024-0159657
+  application_date: 2024-11-11
+  inventors: [박찬우, 김희권, 이재호, 황혜린]
+  ko: { title: "문화 유산 회화 이미지 자동 분류 시스템 및 그 방법" }
+  en: { title: "Automatic Classification System for Cultural Heritage Painting Images and Method Thereof" }
+
+- id: kr04
+  scope: domestic
+  status: filed
+  public: false
+  application_no: 10-2025-0069454
+  application_date: 2025-05-28
+  inventors: [황혜린, 백서현, 김희권, 박찬우, 이재호]
+  ko: { title: "딥러닝 기반 이미지와 텍스트의 연관도 산출 방법 및 분석장치" }
+  en: { title: "Deep Learning Based Evaluating Method for Relevance Between Image and Text and Analysis Apparatus" }
+
+- id: kr05
+  scope: domestic
+  status: filed
+  public: false
+  application_no: 10-2025-0103885
+  application_date: 2025-07-30
+  inventors: [백서현, 황혜린, 김희권, 박찬우, 이재호]
+  ko: { title: "멀티모달 데이터를 이용한 문화유산 분류 방법 및 분석장치" }
+  en: { title: "Cultural Heritage Classification Method Using Multimodal Data and Analysis Apparatus" }
+
+# kr06: 명세서의 영문 명칭에 오타가 있어 뜻을 살려 정리했습니다. 원문 표기는 별첨 6에서 확인할 수 있습니다.
+- id: kr06
+  scope: domestic
+  status: filed
+  public: false
+  application_no: 10-2025-0141361
+  application_date: 2025-09-29
+  inventors: [황혜린, 김희권, 박찬우, 백서현, 이재호, 최종원]
+  ko: { title: "이미지 및 텍스트에 기초하여 조건부 텍스트를 생성하는 방법 및 장치" }
+  en: { title: "Method and Apparatus for Generating Conditional Text Based on Image and Text" }

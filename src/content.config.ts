@@ -131,6 +131,8 @@ const press = defineCollection({
     ready: z.boolean(),
     date: z.coerce.string().optional(),
     url: z.string().optional(),
+    /** 방송 영상의 유튜브 ID. 보관만 하고 임베드는 사용자 확인 뒤에 정한다 (2026-09-14). */
+    youtube: z.string().optional(),
     ko: z.object({ title: z.string() }).optional(),
     en: z.object({ title: z.string() }).optional(),
   }),
@@ -157,6 +159,8 @@ const standards = defineCollection({
     status: z.enum(['enacted', 'published', 'planned']),
     date: z.coerce.string().optional(),
     number: z.string().optional(),
+    // 표준 원문을 볼 수 있는 외부 주소. 있으면 표에서 제목에 링크를 건다 (2026-09-14).
+    url: z.string().url().optional(),
     year: z.number().optional(),
     // 기관명이 언어마다 다를 때만 ko/en 안에 organization을 두고, 없으면 위의 organization을 쓴다.
     ko: z.object({ title: z.string(), desc: z.string(), organization: z.string().optional() }),
@@ -210,6 +214,8 @@ const patents = defineCollection({
   schema: z.object({
     scope: z.enum(['domestic', 'international']),
     status: z.enum(['filed', 'registered']),
+    // false면 화면에 내보내지 않는다 (특허청 공개 전 출원 건 보류용, 2026-09-14)
+    public: z.boolean().default(true),
     application_no: z.string().optional(),
     application_date: z.coerce.string().optional(),
     registration_no: z.string().optional(),

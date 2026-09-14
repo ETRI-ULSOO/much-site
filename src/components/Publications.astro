@@ -13,7 +13,7 @@ const t = useTranslations(locale);
 const papers = kind === 'journal' || kind === 'conference'
   ? (await getCollection('papers')).filter((p) => p.data.kind === kind).sort((a, b) => b.data.year - a.data.year)
   : [];
-const patents = kind === 'patent' ? await getCollection('patents') : [];
+const patents = kind === 'patent' ? (await getCollection('patents')).filter((p) => p.data.public) : [];
 const software = kind === 'software' ? await getCollection('software') : [];
 ---
 

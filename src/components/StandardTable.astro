@@ -23,7 +23,7 @@ const standards = await getCollection('standards');
         const d = data[locale].title ? data[locale] : data.ko;
         return (
           <tr>
-            <td>{d.title}</td>
+            <td>{data.url ? <a href={data.url} target="_blank" rel="noopener">{d.title}</a> : d.title}</td>
             <td>{d.organization ?? data.organization}</td>
             <td>
               {data.date ?? data.year ?? ''}

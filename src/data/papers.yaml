@@ -1,22 +1,250 @@
-# 학술 성과 목록 — 서지 정보를 사용자가 제공하기 전까지 비어 있는 상태로 둡니다.
+# 논문 29편 — 최종보고서 별첨 5(논문 취합 zip)의 PDF 29개를 2026-09-14에 실측해 옮겼습니다.
 #
-# 미해결 Q-2 (2026-09-11 기준): 논문 11편(SCOPUS 9 + SCI·SCIE 2)과 학술대회 발표 18건의
-#   제목, 저자, 게재지, 연도, DOI를 사용자가 복귀한 뒤에 제공하기로 했습니다.
-#   그때까지 `/much/outcomes/` 페이지는 합계 숫자만 보여 주고 목록은 숨깁니다.
+# 분류는 최종보고서 69쪽 정량표를 따릅니다.
+#   국제 학술대회 논문(SCOPUS 등재) 9편 · 논문(SCI/E) 2편 · 기타 국내외 학술대회 논문 18편 = 29편
+#   보고서의 "SCOPUS 9편"은 전부 국제 학술대회 논문이고, 학술지 논문은 SCI 2편(npj Heritage Science,
+#   ETRI Journal)과 국내 학술지 2편(박물관 보존과학 31·32집, 보고서에서는 '기타'에 포함)뿐입니다.
+#   그래서 kind는 journal 4편 · conference 25편으로 나뉩니다.
 #
-# 항목을 채울 때 사용할 형식입니다. venue는 학술지나 학술대회의 이름을 적습니다.
-#   - id: p01
-#     kind: journal          # journal 또는 conference
-#     index: SCOPUS          # SCOPUS, SCI, SCIE 중 하나이며 학술대회는 비웁니다
-#     year: 2025
-#     doi: 10.xxxx/xxxxx     # 없으면 생략합니다
-#     url: https://...       # 없으면 생략합니다
-#     authors: [홍길동, 김철수]
-#     ko: { title: 논문 제목, venue: 게재지 이름 }
-#     en: { title: "", venue: "" }
-
+# index 값: SCI(학술지 2편) · SCOPUS(국제 학술대회 10편). SCOPUS 후보는 성과등록 폴더의 6편에
+#   IEEE 학술대회 4편(ICCE-Asia 2023, ICEIC 2024, ICUFN 2024 ×2)을 더한 10편이며 보고서 집계(9편)보다
+#   1편 많습니다. 어느 편이 집계에서 빠졌는지는 사용자 확인 항목입니다 (2026-09-14 기준 미확인).
+#
+# 학회명·연도가 PDF에 없는 편은 venue에 "게재처 확인 중"이라 적고 주석에 근거를 남겼습니다.
+#   p02·p03·p04·p13 네 편입니다. 사용자 검수 뒤에 고칩니다.
+# 한국어 논문의 영어 제목은 PDF에 실린 영문 제목을 그대로 옮겼습니다. 영문 제목이 없는 편(p05·p12)은
+#   en.title을 비워 두어 영어 쪽에서도 한국어 제목이 나오게 했습니다 (Publications.astro의 대체 규칙).
+# 저자는 이름만 적습니다. PDF 첫 쪽의 이메일·소속은 옮기지 않습니다.
 #
 # 파일 형태 (2026-09-11 4단계): 최상위가 항목 배열이며 kind 항목(journal·conference)으로 구분한다.
 #   콘텐츠 컬렉션의 file 로더가 배열 항목의 id를 열쇠로 쓰기 때문이다.
 
-[]
+- id: p01
+  kind: journal
+  year: 2024
+  doi: 10.22790/conservation.2024.31.0055
+  authors: [백서현, 조예은, 안상두, 최종원]
+  ko: { title: "문화유산 이미지의 질감과 색상 스타일 전이를 위한 알고리즘 개발 연구", venue: "박물관 보존과학 제31집(국립중앙박물관)" }
+  en: { title: "Algorithm Development for Texture and Color Style Transfer of Cultural Heritage Images", venue: "Conservation Science in Museum, Vol. 31 (National Museum of Korea)" }
+
+# p02: 17쪽 LNCS 형식. 학회명과 연도가 본문·꼬리말에 없음. 참고문헌이 2024년까지라 2024로 둡니다 (추정).
+- id: p02
+  kind: conference
+  year: 2024
+  authors: [Jungmin Lee, Huigon Shin, YoungJoon Yoo, Jongwon Choi, Mi Song Kim]
+  ko: { title: "Educational Research Trends of the Use of Gaze Learning Data through Topic Modeling and Scientometric Analysis", venue: "게재처 확인 중" }
+  en: { title: "Educational Research Trends of the Use of Gaze Learning Data through Topic Modeling and Scientometric Analysis", venue: "Venue to be confirmed" }
+
+# p03: IEEE 형식 5쪽. 학회명 없음. 사사에 "2023년 문화체육관광부"가 있고 참고문헌이 2023년까지라 2023으로 둡니다 (추정).
+- id: p03
+  kind: conference
+  year: 2023
+  authors: [Taehoon Kim, Jongwook Choi, Hyunjin Cho, HyoungJun Lim, Jongwon Choi]
+  ko: { title: "Domain Generalization for Face Forgery Detection by Style Transfer", venue: "게재처 확인 중" }
+  en: { title: "Domain Generalization for Face Forgery Detection by Style Transfer", venue: "Venue to be confirmed" }
+
+# p04: 학회명 없음. 사사에 "2024년도 정부 재원"이 있어 2024로 둡니다 (추정).
+- id: p04
+  kind: conference
+  year: 2024
+  authors: [최기윤, 조현진, 조희재, 최종욱, 최종원]
+  ko: { title: "어텐션 분해를 활용한 지식 증류 기반 프롬프트 학습", venue: "게재처 확인 중" }
+  en: { title: "Knowledge Distillation-Based Prompt Learning Using Attention Decomposition", venue: "Venue to be confirmed" }
+
+- id: p05
+  kind: conference
+  year: 2024
+  authors: [최기윤, 김태훈, 차수연, 최종원]
+  ko: { title: "적대적 재프로그래밍을 활용한 비지도 멀티모달 프롬프트 학습", venue: "제36회 영상처리 및 이해에 관한 워크샵(IPIU 2024)" }
+  en: { title: "", venue: "" }
+
+- id: p06
+  kind: conference
+  year: 2024
+  authors: [황혜린, 오아름, 김희권, 박찬우, 이재호]
+  ko: { title: "고전 언어로 기록된 디지털 문화유산의 시각적 변환 및 자동 분류 시스템", venue: "2024년 대한전자공학회 하계학술대회" }
+  en: { title: "System for Visual Transformation and Classification of Cultural Heritage Data Documented in Classical Languages", venue: "IEIE Summer Conference 2024" }
+
+- id: p07
+  kind: journal
+  index: SCI
+  year: 2025
+  doi: 10.1038/s40494-025-01621-1
+  authors: [Hyerin Hwang, Chan-Woo Park, Hee-Kwon Kim, Jae-Ho Lee]
+  ko: { title: "CATS: cultural-heritage classification using LLMs and distribute model", venue: "npj Heritage Science" }
+  en: { title: "CATS: cultural-heritage classification using LLMs and distribute model", venue: "npj Heritage Science" }
+
+- id: p08
+  kind: conference
+  year: 2025
+  authors: [박찬우, 백서현, 김희권, 이재호]
+  ko: { title: "디지털 문화유산 3D 애셋의 표준화 및 플랫폼 기반 활용 연구", venue: "CEIC 2025" }
+  en: { title: "A Study on the Standardization and Platform-Based Utilization of 3D Digital Cultural Heritage Assets", venue: "CEIC 2025" }
+
+# p09: 한국어 제목의 "투어 최적합"은 PDF 원문 표기 그대로입니다(영문 제목은 Tour Optimization). 오타 여부는 사용자 확인 항목.
+- id: p09
+  kind: conference
+  year: 2025
+  authors: [김희권, 백서현, 박찬우, 이재호]
+  ko: { title: "시맨틱 프레임워크 기반 문화유산 탐색: 개인화된 박물관 경험을 위한 지식 그래프와 투어 최적합 통합 시스템", venue: "CEIC 2025" }
+  en: { title: "Semantic Framework-Based Cultural Heritage Exploration: Integrating Knowledge Graphs and Tour Optimization System for a Personalized Museum Experience", venue: "CEIC 2025" }
+
+- id: p10
+  kind: conference
+  index: SCOPUS
+  year: 2025
+  doi: 10.5194/isprs-annals-X-M-2-2025-215-2025
+  authors: [Jungmin Lee, Sojeong Park, Jihyun Min, Jongwon Choi]
+  ko: { title: "3D Gaussian Splatting for Enhanced Documentation of Cultural Artifacts", venue: "CIPA 2025 (ISPRS Annals X-M-2-2025)" }
+  en: { title: "3D Gaussian Splatting for Enhanced Documentation of Cultural Artifacts", venue: "CIPA 2025 (ISPRS Annals X-M-2-2025)" }
+
+- id: p11
+  kind: conference
+  index: SCOPUS
+  year: 2025
+  doi: 10.5194/isprs-annals-X-M-2-2025-39-2025
+  authors: [Seohyun Baek, Hyerin Hwang, Chan-Woo Park, Hee-Kwon Kim, Jae-Ho Lee]
+  ko: { title: "Development of an Artificial Intelligence-based Platform for the Analysis and Utilization of Cultural Heritage Data", venue: "CIPA 2025 (ISPRS Annals X-M-2-2025)" }
+  en: { title: "Development of an Artificial Intelligence-based Platform for the Analysis and Utilization of Cultural Heritage Data", venue: "CIPA 2025 (ISPRS Annals X-M-2-2025)" }
+
+# p12: 파일명의 "KSC 춘계학술대회"만 확인됨(학회 전체 이름 미확인). 사사에 "2023년도 정부 재원"이 있어 2023으로 둡니다.
+- id: p12
+  kind: conference
+  year: 2023
+  authors: [백서현, 최종원, 안상두]
+  ko: { title: "CNN과 RTI 기법을 활용한 상평통보의 주조 관청 판별 연구", venue: "2023 KSC 춘계학술대회" }
+  en: { title: "", venue: "" }
+
+# p13: 2쪽 확장 초록. 학회명·연도 없음. p22와 같은 형식이고 참고문헌에 2023년 6월 학회가 있어 2023으로 둡니다 (추정).
+- id: p13
+  kind: conference
+  year: 2023
+  authors: [Chan-Woo Park, Hee-Kwon Kim, Jae-Ho Lee]
+  ko: { title: "Cultural Heritage in Collaboration with AI Technology", venue: "게재처 확인 중" }
+  en: { title: "Cultural Heritage in Collaboration with AI Technology", venue: "Venue to be confirmed" }
+
+- id: p14
+  kind: conference
+  index: SCOPUS
+  year: 2025
+  doi: 10.2312/dh.20253271
+  authors: [Songie Seol, Yeeun Lee, Hyebin Byun, Jongwook Lee]
+  ko: { title: "Personalized Cultural Heritage Recommendation System for Cognitive Exploration Levels", venue: "Digital Heritage 2025 (Eurographics)" }
+  en: { title: "Personalized Cultural Heritage Recommendation System for Cognitive Exploration Levels", venue: "Digital Heritage 2025 (Eurographics)" }
+
+- id: p15
+  kind: journal
+  index: SCI
+  year: 2025
+  doi: 10.4218/etrij.2025-0113
+  authors: [Seohyun Baek, Jae-Ho Lee, Sangdoo Ahn, Jongwon Choi]
+  ko: { title: "RICH: Coin data restoration using inpainting for cultural heritage analysis", venue: "ETRI Journal" }
+  en: { title: "RICH: Coin data restoration using inpainting for cultural heritage analysis", venue: "ETRI Journal" }
+
+- id: p16
+  kind: conference
+  index: SCOPUS
+  year: 2023
+  authors: [Chan-Woo Park, Hee-Kwon Kim, Jae-Ho Lee]
+  ko: { title: "Historical Asset Viewer for Efficient Management of Cultural Heritage", venue: "ICCE-Asia 2023 (IEEE)" }
+  en: { title: "Historical Asset Viewer for Efficient Management of Cultural Heritage", venue: "ICCE-Asia 2023 (IEEE)" }
+
+- id: p17
+  kind: conference
+  index: SCOPUS
+  year: 2024
+  authors: [Jae-Ho Lee, Chan-Woo Park, Hee-Kwon Kim]
+  ko: { title: "Huge Content Data Management for Numerous Applications in the Museum", venue: "ICUFN 2024 (IEEE)" }
+  en: { title: "Huge Content Data Management for Numerous Applications in the Museum", venue: "ICUFN 2024 (IEEE)" }
+
+- id: p18
+  kind: conference
+  index: SCOPUS
+  year: 2025
+  authors: [Jungmin Lee, Seonghyuk Hong, Juyong Lee, Jaeyoon Lee, Jongwon Choi]
+  ko: { title: "InsideOut: Integrated RGB-Radiative Gaussian Splatting for Comprehensive 3D Object Representation", venue: "ICCV 2025" }
+  en: { title: "InsideOut: Integrated RGB-Radiative Gaussian Splatting for Comprehensive 3D Object Representation", venue: "ICCV 2025" }
+
+- id: p19
+  kind: conference
+  index: SCOPUS
+  year: 2025
+  authors: [Jungmin Lee, Jongwon Choi]
+  ko: { title: "Visual Design from Cultural Heritage through Inpainting-based Restoration", venue: "ICCV 2025 Workshop" }
+  en: { title: "Visual Design from Cultural Heritage through Inpainting-based Restoration", venue: "ICCV 2025 Workshop" }
+
+- id: p20
+  kind: conference
+  index: SCOPUS
+  year: 2024
+  authors: [Jae-Ho Lee, Chan-Woo Park, Hee-Kwon Kim]
+  ko: { title: "Digital Transformation of Cultural Heritage for Various Museum Applications", venue: "ICEIC 2024" }
+  en: { title: "Digital Transformation of Cultural Heritage for Various Museum Applications", venue: "ICEIC 2024" }
+
+- id: p21
+  kind: conference
+  index: SCOPUS
+  year: 2025
+  doi: 10.1109/ISMAR-Adjunct68609.2025.00222
+  authors: [Yeeun Lee, Songie Seol, Jongwook Lee]
+  ko: { title: "Interactive Information Exploration Framework of Cultural Heritage with Generative AI", venue: "ISMAR 2025 Adjunct (IEEE)" }
+  en: { title: "Interactive Information Exploration Framework of Cultural Heritage with Generative AI", venue: "ISMAR 2025 Adjunct (IEEE)" }
+
+# p22: PDF에는 학회명이 없으나 p26의 참고문헌 7이 이 논문을 "ICCC 2023, 323-324"로 인용합니다.
+- id: p22
+  kind: conference
+  year: 2023
+  authors: [Hee-Kwon Kim, Chan-Woo Park, Jae-Ho Lee]
+  ko: { title: "Ontology-based data management system for utilizing digital heritage", venue: "ICCC 2023" }
+  en: { title: "Ontology-based data management system for utilizing digital heritage", venue: "ICCC 2023" }
+
+- id: p23
+  kind: conference
+  index: SCOPUS
+  year: 2024
+  authors: [Chan-Woo Park, Hee-Kwon Kim, Jae-Ho Lee]
+  ko: { title: "Research on Digital Cultural Heritage Expansion Using AI Technology", venue: "ICUFN 2024 (IEEE)" }
+  en: { title: "Research on Digital Cultural Heritage Expansion Using AI Technology", venue: "ICUFN 2024 (IEEE)" }
+
+- id: p24
+  kind: conference
+  year: 2023
+  authors: [정호준, 심소나, 백서현, 안상두, 최종원]
+  ko: { title: "다수의 참조 이미지를 활용한 문화유산 흑백사진 아카이브 채색화 모듈 개발", venue: "2023년 대한전자공학회 하계학술대회" }
+  en: { title: "Cultural Heritage Using Multiple Reference Images Black and White Photo Archive Colorization Module Development", venue: "IEIE Summer Conference 2023" }
+
+- id: p25
+  kind: conference
+  year: 2023
+  authors: [백서현, 김수기, 최종원, 안상두]
+  ko: { title: "CNN과 RTI 기법을 활용한 한국 동전의 제작 연도 판별 연구", venue: "2023 International Symposium on Conservation of East Asian Cultural Heritage in Sapporo" }
+  en: { title: "A Study on Determining the Production Year of Korean Coins Using Convolutional Neural Networks and Reflectance Transformation Imaging", venue: "2023 International Symposium on Conservation of East Asian Cultural Heritage in Sapporo" }
+
+- id: p26
+  kind: conference
+  year: 2024
+  authors: [김희권, 황혜린, 최중용, 박찬우, 이재호]
+  ko: { title: "디지털문화유산관리를 위한 온톨로지 기반 데이터구조 및 관리 시스템", venue: "2024년 대한전자공학회 하계학술대회" }
+  en: { title: "Ontology-based Data Structure and Management System for Digital Heritage Management", venue: "IEIE Summer Conference 2024" }
+
+- id: p27
+  kind: journal
+  year: 2024
+  doi: 10.22790/conservation.2024.32.0079
+  authors: [변혜빈, 임서연, 선은혁, 김수현, 이종욱]
+  ko: { title: "박물관 자료 관리·활용을 위한 디지털 아카이브 데이터 구조 개선방안 연구", venue: "박물관 보존과학 제32집(국립중앙박물관)" }
+  en: { title: "Study on Improving Digital Archival Data Structure for Museum Data Management and Utilization", venue: "Conservation Science in Museum, Vol. 32 (National Museum of Korea)" }
+
+- id: p28
+  kind: conference
+  year: 2024
+  authors: [박찬우, 김현주, 김희권, 황혜린, 이재호]
+  ko: { title: "생성형 AI를 활용한 문화유산의 디지털 복제 방법 연구", venue: "2024년 대한전자공학회 하계학술대회" }
+  en: { title: "Research on Digital Reproduction Methods of Cultural Heritage Using Generative AI", venue: "IEIE Summer Conference 2024" }
+
+- id: p29
+  kind: conference
+  year: 2023
+  authors: [박찬우, 김희권, 이재호, 지형근]
+  ko: { title: "오픈소스 기반의 딥러닝을 활용한 흑백 이미지 문화유산 복원방법 연구", venue: "2023년 대한전자공학회 하계학술대회" }
+  en: { title: "A Study on the Restoration Method of Black and White Image Cultural Heritage Using Deep Learning Based on Open Source", venue: "IEIE Summer Conference 2023" }
