@@ -1,0 +1,52 @@
+---
+/**
+ * 과제 수행 체계. consortium.yaml의 다섯 기관을 지원 부처 → 주관 기관 → 참여·수요 기관의 세 단으로 그린다.
+ * 로고는 logo 항목이 있는 기관만 보인다 (기관별 로고 사용 지침을 확인한 뒤 YAML의 주석을 푼다).
+ */
+import { getCollection } from 'astro:content';
+import { Image } from 'astro:assets';
+import { findImage } from '../lib/images';
+import { getLocale, useTranslations } from '../i18n/utils';
+
+const locale = getLocale(Astro.url);
+const t = useTranslations(locale);
+const orgs = (await getCollection('consortium')).sort((a, b) => a.data.order - b.data.order);
+const tiers = [['ministry'], ['lead'], ['partner', 'demand']] as const;
+
+const rows = await Promise.all(
+  tiers.map((roles) =>
+    Promise.all(
+      orgs
+        .filter(({ data }) => (roles as readonly string[]).includes(data.role))
+        .map(async ({ data }) => ({ data, logo: data.logo ? await findImage('logos/' + data.logo) : undefined })),
+    ),
+  ),
+);
+---
+
+<div class="chart">
+  {rows.map((row) => (
+    <ul class="tier">
+      {row.map(({ data, logo }) => (
+        <li>
+          <p class="role">{t(`consortium.${data.role}`)}</p>
+          {logo && <Image src={logo} alt="" height={40} class="logo" />}
+          <p class="name">{data.url ? <a href={data.url}>{data[locale].name}</a> : data[locale].name}</p>
+        </li>
+      ))}
+    </ul>
+  ))}
+</div>
+
+<style>
+  .chart { margin: 32px 0; }
+  .tier { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; justify-content: center; gap: 16px; }
+  .tier + .tier { margin-top: 16px; }
+  li {
+    flex: 1 1 200px; max-width: 320px; padding: 16px;
+    background: var(--surface); border: 1px solid var(--line); text-align: center;
+  }
+  .role { margin: 0 0 8px; font-family: var(--font-mono); font-size: var(--t-label); letter-spacing: 0.12em; color: var(--ink-muted); }
+  .logo { display: block; width: auto; height: 40px; margin: 0 auto 8px; }
+  .name { margin: 0; color: var(--ink-2); }
+</style>

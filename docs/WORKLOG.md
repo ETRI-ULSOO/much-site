@@ -468,3 +468,83 @@ GitHub Actions로 지정한 다음에 이루어진다. 그때까지 push마다 A
 **다음 단계**: 순서 5 — `tools/pptx_dump.py`로 `그림수정_230127_박찬우.pptx`를 덤프해 수행 체계도·플랫폼
 구조도를 확보하고 `평생도.png`·`반가사유상.png`를 검토한 뒤, 5단계 잔여(그림 판독표, Figure 구성 요소,
 영상 대표 그림, 홈 배경 영상, 유튜브 길이 대조표)로 잇는다.
+
+## 2026-09-14 (오후) — 5.5단계 순서 5·6·7: 그림 합류, 5단계 잔여(그림·영상), 검증
+
+**목표**: [[PLAN]] 5.5단계의 남은 순서를 마친다. 순서 5는 `그림수정_230127_박찬우.pptx`에서 쓸 수 있는
+그림을 가르는 일, 순서 6은 5단계 잔여(Figure 구성 요소, 영상 대표 그림, 홈 배경 영상, 유튜브 길이
+대조표), 순서 7은 검증과 커밋이다.
+
+**결정사항**
+
+- 그림수정 pptx의 체계도·구조도는 글상자로 그린 것이라 그림으로 꺼낼 수 없고, 이 Mac에는 pptx를
+  그려 줄 도구(soffice·PowerPoint)가 없다. 같은 도식의 완성본이 발표자료(2026-04)에 그림으로 있으므로
+  그쪽을 원천으로 삼았다. 판독표는 [[REF-참조데이터-2차분]] 4.1절.
+- 그림은 `src/assets/img/`에 두고 `astro:assets`의 `<Image>`로 낸다(빌드 때 webp·폭별 사본 생성,
+  `sharp` 0.35.4 실측). 원고(MDX)에서는 `<Figure src="이름" alt="…" />`만 쓰고, 파일 찾기는
+  `src/lib/images.ts`의 `findImage`가 맡는다. alt가 없으면 빌드가 실패한다.
+- 컨소시엄은 `Consortium` 구성 요소(3단 체계도: 주무 부처 / 주관 / 참여·수요처)로 바꿨다. 기관 로고 5종은
+  `src/assets/img/logos/`에 두되 `consortium.yaml`의 `# logo:` 주석을 풀어야 화면에 나온다. 각 기관의
+  로고 사용 지침 확인은 사용자 몫이다.
+- 영상 대표 그림은 `videos.yaml`의 `poster` 필드로 처리했다. 발표자료 그림과 영상의 짝은 첫 장면
+  해상도로 확정했다(`image48`=`media4`, `image57`=`media10`, `image58`=`media11`, `image59`=`media12`,
+  `image126`=`media18`, 2026-09-14 실측). 게시 전(`confirmed: false`)에는 자리표시 패널 안에 대표 그림과
+  "영상 준비 중" 라벨만 보인다.
+- 홈 배경 영상은 `media10`(정조 화성행궁 행렬)의 0~6초를 잘라 `public/video/hero-hwaseong.mp4`
+  (1280×528, h264, 무음, 543 kB)와 정지 이미지 `hero-hwaseong.jpg`(174 kB)로 만들었다. **계획 이탈(G5,
+  보수적 선택)**: 계획은 8~10초였으나 6초다. `media10`을 3초 간격 격자와 프레임 차이(`tblend` difference
+  의 YAVG)로 실측한 결과, 화면 UI 패널 없이 그림만 움직이는 구간이 0~10초뿐이고 5.5~6.5초에 제목 카드가
+  사라지며 10.5초에 패널이 열린다. 인물이 제자리에서 걷는 애니메이션이라 0초와 6초의 구도가 거의 같아
+  반복 이음새가 덜 띈다. `media12`(광개토대왕릉비)의 0~8초는 팔레트는 맞지만 중앙에 인용문이 크게 겹쳐
+  제외했다. 자르기(`crop=3150:1300:260:200`)로 좌상단 로고, 우측 제목 카드, 하단 "들어가기" 단추를 뺐다.
+- 배경 영상은 `autoplay` 속성 대신 스크립트가 `play()`를 부른다. `prefers-reduced-motion: reduce`이거나
+  `[data-nomotion]`이면 부르지 않으므로 정지 이미지만 남고 `preload="none"`이라 영상 파일도 내려받지
+  않는다([[DESIGN]] 5절 규칙 4). 글자 대비는 영상 불투명도 0.3에 왼쪽 40%까지 바탕색 그라데이션을 덮어
+  지켰다.
+- `.gitignore`의 `*.mp4` 전역 제외에 `!public/video/*.mp4` 예외를 두었다. 이 폴더는 홈 배경 클립
+  1개만을 위한 것이며 다른 영상을 넣지 않는다(`git check-ignore -v`로 예외 규칙 매치 확인).
+- 유튜브 길이 대조표는 [[REF-종료평가발표자료]] 5.1절에 **채점표로만** 두었다(G4.8). 현행 사이트 12편은
+  모두 ETRI 채널이고, 길이가 정확히 같은 짝은 6쌍(`media2`↔홈 소개 영상 `nJ_bwRA2z98`, `media4`, `media7`,
+  `media8`, `media9`, `media13`)이다. 1초 차이 2쌍은 내용 단서가 어긋나 짝으로 보지 않았다. `videos.yaml`의
+  `youtube`·`confirmed`·제목은 바꾸지 않았다. `media1`을 홈 소개 영상으로 본 이전 추정(`youtube_candidate`)은
+  길이(135초 vs 203초)로 기각된다.
+
+**산출물**
+
+| 순서 | 파일 | 내용 (2026-09-14 실측) |
+|---|---|---|
+| 5 그림 합류 | [[REF-참조데이터-2차분]] 4.1절, `src/assets/img/logos/`(5종) | 삽화 1장·로고 5종만 채택. 인증서·타사 화면·내부 경로 화면은 제외 |
+| 6 그림 | `src/assets/img/`(그림 8장: overview-needs·overview-concept·research-roadmap PNG, showcase-platform-ui·hwaseong·bangasayusang·gwanggaeto·outreach-museum-gwanggaeto JPEG), `src/lib/images.ts`, `src/components/Figure.astro`, ko/en `much/index.mdx`·`research.mdx` | 긴 변 2000px, `<Image widths={[640,1024,1600]}>`, alt 필수 |
+| 6 컨소시엄 | `src/components/Consortium.astro`, `src/data/consortium.yaml`, `src/i18n/ui.ts`, `src/content.config.ts`, ko/en `consortium.mdx` | 3단 체계도, 로고는 주석 게이트 |
+| 6 영상 대표 그림 | `src/data/videos.yaml`(poster 5건·alt), `Video.astro`·`VideoEmbed.astro`, `content.config.ts` | 자리표시 패널에 대표 그림 |
+| 6 홈 배경 영상 | `public/video/hero-hwaseong.mp4`·`.jpg`, `src/pages/[locale]/index.astro`, `.gitignore` | 6초 무음 반복, 움직임 줄임 설정 존중 |
+| 6 유튜브 대조표 | [[REF-종료평가발표자료]] 5.1절 | 12편 실측, 짝 6쌍 제시, 판정 대기 |
+| 7 문서 | [[PLAN]] 5.5단계 6·7항, [[DECISIONS]] Q-3 | |
+
+**검증 (2026-09-14 실측)**: `npx astro build` 29쪽 성공(빌드 산출물 `dist/ko/index.html`의 `<video>`가
+`/much-site/video/hero-hwaseong.mp4`를 가리킴), `check_i18n.py` 통과(ko/en 14쪽, yaml 13개, ui 64키),
+`check_links.py` 통과(39쪽, 내부 링크 835건, 깨진 것 0, 메타 누락 0), `check_size.sh` 통과, `src/assets`
+1.7 MB·`public` 784 kB. dev 서버에서 375px 가로 넘침 없음(`scrollWidth == innerWidth`, JS DOM 실측; 앱 안
+브라우저 창이 숨겨져 있어 스크린샷은 못 찍었다). 배경 영상은 숨겨진 탭에서는 `paused: true`였으나 수동
+`play()`가 오류 없이 재생됐고(`currentTime` 1.74) 움직임 줄임 판정은 `false`였다. **자동 재생은 보이는
+창에서만 확인할 수 있어 미확인**이며, 배포 뒤 사용자 검수 항목으로 남긴다.
+
+**현재 진행도**: 5.5단계 순서 1~7 완료. 5단계(그림·영상)는 이로써 마쳤고 문서(가이드라인 PDF 호스팅)는
+발행처 허락 확인 대기. 다음은 6단계(점검과 배포)이며 Q-1(ETRI 기관 정책)이 선행 조건이다.
+
+**남은 미해결 (사용자 확인 항목, 2026-09-14 추가분)**
+
+- 홈 배경 클립 구간: `media10` 0~6초를 채택했고 대안은 `media12` 0~8초(인용문 겹침)다. 실제 브라우저에서
+  자동 재생과 반복 이음새를 확인해 달라.
+- 유튜브 짝 6쌍의 판정([[REF-종료평가발표자료]] 5.1절). 맞으면 `videos.yaml`의 `youtube`에 옮기고 제목을
+  유튜브 제목으로 바꿀지, 발표자료에 없는 유튜브 4편(`Xst3GBBzCQY`·`hx4G-OvY1nQ`·`fQHP54KxzXM`·`zcYEaA_JAZU`)을
+  별도로 실을지.
+- 기관 로고 5종의 사용 가부(`consortium.yaml` `# logo:` 주석 해제 게이트).
+- 그림 출처: 발표자료 `image12` 삽화(그림수정 `image11`과 같은 삽화), `image16`(반가사유상 전시 연출),
+  `image126`(전시 공간 사진), `image4`(선 아이콘 9개).
+- 영상 제목 단서(`media1`·`3`·`4`·`6`·`7`·`9`·`10`·`11`·`12`·`13`) 확인, `media1`의 방송 뉴스 여부와
+  임베드 여부(방송 7편과 같은 규칙).
+- 이전부터 이월: 위 2026-09-14 오전 항목 전부(1단계 원고 검수, 영어 초안, Q-1·Q-5, TRIC 표기, media16 허락,
+  이메일·과제번호 표기, 2025년 출원 특허 3건, 서지 확인 항목들).
+
+**다음 단계**: 사용자 검수(위 항목) → 6단계 점검과 배포(Q-1 확인 뒤 Pages 설정·공개 전환은 사용자 확인 후).

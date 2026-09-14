@@ -48,6 +48,10 @@ export const ui = {
     'footer.top': '맨 위로',
     'video.play': '영상 재생',
     'video.pending': '영상 준비 중',
+    'consortium.ministry': '주관 부처',
+    'consortium.lead': '주관 연구기관',
+    'consortium.partner': '참여 연구기관',
+    'consortium.demand': '수요 기관',
     // 4단계: 홈 단추·쪽 이동·구성 요소 제목
     'hero.cta.outcomes': '연구 성과 보기',
     'hero.cta.much': '플랫폼이 하는 일',
@@ -112,6 +116,10 @@ export const ui = {
     'footer.top': 'Back to top',
     'video.play': 'Play video',
     'video.pending': 'Video coming soon',
+    'consortium.ministry': 'Sponsoring ministry',
+    'consortium.lead': 'Lead institute',
+    'consortium.partner': 'Partner institution',
+    'consortium.demand': 'Demand-side institution',
     // Stage 4: home buttons, page navigation, component headings
     'hero.cta.outcomes': 'See the outcomes',
     'hero.cta.much': 'What the platform does',

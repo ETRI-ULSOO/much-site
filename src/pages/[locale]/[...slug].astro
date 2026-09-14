@@ -15,6 +15,8 @@ import Events from '../../components/Events.astro';
 import StandardTable from '../../components/StandardTable.astro';
 import StatTable from '../../components/StatTable.astro';
 import Publications from '../../components/Publications.astro';
+import Figure from '../../components/Figure.astro';
+import Consortium from '../../components/Consortium.astro';
 import { locales, type Locale } from '../../i18n/ui';
 import { useTranslations } from '../../i18n/utils';
 
@@ -49,7 +51,7 @@ const path = `/${entry.id.split('/').slice(1).join('/')}/`;
       </header>
       <div class="prose body">
         {/* 원고 안의 태그 이름은 여기서 넘긴 것만 쓸 수 있다. */}
-        <Content components={{ Video, Videos, Awards, Press, Events, StandardTable, StatTable, Publications }} />
+        <Content components={{ Video, Videos, Awards, Press, Events, StandardTable, StatTable, Publications, Figure, Consortium }} />
       </div>
       <PrevNext path={path} />
     </div>

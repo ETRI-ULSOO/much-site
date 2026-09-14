@@ -11,8 +11,13 @@
 #   확인되기 전까지 이 파일에 TRIC을 넣지 않았습니다.
 #
 # 연구개발비는 정부 출연금이 100퍼센트이고 참여 기업은 없습니다 (발표자료 슬라이드 2).
+#
+# 로고 (2026-09-14): 종료평가 발표자료에서 뽑은 로고 다섯 개를 src/assets/img/logos/에 두었습니다.
+#   각 기관의 로고 사용 지침을 확인한 뒤에 아래 `# logo:` 줄의 주석을 풀면 참여 기관 쪽의 체계도에 로고가 보입니다.
+#   확인되기 전에는 주석을 풀지 않습니다 (화면에 내보내지 않음).
 
 - id: mcst
+  # logo: logo-mcst.png
   role: ministry
   url: ""
   order: 1
@@ -20,6 +25,7 @@
   en: { name: "Ministry of Culture, Sports and Tourism", abbr: MCST }
 
 - id: etri
+  # logo: logo-etri.png
   role: lead
   url: https://www.etri.re.kr/intro.html
   order: 2
@@ -27,6 +33,7 @@
   en: { name: Electronics and Telecommunications Research Institute, abbr: ETRI }
 
 - id: knuh
+  # logo: logo-nuch.png
   role: partner
   url: https://www.knuh.ac.kr/
   order: 3
@@ -34,6 +41,7 @@
   en: { name: Korea National University of Cultural Heritage, abbr: KNUH }
 
 - id: cau
+  # logo: logo-cau.png
   role: partner
   url: ""
   order: 4
@@ -41,6 +49,7 @@
   en: { name: Chung-Ang University, abbr: CAU }
 
 - id: nmk
+  # logo: logo-nmk.png
   role: demand
   url: https://www.museum.go.kr/MUSEUM/main/index.do
   order: 5

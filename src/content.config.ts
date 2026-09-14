@@ -75,6 +75,7 @@ const consortium = defineCollection({
     role: z.enum(['ministry', 'lead', 'partner', 'demand']),
     order: z.number(),
     url: z.string().optional(),
+    logo: z.string().optional(),
     ko: z.object({ name: z.string(), abbr: z.string() }),
     en: z.object({ name: z.string(), abbr: z.string() }),
   }),
@@ -100,6 +101,8 @@ const videos = defineCollection({
     place: z.string(),
     youtube: z.string(),
     confirmed: z.boolean(),
+    /** 대표 그림. src/assets/img/ 안의 파일 이름(확장자 없이). 영상의 첫 장면을 발표자료에서 뽑은 것 */
+    poster: z.string().optional(),
     ko: z.object({ title: z.string(), desc: z.string(), alt: z.string() }),
     en: z.object({ title: z.string(), desc: z.string(), alt: z.string() }),
   }),

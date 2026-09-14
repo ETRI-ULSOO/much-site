@@ -18,6 +18,9 @@
 #               oversize    원본이 너무 커서 저장소에 절대 넣지 않습니다. 게시는 유튜브로만 합니다.
 # youtube     영상 ID입니다. 5단계에서 현행 사이트의 게시 영상과 대조해 채웁니다.
 # confirmed   제목과 설명이 확인된 항목인지 여부입니다. false면 사용자 확인 전까지 게시하지 않습니다.
+# poster      대표 그림입니다. src/assets/img/ 안의 파일 이름(확장자 없이)이며, 발표자료에서 뽑은 그 영상의
+#             첫 장면입니다(2026-09-14 해상도로 짝 확인). 게시 전에는 자리표시 패널 안에, 게시 뒤에는 재생 단추 뒤에 보입니다.
+#             alt는 이 그림을 설명합니다.
 #
 # ── 미해결 사항 (2026-09-11 기준) ────────────────────────────────────────────
 # Q-3  영상을 어느 계정에 올릴지 정해지지 않았습니다. 선행 과제 CHIC의 영상이 개인 계정에
@@ -96,11 +99,12 @@
   delivery: youtube
   youtube: ""
   confirmed: false
+  poster: showcase-platform-ui
   ko:
     title: 연구 내용 시연 영상 (슬라이드 18)
     desc: 연구 내용을 상세히 설명하는 구간에 실린 시연 영상입니다.
-    alt: 연구 내용 시연 영상의 첫 화면입니다.
-  en: { title: "Research Demonstration Video (Slide 18)", desc: "A demonstration video from the section that explains the research in detail.", alt: "The opening frame of the research demonstration video." }
+    alt: MUCH 플랫폼 웹 화면. 위쪽에 소장품 검색 상자, 가운데에 3차원 향로 뷰어, 아래에 애셋 갤러리가 있습니다.
+  en: { title: "Research Demonstration Video (Slide 18)", desc: "A demonstration video from the section that explains the research in detail.", alt: "The MUCH platform web screen: a collection search box at the top, a 3D incense burner viewer in the middle, and an asset gallery below." }
 
 - id: media5
   source: media5.mp4
@@ -206,19 +210,20 @@
   delivery: self-clip
   youtube: ""
   confirmed: false
+  poster: showcase-hwaseong
   ko:
     title: 공공장소 대형 화면 콘텐츠 (1)
     desc: >-
       가로가 세로의 약 1.9배인 대형 화면 비율이고 소리가 없는 영상입니다.
       공공장소에 설치한 대형 화면용 콘텐츠로 보입니다.
-    alt: 공공장소 대형 화면에 재생되는 문화유산 콘텐츠 화면입니다.
+    alt: 정조 화성행궁 행렬도를 담은 전시 콘텐츠의 첫 화면입니다.
     note: >-
       소리가 없고 길이가 88초이므로, 8초에서 10초 구간을 가로 1280픽셀로 잘라 내면
       5MB 이하가 되어 홈 화면의 배경 영상으로 쓸 수 있습니다.
       같은 슬라이드의 세 영상은 발표자료가 공공 확산 사례로 든 세 곳,
       곧 센트럴시티 반가사유상과 인천공항 반가사유상, 센트럴시티 정조 화성행궁에
       대응하는 것으로 보이나 어느 영상이 어느 곳인지는 확인되지 않았습니다.
-  en: { title: "Large Public Display Content (1)", desc: "A silent video with a wide aspect ratio, about 1.9 times as wide as it is tall. It appears to be content made for a large display installed in a public space.", alt: "Cultural heritage content playing on a large display in a public space.", note: "Since it has no sound and is 88 seconds long, cropping an 8-to-10-second segment at 1280 pixels wide would bring it under 5MB, making it usable as the home page's background video. The three videos on the same slide appear to correspond to the three public-deployment cases the presentation cites, the Pensive Bodhisattva at Central City, the Pensive Bodhisattva at Incheon International Airport, and King Jeongjo's Hwaseong Haenggung at Central City, but which video corresponds to which location has not been confirmed." }
+  en: { title: "Large Public Display Content (1)", desc: "A silent video with a wide aspect ratio, about 1.9 times as wide as it is tall. It appears to be content made for a large display installed in a public space.", alt: "The opening frame of exhibition content showing the procession painting of King Jeongjo's Hwaseong Haenggung.", note: "Since it has no sound and is 88 seconds long, cropping an 8-to-10-second segment at 1280 pixels wide would bring it under 5MB, making it usable as the home page's background video. The three videos on the same slide appear to correspond to the three public-deployment cases the presentation cites, the Pensive Bodhisattva at Central City, the Pensive Bodhisattva at Incheon International Airport, and King Jeongjo's Hwaseong Haenggung at Central City, but which video corresponds to which location has not been confirmed." }
 
 - id: media11
   source: media11.mp4
@@ -232,11 +237,12 @@
   delivery: youtube
   youtube: ""
   confirmed: false
+  poster: showcase-bangasayusang
   ko:
     title: 공공장소 대형 화면 콘텐츠 (2)
     desc: 같은 슬라이드에 나란히 실린 대형 화면용 콘텐츠 가운데 두 번째 영상입니다.
-    alt: 공공장소 대형 화면에 재생되는 문화유산 콘텐츠 화면입니다.
-  en: { title: "Large Public Display Content (2)", desc: "The second of the large-display content videos placed side by side on the same slide.", alt: "Cultural heritage content playing on a large display in a public space." }
+    alt: 붉은 갈색 바탕에 반가사유상 두 점의 3차원 모델과 '자세히 보기' 단추가 놓인 MUCH 플랫폼의 금동반가사유상 소개 화면입니다.
+  en: { title: "Large Public Display Content (2)", desc: "The second of the large-display content videos placed side by side on the same slide.", alt: "The MUCH platform's introduction screen for the gilt-bronze Pensive Bodhisattva: 3D models of the two statues on a reddish-brown background with a 'View details' button." }
 
 - id: media12
   source: media12.mp4
@@ -250,12 +256,13 @@
   delivery: self-clip
   youtube: ""
   confirmed: false
+  poster: showcase-gwanggaeto
   ko:
     title: 공공장소 대형 화면 콘텐츠 (3)
     desc: 같은 슬라이드에 나란히 실린 대형 화면용 콘텐츠 가운데 세 번째 영상이며 소리가 없습니다.
-    alt: 공공장소 대형 화면에 재생되는 문화유산 콘텐츠 화면입니다.
+    alt: 확대한 광개토대왕릉비 비문 위에 한 구절의 한국어 풀이와 영어 번역이 얹힌 디지털 광개토대왕릉비 콘텐츠 화면입니다.
     note: media10과 마찬가지로 홈 화면의 배경 영상 후보입니다. 두 편 가운데 한 편을 고릅니다.
-  en: { title: "Large Public Display Content (3)", desc: "The third of the large-display content videos placed side by side on the same slide; it has no sound.", alt: "Cultural heritage content playing on a large display in a public space.", note: "Like media10, this is a candidate for the home page background video. One of the two will be chosen." }
+  en: { title: "Large Public Display Content (3)", desc: "The third of the large-display content videos placed side by side on the same slide; it has no sound.", alt: "A Digital Gwanggaeto Stele content screen: a Korean reading of one passage and its English translation over a magnified inscription.", note: "Like media10, this is a candidate for the home page background video. One of the two will be chosen." }
 
 - id: media13
   source: media13.mp4
@@ -374,13 +381,14 @@
   delivery: youtube
   youtube: ""
   confirmed: true
+  poster: outreach-museum-gwanggaeto
   ko:
     title: 국립중앙박물관 '역사의 길' 디지털 광개토대왕릉비
     desc: >-
       초고해상도로 만든 디지털 애셋을 활용해,
       국립중앙박물관의 중앙 통로인 '역사의 길'에 디지털 광개토대왕릉비 콘텐츠로 설치했습니다.
-    alt: 국립중앙박물관 역사의 길에 설치된 디지털 광개토대왕릉비 화면입니다.
-  en: { title: "Digital Gwanggaeto Stele at the National Museum of Korea's 'Road of History'", desc: "Using digital assets created in ultra-high resolution, the Digital Gwanggaeto Stele content was installed in 'Road of History,' the National Museum of Korea's central corridor.", alt: "The Digital Gwanggaeto Stele screen installed in the National Museum of Korea's Road of History." }
+    alt: 국립중앙박물관 '역사의 길'에 설치된 디지털 광개토대왕릉비 전시 공간. 재현한 비석 양옆에 탁본 패널이 서 있습니다.
+  en: { title: "Digital Gwanggaeto Stele at the National Museum of Korea's 'Road of History'", desc: "Using digital assets created in ultra-high resolution, the Digital Gwanggaeto Stele content was installed in 'Road of History,' the National Museum of Korea's central corridor.", alt: "The Digital Gwanggaeto Stele exhibition space on the National Museum of Korea's Road of History: rubbing panels stand on either side of the recreated stele." }
 
 - id: media19
   source: media19.mp4

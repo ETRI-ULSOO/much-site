@@ -5,7 +5,10 @@
  *  - youtube-nocookie 도메인, rel=0.
  *  - 비율은 고정하지 않는다. 세로 영상(media15·17)은 max-height로만 누른다.
  *  - youtube가 비어 있으면(1단계 기준 19편 중 19편) 자리표시 패널을 보여 준다.
+ *  - poster가 있으면 유튜브 섬네일 대신 우리 그림을 재생 단추에 깔고, 자리표시 패널에도 그 그림을 보인다.
  */
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
 import { getLocale, useTranslations } from '../i18n/utils';
 
 interface Props {
@@ -15,8 +18,11 @@ interface Props {
   desc?: string;
   /** 'portrait'면 세로 영상 — 높이 상한을 둔다 */
   orientation?: 'landscape' | 'portrait';
+  /** 대표 그림과 그 대체 텍스트. 없으면 유튜브 섬네일(게시 뒤) 또는 빈 패널(게시 전) */
+  poster?: ImageMetadata;
+  alt?: string;
 }
-const { youtube, title, desc, orientation = 'landscape' } = Astro.props;
+const { youtube, title, desc, orientation = 'landscape', poster, alt = '' } = Astro.props;
 const locale = getLocale(Astro.url);
 const t = useTranslations(locale);
 const id = youtube?.trim();
@@ -25,14 +31,21 @@ const id = youtube?.trim();
 {id ? (
   <figure class:list={['video', orientation]} data-video={id} data-nomotion>
     <button type="button" class="play" aria-label={`${t('video.play')}: ${title}`}>
-      <img src={`https://i.ytimg.com/vi/${id}/hqdefault.jpg`} alt="" loading="lazy" width="480" height="360" />
+      {poster ? (
+        <Image src={poster} alt="" widths={[640, 1024]} sizes="(max-width: 720px) 100vw, 720px" loading="lazy" />
+      ) : (
+        <img src={`https://i.ytimg.com/vi/${id}/hqdefault.jpg`} alt="" loading="lazy" width="480" height="360" />
+      )}
       <span class="label">▶ {t('video.play')}</span>
     </button>
     <figcaption><span class="t">{title}</span>{desc && <span class="d">{desc}</span>}</figcaption>
   </figure>
 ) : (
   <figure class:list={['video', 'pending', orientation]}>
-    <div class="panel"><p class="label">{t('video.pending')}</p></div>
+    <div class:list={['panel', { poster }]}>
+      {poster && <Image src={poster} alt={alt} widths={[640, 1024]} sizes="(max-width: 720px) 100vw, 720px" loading="lazy" />}
+      <p class="label">{t('video.pending')}</p>
+    </div>
     <figcaption><span class="t">{title}</span>{desc && <span class="d">{desc}</span>}</figcaption>
   </figure>
 )}
@@ -72,6 +85,13 @@ const id = youtube?.trim();
     background: var(--surface); border: 1px dashed var(--line-strong);
   }
   .portrait.pending .panel { aspect-ratio: 9 / 16; max-height: 60vh; }
+  /* 대표 그림이 있는 자리표시 패널: 그림을 깔고 '준비 중' 라벨을 재생 단추와 같은 자리에 얹는다 */
+  .pending .panel.poster { position: relative; display: block; aspect-ratio: auto; min-height: 0; border-style: solid; }
+  .pending .panel.poster img { display: block; width: 100%; height: auto; }
+  .pending .panel.poster .label {
+    position: absolute; left: 16px; bottom: 16px; margin: 0;
+    background: var(--bg); color: var(--ink-3); padding: 8px 12px; border: 1px solid var(--line-strong);
+  }
   figcaption { margin: 10px 0 0; color: var(--ink-3); font-size: 14px; }
   figcaption .t { display: block; color: var(--ink-2); }
   figcaption .d { display: block; margin-top: 4px; }
