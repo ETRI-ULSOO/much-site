@@ -600,3 +600,9 @@ GitHub Actions로 지정한 다음에 이루어진다. 그때까지 push마다 A
 - 이전부터 이월된 사용자 확인 항목 전부(위 오후 항목 참조).
 
 **다음 단계**: 사용자 결정(Pages·공개 전환·Q-1) → 배포 → 배포 주소에서 재점검 → 구 사이트 안내.
+
+**사용자 결정 (2026-09-14 저녁)**: 배포 경로는 "Q-1 확인 뒤 공개 전환 + Pages", Pages 활성화는 Claude가 API로.
+`gh api -X POST repos/ETRI-ULSOO/much-site/pages -f build_type=workflow`는 auto mode 권한 분류기가 막아 실행하지
+못했다(저장소 설정 변경). 대안 두 가지를 제시하고 대기: ① 사용자가 같은 명령을 직접 실행, ② 워크플로
+`configure-pages`에 `enablement: true`를 두어 Actions가 켜게 함(비공개 저장소는 Pro 없이는 실패하므로 공개 전환 뒤).
+Q-1 확인은 아직 받지 못했으므로 공개 전환은 하지 않았다.
