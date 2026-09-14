@@ -1,5 +1,6 @@
 import { defineConfig } from 'astro/config';
 import mdx from '@astrojs/mdx';
+import sitemap from '@astrojs/sitemap';
 import { satteri } from '@astrojs/markdown-satteri';
 import localeLinks from './src/lib/locale-links.mjs';
 
@@ -18,7 +19,17 @@ export default defineConfig({
   // 마크다운 처리기는 Astro 7 기본값인 Sätteri를 명시해 hast 플러그인을 끼운다 — 원고의
   // 사이트 절대 경로 링크에 base와 언어를 붙이는 일이다 (src/lib/locale-links.mjs).
   // 옛 markdown.rehypePlugins는 @astrojs/markdown-remark를 따로 설치해야 동작하므로 쓰지 않는다.
-  integrations: [mdx()],
+  // 사이트맵은 /ko/·/en/ 아래의 실제 쪽만 싣는다. 구 경로를 넘기는 redirects 쪽(meta refresh)은
+  // 검색 대상이 아니므로 뺀다. i18n을 주면 쪽마다 다른 언어판을 hreflang으로 함께 적는다.
+  // robots.txt는 두지 않는다 — GitHub Pages 프로젝트 사이트는 도메인 루트가 아니어서
+  // /much-site/robots.txt를 검색 엔진이 읽지 않는다. 기관 도메인을 붙일 때 public/에 추가한다.
+  integrations: [
+    mdx(),
+    sitemap({
+      filter: (page) => /\/(ko|en)\//.test(page),
+      i18n: { defaultLocale: 'ko', locales: { ko: 'ko-KR', en: 'en-GB' } },
+    }),
+  ],
   markdown: { processor: satteri({ hastPlugins: [localeLinks({ base: BASE })] }) },
 
   // 한국어와 영어가 같은 구조를 갖도록 두 언어 모두 접두사를 붙인다 (/ko/…, /en/…).

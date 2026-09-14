@@ -229,11 +229,31 @@ tools/                    check_size.sh, check_i18n.py, 발표자료 추출
 개인정보가 저장소·스크래치패드 어디에도 없음,
 `check_i18n.py`·`check_links.py`·`check_size.sh` 통과, `npx astro build` 성공.
 
-### 6단계 — 점검과 배포
+### 6단계 — 점검과 배포 (점검 ✅ 2026-09-14 · 배포는 사용자 결정 대기)
 
 두 컴퓨터의 빌드 결과를 비교하고, 배포된 주소를 브라우저로 훑는다(가로 375픽셀에서
 넘침 없음, 언어 전환, 영상 지연 로드, 내려받기 링크). 접근성과 검색 점수를 재고,
 사용자 승인을 받아 저장소를 공개로 바꾼 뒤 구 사이트에 이전 안내를 올린다.
+
+**점검 결과 (2026-09-14 실측, 로컬 `astro preview`·dist 29쪽 기준)**
+
+| 항목 | 결과 | 비고 |
+|---|---|---|
+| 두 컴퓨터 빌드 | 부분 확인 | GitHub Actions(ubuntu)에서 빌드·i18n 검사는 성공했으나 산출물 올리기 단계가 Pages 미설정으로 실패해 해시 비교는 못 했다. Pages 설정 뒤 첫 성공 실행의 artifact로 비교한다. |
+| 가로 375px 넘침 | 0쪽 | 29쪽 iframe 하네스 실측. `.pending .panel`의 `min-height: 200px`가 `aspect-ratio`에 의해 최소 너비 356px로 옮겨져 10쪽이 넘치던 것을 `VideoEmbed.astro`에서 제거해 해결 |
+| 언어 전환 | 28쪽 | `a.lang` 대상 쪽이 dist에 전부 존재 |
+| 영상 지연 로드 | 초기 iframe 0 | 29쪽 전부 |
+| 내려받기 링크 | 없음 | `public/files/` 미생성. 가이드라인 PDF는 발행처 허락 대기(외부 링크만) |
+| HTML 유효성 | 통과 | `html-validate` 29쪽, `valid-id` 규칙만 제외(숫자로 시작하는 헤딩 id는 HTML5에서 유효) |
+| 링크·메타 | 통과 | `check_links.py` 39쪽·863건·깨진 것 0, alt 없는 img 0, 깨진 이미지 0 |
+| `sitemap.xml` | 있음 | `@astrojs/sitemap` 3.7.4, 28 URL, hreflang 56개(redirect·404 제외) |
+| `robots.txt` | 두지 않음 | 프로젝트 사이트(`/much-site/`)는 도메인 루트가 아니라 검색 엔진이 읽지 않는다. 기관 도메인 연결 시 `public/`에 추가 |
+| Lighthouse 접근성 / 검색 | **100 / 100** | ko 홈·ko showcase·en 홈 3쪽 모두. 목표 90 이상 달성 |
+| Lighthouse 성능 | 62 / 78 / 81 | 원인: 유니코드 구간별 서체 471개 `@font-face`가 든 CSS(527 kB, gzip 235 kB)가 화면 그리기를 막음. `favicon.ico` 404가 콘솔 오류 1건. 목표 항목이 아니므로 기록만 함 |
+
+**배포 (사용자 결정 대기)**: ① Pages 활성화(저장소 설정 → Pages → Source: GitHub Actions, 또는 워크플로에
+`enablement: true`) ② 비공개 저장소의 Pages는 GitHub Pro가 필요하므로 Q-1(ETRI 기관 정책) 확인 뒤 공개 전환
+③ 구 Google Sites 이전 안내는 사용자가 게시.
 
 ## 5. 성공 기준
 

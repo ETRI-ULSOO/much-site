@@ -80,8 +80,10 @@ const id = youtube?.trim();
   .video iframe { display: block; width: 100%; aspect-ratio: 16 / 9; border: 1px solid var(--line); }
   .portrait .play img, .portrait iframe { max-height: 80vh; object-fit: contain; }
   .portrait iframe { aspect-ratio: 9 / 16; }
+  /* min-height를 두지 않는다 — aspect-ratio가 있으면 min-height가 최소 너비로 옮겨져(200px → 356px)
+     가로 375px 화면에서 패널이 본문 밖으로 넘친다 (2026-09-14 실측). 높이는 비율만으로 정한다. */
   .pending .panel {
-    display: grid; place-items: center; min-height: 200px; aspect-ratio: 16 / 9;
+    display: grid; place-items: center; aspect-ratio: 16 / 9;
     background: var(--surface); border: 1px dashed var(--line-strong);
   }
   .portrait.pending .panel { aspect-ratio: 9 / 16; max-height: 60vh; }

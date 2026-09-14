@@ -548,3 +548,55 @@ GitHub Actions로 지정한 다음에 이루어진다. 그때까지 push마다 A
   이메일·과제번호 표기, 2025년 출원 특허 3건, 서지 확인 항목들).
 
 **다음 단계**: 사용자 검수(위 항목) → 6단계 점검과 배포(Q-1 확인 뒤 Pages 설정·공개 전환은 사용자 확인 후).
+
+## 2026-09-14 (저녁) — 6단계 점검: 사이트맵, 375px 패널 넘침 수정, 유효성·Lighthouse 실측
+
+**목표**: [[PLAN]] 6단계의 점검(QA) 부분을 끝내고, 배포(저장소 설정 변경)는 사용자 결정에 넘긴다.
+
+**결정사항**
+- `@astrojs/sitemap` 3.7.4를 넣어 `/ko/`·`/en/` 아래 실제 쪽 28개만 싣는다(redirect·404 제외, i18n으로 hreflang
+  56개). `BaseLayout.astro` head에 `<link rel="sitemap">`을 더했다.
+- `robots.txt`는 두지 않는다. GitHub Pages 프로젝트 사이트(`/much-site/`)는 도메인 루트가 아니어서 검색 엔진이
+  `/much-site/robots.txt`를 읽지 않는다. 기관 도메인을 붙일 때 `public/`에 추가한다(`astro.config.mjs` 주석).
+- 375px 넘침의 원인은 `VideoEmbed.astro`의 `.pending .panel`이 가진 `min-height: 200px`였다. `aspect-ratio: 16/9`가
+  있으면 브라우저가 min-height를 최소 너비(200 × 16/9 = 356px)로 옮기므로(transfer), 부모 295px보다 넓어져
+  ko/en의 `much/`·`events`·`media`·`research`·`showcase` 10쪽이 scrollWidth 395로 넘쳤다. `min-height`를 지워
+  비율만으로 높이를 정한다(2026-09-14 실측, 수정 뒤 29쪽 넘침 0).
+- `html-validate`의 `valid-id` 규칙은 숫자로 시작하는 id(`3d-shape-data` 등)를 오류로 보지만 HTML5에서는 유효하므로
+  이 규칙만 끄고 검사했다.
+- Lighthouse 성능 점수(62·78·81)의 원인은 서체 CSS다. Noto Serif KR 3굵기 × 124구간 + Song Myung 89 + IBM Plex Mono 10
+  = 471개 `@font-face`가 본문 CSS와 한 파일(527 kB, gzip 235 kB)로 묶여 화면 그리기를 막는다. 굵기 900은 명시
+  규칙이 없어도 `strong`·헤딩의 bold(700)가 400·600·900 중 900을 고르므로 실제로 쓰이며, 굵기 구성은 시안이 정한
+  것이라 바꾸지 않았다. 접근성·검색이 목표(90 이상)이고 둘 다 100이므로 성능은 기록만 한다. favicon은 디자인
+  자산이 없어(시안 HTML에도 없음) 넣지 않았고 `favicon.ico` 404 콘솔 오류 1건이 남는다.
+- `.claude/launch.json`에 `much-site preview`(`npm run preview`, 4321) 구성을 더해 dist를 그대로 검사했다.
+
+**산출물**: `astro.config.mjs`(sitemap 통합), `src/layouts/BaseLayout.astro`(sitemap link), `src/components/VideoEmbed.astro`
+(min-height 제거), `package.json`·`package-lock.json`, `.claude/launch.json`, [[PLAN]] 6단계 점검표.
+
+**검증 (2026-09-14 실측, 로컬 preview·dist 29쪽)**
+
+| 검사 | 결과 |
+|---|---|
+| 375px iframe 하네스(29쪽) | 넘침 0, 초기 iframe 0, alt 없는 img 0, 깨진 이미지 0, h1 1개(404만 한·영 2개) |
+| 언어 전환 | 28쪽 `a.lang` 대상이 dist에 전부 존재 |
+| 메타 점검표(title·description·canonical·og·hreflang·JSON-LD) | 28쪽 통과, 404는 noindex라 description 없음(의도) |
+| `html-validate`(valid-id 제외) | 29쪽 exit 0 |
+| `sitemap-0.xml` | 28 URL, hreflang 56 |
+| Lighthouse ko 홈 / ko showcase / en 홈 | 접근성 100·100·100, 검색 100·100·100, 모범 사례 96·96·96, 성능 62·78·81 |
+| `check_i18n.py` / `check_links.py` / `check_size.sh` | 통과 / 39쪽 863건 깨진 것 0 / 대용량 없음 |
+| `git ls-files` 영상 | `public/video/hero-hwaseong.mp4` 1건뿐 |
+| 두 컴퓨터 빌드 비교 | Actions(ubuntu) 빌드 성공으로 부분 확인. artifact는 Pages 미설정 실패로 안 올라가 해시 비교 못 함 |
+
+**현재 진행도**: 6단계 점검 완료. 배포는 저장소 설정 변경이라 사용자 결정 대기.
+
+**남은 미해결**
+- Pages 활성화(사용자가 Settings → Pages → Source: GitHub Actions, 또는 확인 뒤 워크플로 `enablement: true`).
+- 비공개 저장소 Pages는 GitHub Pro 필요 → Q-1(ETRI 기관 정책) 확인 뒤 공개 전환 여부.
+- 구 Google Sites 이전 안내(사용자 게시).
+- favicon 자산(디자인에서 넘겨주면 `public/`에 두고 `BaseLayout.astro`에 `<link rel="icon">` 추가).
+- 성능 개선 선택지(원하면): 서체 CSS를 본문 CSS와 분리해 비차단으로 싣기, 홈 poster `preload`, 굵기 900 제외 여부(시안 결정).
+- 배포 뒤 실기기 검수: 홈 배경 클립 자동 재생·이음새, 실제 주소에서 375px 재확인.
+- 이전부터 이월된 사용자 확인 항목 전부(위 오후 항목 참조).
+
+**다음 단계**: 사용자 결정(Pages·공개 전환·Q-1) → 배포 → 배포 주소에서 재점검 → 구 사이트 안내.

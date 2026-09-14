@@ -55,6 +55,7 @@ const jsonLd = {
     <meta name="description" content={pageDesc} />
     <meta name="referrer" content="strict-origin-when-cross-origin" />
     <link rel="canonical" href={canonical} />
+    <link rel="sitemap" href={withBase('/sitemap-index.xml')} />
     <link rel="alternate" hreflang={locale} href={canonical} />
     <link rel="alternate" hreflang={other} href={altHref} />
     <link rel="alternate" hreflang="x-default" href={locale === 'ko' ? canonical : altHref} />
